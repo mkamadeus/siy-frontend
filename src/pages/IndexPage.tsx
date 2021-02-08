@@ -2,7 +2,9 @@ import React from 'react';
 import Navbar from '../components/Navbar';
 import { RouteComponentProps } from '@reach/router';
 
-const IndexPage = (props: RouteComponentProps) => {
+const IndexPage: React.FC<RouteComponentProps> = (
+  _props: RouteComponentProps
+) => {
   return (
     <div>
       <Navbar />
