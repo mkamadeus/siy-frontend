@@ -1,14 +1,12 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./App";
-
-interface Props {}
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './pages/IndexPage';
 
 ReactDOM.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>,
-  document.getElementById("root")
+  document.getElementById('root')
 );
 
 if (import.meta.hot) {
