@@ -8,6 +8,7 @@ const IndexPage: React.FC<RouteComponentProps> = (
   return (
     <div>
       <Navbar />
+      <div>asdasdas</div>
     </div>
   );
 };
