@@ -16,7 +16,7 @@ const StudentPage: React.FC<RouteComponentProps> = (
   return (
     <div className="container mx-auto p-6">
       <div className="flex flex-col items-center">
-        <div className="flex flex-col">
+        <div className="flex flex-col mb-2">
           <img src="hehe" alt="img-mahasiswa" />
           <div className="text-center text-xl font-bold">
             <LazyLoadText isLoading={isLoading} text={data?.name} />
@@ -28,7 +28,7 @@ const StudentPage: React.FC<RouteComponentProps> = (
         <div className="flex w-full">
           <table className="table-auto w-full text-sm">
             <thead>
-              <tr className="border border-gray-500 ">
+              <tr className="border-b border-gray-400 ">
                 <th className="p-1">Kode</th>
                 <th className="p-1">Nama</th>
                 <th className="p-1">Indeks</th>
@@ -36,7 +36,7 @@ const StudentPage: React.FC<RouteComponentProps> = (
               </tr>
             </thead>
             <tbody>
-              <tr className="border border-gray-500 ">
+              <tr className="border-b border-gray-400 ">
                 <td className="p-1">IF3299</td>
                 <td className="p-1">Pisang</td>
                 <td className="p-1">AB</td>
