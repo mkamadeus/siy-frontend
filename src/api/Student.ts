@@ -1,3 +1,4 @@
+import { CourseGrade } from '~/model/Course';
 import { Student } from '~/model/Student';
 import { dummyRequest } from './Dummy';
 
@@ -7,7 +8,7 @@ export const getStudentData = async (): Promise<Student> => {
     ipk: 1.23,
     name: 'Matthew Kevin Amadeus',
     imgPath:
-      'https://cdn.idntimes.com/content-images/community/2020/07/81mx4y9v3cl-sl1500-d6b25ea877f48b4d335694dfaaff435c-f3bf2b1a6a996e30d7c8459a94d91470_600x400.jpg',
+      'https://gitlab.informatika.org/uploads/-/system/user/avatar/1646/avatar.png?width=90',
     loAverage: 1.23,
     courses: [
       {
@@ -39,40 +40,49 @@ export const getStudentData = async (): Promise<Student> => {
       {
         year: 2020,
         semester: 1,
+        ip: 1.23,
         courses: [
           {
             code: 'IF3110',
-            name: '	Pengembangan Aplikasi Berbasis Web',
+            name: 'Pengembangan Aplikasi Berbasis Web',
+            grade: CourseGrade.A,
           },
           {
             code: 'IF3130',
             name: 'Jaringan Komputer',
+            grade: CourseGrade.BC,
           },
           {
             code: 'IF3140',
             name: 'Manajemen Basis Data',
+            grade: CourseGrade.T,
           },
           {
             code: 'IF3141',
             name: 'Sistem Informasi',
+            grade: CourseGrade.C,
           },
           {
             code: 'IF3150',
             name: 'Manajemen Proyek Perangkat Lunak',
+            grade: CourseGrade.AB,
           },
           {
             code: 'IF3151',
             name: 'Interaksi Manusia Komputer',
+            grade: CourseGrade.D,
           },
           {
             code: 'IF3170',
             name: 'Inteligensi Buatan',
+            grade: CourseGrade.E,
           },
         ],
       },
       {
         year: 2020,
         semester: 2,
+        ip: 1.23,
         courses: [
           {
             code: 'IF3210',

@@ -8,12 +8,12 @@ export interface Course {
 }
 
 export enum CourseGrade {
-  A,
-  AB,
-  B,
-  DC,
-  C,
-  D,
-  E,
-  T,
+  A = 'A',
+  AB = 'AB',
+  B = 'B',
+  BC = 'BC',
+  C = 'C',
+  D = 'D',
+  E = 'E',
+  T = 'T',
 }
