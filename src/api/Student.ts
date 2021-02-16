@@ -35,6 +35,72 @@ export const getStudentData = async (): Promise<Student> => {
         name: 'Socio-informatika dan Profesionalisme',
       },
     ],
+    transcript: [
+      {
+        year: 2020,
+        semester: 1,
+        courses: [
+          {
+            code: 'IF3110',
+            name: '	Pengembangan Aplikasi Berbasis Web',
+          },
+          {
+            code: 'IF3130',
+            name: 'Jaringan Komputer',
+          },
+          {
+            code: 'IF3140',
+            name: 'Manajemen Basis Data',
+          },
+          {
+            code: 'IF3141',
+            name: 'Sistem Informasi',
+          },
+          {
+            code: 'IF3150',
+            name: 'Manajemen Proyek Perangkat Lunak',
+          },
+          {
+            code: 'IF3151',
+            name: 'Interaksi Manusia Komputer',
+          },
+          {
+            code: 'IF3170',
+            name: 'Inteligensi Buatan',
+          },
+        ],
+      },
+      {
+        year: 2020,
+        semester: 2,
+        courses: [
+          {
+            code: 'IF3210',
+            name: 'Pengembangan Aplikasi pada Platform Khusus',
+          },
+          {
+            code: 'IF3230',
+            name: 'Sistem Paralel dan Terdistribusi',
+          },
+          {
+            code: 'IF3250',
+            name: 'Proyek Perangkat Lunak',
+          },
+          {
+            code: 'IF3260',
+            name: 'Grafika Komputer',
+          },
+          {
+            code: 'IF3270',
+            name: 'Pembelajaran Mesin',
+          },
+          {
+            code: 'IF3280',
+            name: 'Socio-informatika dan Profesionalisme',
+          },
+        ],
+      },
+    ],
     lo: [
       { loId: 'LO A', loName: 'Penyelesaian Masalah', loScore: 1.23 },
       { loId: 'LO B', loName: 'Desain', loScore: 2.23 },

@@ -1,9 +1,10 @@
 import React from 'react';
-import { RouteComponentProps } from '@reach/router';
+import { Link, RouteComponentProps } from '@reach/router';
 import { getStudentData } from '~/api/Student';
 import { useQuery } from 'react-query';
 import LazyLoadText from '~/components/LazyLoadText';
 import LazyLoadImage from '~/components/LazyLoadImage';
+import TranscriptTable from '~/components/page/TranscriptTable';
 
 const StudentPage: React.FC<RouteComponentProps> = (
   props: RouteComponentProps
@@ -31,50 +32,7 @@ const StudentPage: React.FC<RouteComponentProps> = (
           </div>
         </div>
         <div className="flex w-full mb-4">
-          <table className="table-auto w-full text-xs">
-            <thead>
-              <tr className="border-b border-gray-400 ">
-                <th className="p-1">Kode</th>
-                <th className="p-1">Nama</th>
-                <th className="p-1">Indeks</th>
-              </tr>
-            </thead>
-            <tbody>
-              {isLoading
-                ? Array(5)
-                    .fill(1)
-                    .map((_, index) => {
-                      return (
-                        <tr
-                          className="border-b border-gray-400"
-                          key={`lazy-load-course-${index}`}
-                        >
-                          <td className="p-1 text-center">
-                            <LazyLoadText isLoading={isLoading} fit />
-                          </td>
-                          <td className="p-1 text-center">
-                            <LazyLoadText isLoading={isLoading} fit />
-                          </td>
-                          <td className="p-1 text-center">
-                            <LazyLoadText isLoading={isLoading} fit />
-                          </td>
-                        </tr>
-                      );
-                    })
-                : data?.courses.map(({ code, name, grade }, index) => {
-                    return (
-                      <tr
-                        className="border-b border-gray-400"
-                        key={`course-${index}`}
-                      >
-                        <td className="p-1 text-center">{code}</td>
-                        <td className="p-1">{name}</td>
-                        <td className="p-1 text-center">{grade || 'N/A'}</td>
-                      </tr>
-                    );
-                  })}
-            </tbody>
-          </table>
+          <TranscriptTable courses={data?.courses} isLoading={isLoading} />
         </div>
         <div className="flex flex-col mb-4">
           <div className="font-bold text-xl text-center">LO Anda:</div>
@@ -134,9 +92,11 @@ const StudentPage: React.FC<RouteComponentProps> = (
           <hr />
         </div>
         <div className="flex">
-          <div className="text-blue-400 underline text-sm">
-            Lihat transkrip lengkap..
-          </div>
+          <Link to="/student/transcript">
+            <div className="text-blue-400 underline text-sm">
+              Lihat transkrip lengkap..
+            </div>
+          </Link>
         </div>
       </div>
     </div>
