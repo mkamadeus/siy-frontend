@@ -13,7 +13,7 @@ const TranscriptTable: React.FC<Props> = ({ isLoading, courses }: Props) => {
       <thead>
         <tr className="border-b border-gray-400 ">
           <th className="p-1">Kode</th>
-          <th className="p-1">Nama</th>
+          <th className="p-1">Mata Kuliah</th>
           <th className="p-1">Indeks</th>
         </tr>
       </thead>

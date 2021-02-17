@@ -48,7 +48,9 @@ const TranscriptPage: React.FC<RouteComponentProps> = (
                 className="mb-4"
               >
                 <div>
-                  <div className="font-bold text-lg">Tahun Ajaran {year}</div>
+                  <div className="font-bold text-lg">
+                    Tahun Ajaran {year}/{year + 1}
+                  </div>
                   <div className="italic text-sm">
                     Semester {semester} - IP : {ip}
                   </div>
