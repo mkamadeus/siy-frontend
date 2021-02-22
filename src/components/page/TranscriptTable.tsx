@@ -1,13 +1,16 @@
 import React from 'react';
-import { Course } from '~/model/Course';
+import { StudentGrade } from '~/model/Grade';
 import LazyLoadText from '../LazyLoadText';
 
 interface Props {
   isLoading: boolean;
-  courses: Course[];
+  studentGrades: StudentGrade[];
 }
 
-const TranscriptTable: React.FC<Props> = ({ isLoading, courses }: Props) => {
+const TranscriptTable: React.FC<Props> = ({
+  isLoading,
+  studentGrades: courses,
+}: Props) => {
   return (
     <table className="table-auto w-full text-xs">
       <thead>
@@ -39,15 +42,15 @@ const TranscriptTable: React.FC<Props> = ({ isLoading, courses }: Props) => {
                   </tr>
                 );
               })
-          : courses.map(({ code, name, grade }, index) => {
+          : courses.map(({ course, indeks }, index) => {
               return (
                 <tr
                   className="border-b border-gray-400"
                   key={`course-${index}`}
                 >
-                  <td className="p-1 text-center">{code}</td>
-                  <td className="p-1">{name}</td>
-                  <td className="p-1 text-center">{grade || 'N/A'}</td>
+                  <td className="p-1 text-center">{course.code}</td>
+                  <td className="p-1">{course.name}</td>
+                  <td className="p-1 text-center">{indeks || 'N/A'}</td>
                 </tr>
               );
             })}

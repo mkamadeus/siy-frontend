@@ -34,7 +34,7 @@ const TranscriptPage: React.FC<RouteComponentProps> = (
         </div>
       </div>
       <hr className="mb-4" />
-      <div>
+      {/* <div>
         {data.transcript
           .sort((t1, t2) => {
             if (t1.year > t2.year) return 1;
@@ -56,12 +56,12 @@ const TranscriptPage: React.FC<RouteComponentProps> = (
                   </div>
                 </div>
                 <div>
-                  <TranscriptTable courses={courses} isLoading={isLoading} />
+                  <TranscriptTable studentGrades={courses} isLoading={isLoading} />
                 </div>
               </div>
             );
           })}
-      </div>
+      </div> */}
     </div>
   );
 };
