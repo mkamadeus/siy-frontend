@@ -1,19 +1,10 @@
-import { LearningOutcome } from './LearningOutcome';
-
 export interface Course {
+  id: number;
   code: string;
   name: string;
-  grade?: CourseGrade;
-  lo?: LearningOutcome[];
-}
-
-export enum CourseGrade {
-  A = 'A',
-  AB = 'AB',
-  B = 'B',
-  BC = 'BC',
-  C = 'C',
-  D = 'D',
-  E = 'E',
-  T = 'T',
+  sks: number;
+  silabusRingkas: string;
+  silabusLengkap: string;
+  outcome: string;
+  // lo?: LearningOutcome[];
 }

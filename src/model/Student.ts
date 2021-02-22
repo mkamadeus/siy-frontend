@@ -1,8 +1,9 @@
 import { Course } from './Course';
 import { LearningOutcome } from './LearningOutcome';
-import { Transcript } from './Transcript';
+import { StudentGrade } from './Grade';
 
 export interface StudentBase {
+  id: number;
   nim: string;
   name: string;
   imgPath: string;
@@ -12,6 +13,6 @@ export interface StudentBase {
 
 export interface Student extends StudentBase {
   courses: Course[];
-  transcript: Transcript[];
+  studentGrades: StudentGrade[];
   lo: LearningOutcome[];
 }
