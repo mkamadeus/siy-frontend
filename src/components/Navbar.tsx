@@ -10,6 +10,10 @@ const navigationButtons = [
     title: 'Status',
     path: 'student',
   },
+  {
+    title: 'Teacher',
+    path: 'teacher',
+  },
 ];
 
 const Navbar: React.FC = () => {
