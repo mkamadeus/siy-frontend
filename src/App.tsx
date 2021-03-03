@@ -7,6 +7,7 @@ import StudentPage from '~/pages/StudentPage';
 import NotFoundPage from './pages/NotFoundPage';
 import Navbar from './components/Navbar';
 import TranscriptPage from './pages/TranscriptPage';
+import PeerAssesmentForm from './pages/PeerAssesmentForm';
 
 const queryClient = new QueryClient();
 
@@ -19,6 +20,7 @@ const App: React.FC = () => {
         <IndexPage path="/" />
         <StudentPage path="/student" />
         <TranscriptPage path="/student/transcript" />
+        <PeerAssesmentForm path="/peer-assesment-form" />
       </Router>
     </QueryClientProvider>
   );
