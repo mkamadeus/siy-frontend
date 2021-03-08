@@ -103,6 +103,11 @@ const StudentPage: React.FC<RouteComponentProps> = (
           </div> */}
           <hr />
         </div>
+        {/* <Link to="/student/lo">
+          <div className="text-blue-400 underline text-sm">
+            Lihat rincian LO..
+          </div>
+        </Link> */}
         <div className="flex">
           <Link to="/student/transcript">
             <div className="text-blue-400 underline text-sm">
