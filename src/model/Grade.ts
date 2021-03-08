@@ -8,7 +8,7 @@ export interface StudentGrade {
   semester: number;
   indeks: CourseGrade;
   course: Course;
-  ip: number;
+  //ip: number;
 }
 
 export enum CourseGrade {
