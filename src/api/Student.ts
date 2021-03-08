@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { symlinkSync } from 'fs';
 // import { env } from '~/env';
-import { CourseGrade } from '~/model/Course';
+import { CourseGrade } from '~/model/Grade';
 import { Student } from '~/model/Student';
 import { dummyRequest } from './Dummy';
 
