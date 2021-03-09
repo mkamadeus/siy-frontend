@@ -12,7 +12,10 @@ const TeacherPage: React.FC<RouteComponentProps> = (
   const { data, error, isLoading } = useQuery('courseData', getCourseData);
   const { register, handleSubmit } = useForm();
   //const onSubmit = (values) => useQuery('sendFile', postForm);
-  const onSubmit = (values) => console.log(values);
+  const onSubmit = (values) => {
+    console.log(values);
+    alert('File berhasil tersimpan.');
+  };
 
   //const data = ['MS0001', 'MS0002', 'MS0003'];
 
