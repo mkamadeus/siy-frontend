@@ -22,7 +22,7 @@ const App: React.FC = () => {
         <StudentPage path="/student" />
         <TranscriptPage path="/student/transcript" />
         <TeacherPage path="/teacher" />
-        <PeerAssesmentForm path="/peer-assesment-form" />
+        <PeerAssesmentForm path="/peer-assessment-form" />
       </Router>
     </QueryClientProvider>
   );

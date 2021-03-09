@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { symlinkSync } from 'fs';
+// import { symlinkSync } from 'fs';
 // import { env } from '~/env';
 import { CourseGrade } from '~/model/Grade';
 import { Student } from '~/model/Student';
@@ -122,7 +122,7 @@ export const getStudentData = async (): Promise<Student> => {
           code: 'MS0002',
           name: 'Mata Kuliah 2',
           id: 2,
-          sks: 2,
+          sks: 4,
           silabusRingkas: 'lorem',
           silabusLengkap: 'lorem ipsum',
           outcome: '',
@@ -156,7 +156,7 @@ export const getStudentData = async (): Promise<Student> => {
           code: 'MS0004',
           name: 'Mata Kuliah 4',
           id: 4,
-          sks: 2,
+          sks: 3,
           silabusRingkas: 'lorem',
           silabusLengkap: 'lorem ipsum',
           outcome: '',
@@ -209,9 +209,9 @@ export const getStudentData = async (): Promise<Student> => {
   });
 };
 
-export const getStudentIP = async (): Promise<number> => {
-  const res = await axios.get<number>(
-    `${import.meta.env.SNOWPACK_PUBLIC_API_URL}/students/ip/13518035`
-  );
-  return res.data;
-};
+// export const getStudentIP = async (): Promise<number> => {
+//   const res = await axios.get<number>(
+//     `${import.meta.env.SNOWPACK_PUBLIC_API_URL}/students/ip/13518035`
+//   );
+//   return res.data;
+// };

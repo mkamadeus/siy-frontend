@@ -14,6 +14,10 @@ const navigationButtons = [
     title: 'Teacher',
     path: 'teacher',
   },
+  {
+    title: 'Peer Assessment',
+    path: 'peer-assessment-form',
+  },
 ];
 
 const Navbar: React.FC = () => {

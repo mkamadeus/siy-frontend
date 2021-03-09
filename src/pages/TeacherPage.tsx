@@ -75,10 +75,10 @@ const TeacherPage: React.FC<RouteComponentProps> = (
             })}
           >
             <option label=" "></option>
-            <option>dosen1</option>
-            <option>dosen2</option>
-            <option>dosen3</option>
-            <option>dosen4</option>
+            <option>Nama Dosen 1</option>
+            <option>Nama Dosen 2</option>
+            <option>Nama Dosen 3</option>
+            <option>Nama Dosen 4</option>
           </select>
           <div className="container p-3">
             <div>Upload File Rekap Nilai</div>

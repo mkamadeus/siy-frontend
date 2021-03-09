@@ -11,16 +11,16 @@ const StudentPage: React.FC<RouteComponentProps> = (
   props: RouteComponentProps
 ) => {
   const { data, error, isLoading } = useQuery('userData', getStudentData);
-  const { data: ip, error: ipError, isLoading: ipIsLoading } = useQuery(
-    'userGrade',
-    getStudentIP
-  );
+  // const { data: ip, error: ipError, isLoading: ipIsLoading } = useQuery(
+  //   'userGrade',
+  //   getStudentIP
+  // );
 
-  if (error || ipError) {
+  if (error) {
     alert(error);
   }
 
-  if (isLoading || !data || ipIsLoading || !ip) {
+  if (isLoading || !data) {
     return <LoadingPage />;
   }
 
@@ -37,7 +37,7 @@ const StudentPage: React.FC<RouteComponentProps> = (
             <LazyLoadText isLoading={isLoading} text={data.name} />
           </div>
           <div className="text-center italic font-semibold">
-            IPK/NR : <LazyLoadText isLoading={isLoading} text={ip} />
+            IPK/NR : <LazyLoadText isLoading={isLoading} text={data.ipk} />
           </div>
         </div>
         <div className="flex w-full mb-4">
@@ -52,7 +52,7 @@ const StudentPage: React.FC<RouteComponentProps> = (
             <LazyLoadText isLoading={isLoading} text={data.loAverage} />
           </div>
           <hr />
-          {/* <div className="flex flex-wrap justify-center">
+          <div className="flex flex-wrap justify-center">
             {isLoading
               ? Array(5)
                   .fill(1)
@@ -100,7 +100,7 @@ const StudentPage: React.FC<RouteComponentProps> = (
                       </div>
                     );
                   })}
-          </div> */}
+          </div>
           <hr />
         </div>
         {/* <Link to="/student/lo">

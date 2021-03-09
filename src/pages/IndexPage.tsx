@@ -6,7 +6,7 @@ const IndexPage: React.FC<RouteComponentProps> = (
 ) => {
   return (
     <div className="container mx-auto p-6">
-      <div>asdasdas</div>
+      <div>Welcome to Si-Y homepage</div>
     </div>
   );
 };

@@ -16,7 +16,8 @@ const TranscriptTable: React.FC<Props> = ({
       <thead>
         <tr className="border-b border-gray-400 ">
           <th className="p-1">Kode</th>
-          <th className="p-1">Mata Kuliah</th>
+          <th className="p-1 text-left">Mata Kuliah</th>
+          <th className="p-1">SKS</th>
           <th className="p-1">Indeks</th>
         </tr>
       </thead>
@@ -31,6 +32,9 @@ const TranscriptTable: React.FC<Props> = ({
                     key={`lazy-load-course-${index}`}
                   >
                     <td className="p-1 text-center">
+                      <LazyLoadText isLoading={isLoading} fit />
+                    </td>
+                    <td className="p-1">
                       <LazyLoadText isLoading={isLoading} fit />
                     </td>
                     <td className="p-1 text-center">
@@ -50,6 +54,7 @@ const TranscriptTable: React.FC<Props> = ({
                 >
                   <td className="p-1 text-center">{course.code}</td>
                   <td className="p-1">{course.name}</td>
+                  <td className="p-1 text-center">{course.sks}</td>
                   <td className="p-1 text-center">{indeks || 'N/A'}</td>
                 </tr>
               );
