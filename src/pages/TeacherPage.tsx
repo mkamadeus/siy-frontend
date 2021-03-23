@@ -32,7 +32,7 @@ const TeacherPage: React.FC<RouteComponentProps> = (
       <div className="flex flex-col">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="container p-3">Kode Mata Kuliah</div>
-          <select
+          {/*<select
             className="container p-3 rounded-md border-b bg-gray-200 mb-3 mx-2"
             name="course"
             ref={register({
@@ -43,7 +43,7 @@ const TeacherPage: React.FC<RouteComponentProps> = (
             {data.map((d) => (
               <option key={d.code}>{d.code}</option>
             ))}
-          </select>
+            </select>*/}
           <div className="container p-3">Semester</div>
           <select
             className="container p-3 rounded-md border-b bg-gray-200 mb-3 mx-2"
