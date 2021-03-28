@@ -2,6 +2,7 @@ export interface Course {
   id: number;
   code: string;
   name: string;
+  credits: number;
   briefSyllabus: string;
   completeSyllabus: string;
   outcome: string;
