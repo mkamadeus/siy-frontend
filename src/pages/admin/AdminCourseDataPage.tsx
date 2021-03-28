@@ -1,21 +1,27 @@
 import { RouteComponentProps } from '@reach/router';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { createCourse } from '~/api/Course';
 import Button from '~/components/common/Button';
 import CourseTable from '~/components/page/CourseTable';
+import { Course } from '~/model/Course';
 
 const AdminCourseDataPage: React.FC<RouteComponentProps> = (
   _props: RouteComponentProps
 ) => {
   const { register, handleSubmit } = useForm();
 
-  const onSubmit = (data) => {};
+  const onSubmit = async (data: Course) => {
+    console.log(data);
+    const course = await createCourse(data);
+    console.log('Created course', course);
+  };
 
   return (
     <div className="container mx-auto p-6">
       <div className="font-bold text-3xl mb-4">Create Course</div>
       <form
-        className="flex flex-col space-y-2"
+        className="flex flex-col space-y-3"
         onSubmit={handleSubmit(onSubmit)}
       >
         <div className="flex items-center space-x-2">
@@ -70,14 +76,24 @@ const AdminCourseDataPage: React.FC<RouteComponentProps> = (
             className="border-gray-300 rounded-md shadow-sm w-full"
           />
         </div>
+        <div className="flex items-center space-x-2">
+          <label htmlFor="credits" className="text-sm w-1/4">
+            SKS
+          </label>
+          <input
+            name="credits"
+            type="number"
+            ref={register({ setValueAs: (val) => parseInt(val) })}
+            className="border-gray-300 rounded-md shadow-sm w-full"
+          />
+        </div>
         <div>
           <button
             type="submit"
-            className="flex w-full items-center justify-center rounded-md bg-blue-500 text-white py-2 px-4 transform shadow-none hover:shadow-lg focus:ring focus:outline-none focus:bg-blue-600 transition duration-300 hover:-translate-y-1"
+            className="flex w-full items-center justify-center rounded-md bg-blue-500 text-white py-2 px-4 shadow-none hover:shadow-lg focus:ring focus:outline-none focus:bg-blue-600 transition duration-300"
           >
             Submit
           </button>
-          {/* <Button type="submit">Submit</Button> */}
         </div>
       </form>
     </div>
