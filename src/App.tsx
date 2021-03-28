@@ -13,6 +13,7 @@ import AdminCoursePage from './pages/admin/course/AdminCoursePage';
 import AdminCourseCreatePage from './pages/admin/course/AdminCourseCreatePage';
 import AdminIndexPage from './pages/admin/AdminIndexPage';
 import AdminCourseEditPage from './pages/admin/course/AdminCourseEditPage';
+import LoDetailPage from './pages/LoDetailPage';
 
 const queryClient = new QueryClient();
 
