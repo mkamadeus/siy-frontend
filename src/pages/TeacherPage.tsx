@@ -1,7 +1,7 @@
 import React from 'react';
 import { RouteComponentProps } from '@reach/router';
 import { useForm } from 'react-hook-form';
-import Button from '../components/Button';
+import Button from '../components/common/Button';
 import { getCourseData, postForm } from '~/api/Teacher';
 import { useQuery } from 'react-query';
 import LoadingPage from './LoadingPage';
@@ -11,13 +11,11 @@ const TeacherPage: React.FC<RouteComponentProps> = (
 ) => {
   const { data, error, isLoading } = useQuery('courseData', getCourseData);
   const { register, handleSubmit } = useForm();
-  //const onSubmit = (values) => useQuery('sendFile', postForm);
+
   const onSubmit = (values) => {
     console.log(values);
     alert('File berhasil tersimpan.');
   };
-
-  //const data = ['MS0001', 'MS0002', 'MS0003'];
 
   if (error) {
     alert(error);
@@ -106,7 +104,7 @@ const TeacherPage: React.FC<RouteComponentProps> = (
                 required: 'Required',
               })}
             ></input>
-            <Button />
+            <Button type="submit">asd</Button>
           </div>
         </form>
       </div>

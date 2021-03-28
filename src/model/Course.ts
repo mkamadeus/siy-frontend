@@ -2,11 +2,9 @@ export interface Course {
   id: number;
   code: string;
   name: string;
-  sks: number;
-  silabusRingkas: string;
-  silabusLengkap: string;
+  briefSyllabus: string;
+  completeSyllabus: string;
   outcome: string;
-  // lo?: LearningOutcome[];
 }
 
 export enum CourseGrade {
