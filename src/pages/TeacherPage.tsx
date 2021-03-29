@@ -2,7 +2,7 @@ import React from 'react';
 import { RouteComponentProps } from '@reach/router';
 import { useForm } from 'react-hook-form';
 import Button from '../components/Button';
-import { getCourseData } from '~/api/Teacher';
+import { getCourseData} from '~/api/Teacher';
 import { useQuery } from 'react-query';
 import LoadingPage from './LoadingPage';
 
@@ -40,10 +40,9 @@ const TeacherPage: React.FC<RouteComponentProps> = (
             })}
           >
             <option label=" "></option>
-            <option>M001</option>
-            <option>M002</option>
-            <option>M003</option>
-            <option>M004</option>
+            {data.map((d) => (
+              <option key={d.code}>{d.code}</option>
+            ))}
           </select>
           {console.log(data)}
           <div className="container p-3">Semester</div>
