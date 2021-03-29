@@ -1,25 +1,60 @@
-import { RouteComponentProps } from '@reach/router';
+import { navigate, RouteComponentProps } from '@reach/router';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { createCourse } from '~/api/Course';
+import { getCourseById, updateCourse } from '~/api/Course';
 import Button from '~/components/common/Button';
 import CourseTable from '~/components/page/CourseTable';
 import { Course } from '~/model/Course';
+import swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+import { useQuery } from 'react-query';
+import LoadingPage from '~/pages/common/LoadingPage';
 
-const AdminCourseDataPage: React.FC<RouteComponentProps> = (
-  _props: RouteComponentProps
+type RouteProps = {
+  id: number;
+};
+
+const AdminCourseEditPage: React.FC<RouteComponentProps> = (
+  props: RouteComponentProps<RouteProps>
 ) => {
   const { register, handleSubmit } = useForm();
+  const { data, isLoading, error } = useQuery(['courses', props.id], () =>
+    getCourseById(props.id!)
+  );
+
+  if (error) {
+    alert('error bang');
+    return null;
+  }
+
+  if (isLoading || !data) {
+    return <LoadingPage />;
+  }
 
   const onSubmit = async (data: Course) => {
-    console.log(data);
-    const course = await createCourse(data);
-    console.log('Created course', course);
+    const Swal = withReactContent(swal);
+    try {
+      await updateCourse(props.id!, data);
+      // await Swal.fire({
+      //   title: 'Berhasil!',
+      //   text: 'Pembuatan course baru berhasil!',
+      //   icon: 'success',
+      // });
+      alert('Berhasil!');
+      navigate('/admin/course');
+    } catch (err) {
+      // Swal.fire({
+      //   title: 'Gagal',
+      //   text: 'Pembuatan course baru gagal :(',
+      //   icon: 'error',
+      // });
+      alert('Gagal :(');
+    }
   };
 
   return (
     <div className="container mx-auto p-6">
-      <div className="font-bold text-3xl mb-4">Create Course</div>
+      <div className="font-bold text-3xl mb-4">Edit Course</div>
       <form
         className="flex flex-col space-y-3"
         onSubmit={handleSubmit(onSubmit)}
@@ -32,6 +67,7 @@ const AdminCourseDataPage: React.FC<RouteComponentProps> = (
             name="code"
             type="text"
             ref={register}
+            defaultValue={data.code}
             className="border-gray-300 rounded-md shadow-sm w-full"
           />
         </div>
@@ -43,6 +79,7 @@ const AdminCourseDataPage: React.FC<RouteComponentProps> = (
             name="name"
             type="text"
             ref={register}
+            defaultValue={data.name}
             className="border-gray-300 rounded-md shadow-sm w-full"
           />
         </div>
@@ -53,6 +90,7 @@ const AdminCourseDataPage: React.FC<RouteComponentProps> = (
           <textarea
             name="briefSyllabus"
             ref={register}
+            defaultValue={data.briefSyllabus}
             className="border-gray-300 rounded-md shadow-sm w-full"
           />
         </div>
@@ -63,6 +101,7 @@ const AdminCourseDataPage: React.FC<RouteComponentProps> = (
           <textarea
             name="completeSyllabus"
             ref={register}
+            defaultValue={data.completeSyllabus}
             className="border-gray-300 rounded-md shadow-sm w-full"
           />
         </div>
@@ -73,6 +112,7 @@ const AdminCourseDataPage: React.FC<RouteComponentProps> = (
           <textarea
             name="outcome"
             ref={register}
+            defaultValue={data.outcome}
             className="border-gray-300 rounded-md shadow-sm w-full"
           />
         </div>
@@ -83,6 +123,7 @@ const AdminCourseDataPage: React.FC<RouteComponentProps> = (
           <input
             name="credits"
             type="number"
+            defaultValue={data.credits}
             ref={register({ setValueAs: (val) => parseInt(val) })}
             className="border-gray-300 rounded-md shadow-sm w-full"
           />
@@ -92,7 +133,7 @@ const AdminCourseDataPage: React.FC<RouteComponentProps> = (
             type="submit"
             className="flex w-full items-center justify-center rounded-md bg-blue-500 text-white py-2 px-4 shadow-none hover:shadow-lg focus:ring focus:outline-none focus:bg-blue-600 transition duration-300"
           >
-            Submit
+            Update
           </button>
         </div>
       </form>
@@ -100,4 +141,4 @@ const AdminCourseDataPage: React.FC<RouteComponentProps> = (
   );
 };
 
-export default AdminCourseDataPage;
+export default AdminCourseEditPage;

@@ -5,7 +5,7 @@ import { useQuery } from 'react-query';
 import LazyLoadText from '~/components/LazyLoadText';
 import LazyLoadImage from '~/components/LazyLoadImage';
 import TranscriptTable from '~/components/page/TranscriptTable';
-import LoadingPage from './LoadingPage';
+import LoadingPage from './common/LoadingPage';
 
 const StudentPage: React.FC<RouteComponentProps> = (
   props: RouteComponentProps

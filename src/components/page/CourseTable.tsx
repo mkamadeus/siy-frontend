@@ -1,3 +1,4 @@
+import { Link } from '@reach/router';
 import React from 'react';
 import { Course } from '~/model/Course';
 
@@ -23,20 +24,27 @@ const CourseTable: React.FunctionComponent<Props> = ({ courses }: Props) => {
         </tr>
       </thead>
       <tbody>
-        {courses.map((course, index) => {
-          return (
-            <tr className="border-b border-gray-400" key={`course-${index}`}>
-              <td className="p-1 text-center">{course.id}</td>
-              <td className="p-1">{course.code}</td>
-              <td className="p-1 text-center">{course.name}</td>
-              <td className="p-1 text-center">
-                <div>a</div>
-                <div>b</div>
-                <div>c</div>
-              </td>
-            </tr>
-          );
-        })}
+        {courses
+          .sort((a, b) => (a.id > b.id ? 1 : -1))
+          .map((course, index) => {
+            return (
+              <tr className="border-b border-gray-400" key={`course-${index}`}>
+                <td className="p-1 text-center">{course.id}</td>
+                <td className="p-1">{course.code}</td>
+                <td className="p-1 text-center">{course.name}</td>
+                <td className="p-1 text-center flex justify-center space-x-3">
+                  <div>Preview</div>
+                  <div>Delete</div>
+                  <Link
+                    to={`edit/${course.id}`}
+                    className="text-blue-500 underline"
+                  >
+                    Edit
+                  </Link>
+                </td>
+              </tr>
+            );
+          })}
       </tbody>
     </table>
   );
