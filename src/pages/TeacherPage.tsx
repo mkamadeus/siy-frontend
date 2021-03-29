@@ -2,7 +2,7 @@ import React from 'react';
 import { RouteComponentProps } from '@reach/router';
 import { useForm } from 'react-hook-form';
 import Button from '../components/common/Button';
-import { getCourseData, postForm } from '~/api/Teacher';
+import { getCourseData } from '~/api/Teacher';
 import { useQuery } from 'react-query';
 import LoadingPage from './common/LoadingPage';
 

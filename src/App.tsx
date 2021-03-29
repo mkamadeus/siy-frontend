@@ -9,11 +9,11 @@ import TeacherPage from '~/pages/TeacherPage';
 import Navbar from './components/Navbar';
 import TranscriptPage from './pages/TranscriptPage';
 import PeerAssesmentForm from './pages/PeerAssesmentForm';
+import LoDetailPage from './pages/LoDetailPage';
 import AdminCoursePage from './pages/admin/course/AdminCoursePage';
 import AdminCourseCreatePage from './pages/admin/course/AdminCourseCreatePage';
 import AdminIndexPage from './pages/admin/AdminIndexPage';
 import AdminCourseEditPage from './pages/admin/course/AdminCourseEditPage';
-import LoDetailPage from './pages/LoDetailPage';
 
 const queryClient = new QueryClient();
 
