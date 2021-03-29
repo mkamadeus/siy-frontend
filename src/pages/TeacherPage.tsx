@@ -2,14 +2,14 @@ import React from 'react';
 import { RouteComponentProps } from '@reach/router';
 import { useForm } from 'react-hook-form';
 import Button from '../components/common/Button';
-import { getCourseData } from '~/api/Teacher';
+import { getTeacherData } from '~/api/Teacher';
 import { useQuery } from 'react-query';
 import LoadingPage from './common/LoadingPage';
 
 const TeacherPage: React.FC<RouteComponentProps> = (
   props: RouteComponentProps
 ) => {
-  const { data, error, isLoading } = useQuery('courseData', getCourseData);
+  const { data, error, isLoading } = useQuery('teacherData', getCourseData);
   const { register, handleSubmit } = useForm();
 
   const onSubmit = (values) => {
@@ -32,7 +32,7 @@ const TeacherPage: React.FC<RouteComponentProps> = (
           <div className="container p-3">Kode Mata Kuliah</div>
           <select
             className="container p-3 rounded-md border-b bg-gray-200 mb-3 mx-2"
-            name="course"
+            name="teacher"
             ref={register({
               required: 'Required',
             })}
