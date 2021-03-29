@@ -2,7 +2,7 @@ import React from 'react';
 import { RouteComponentProps } from '@reach/router';
 import { useForm } from 'react-hook-form';
 import Button from '../components/Button';
-import { getCourseData, postForm } from '~/api/Teacher';
+import { getCourseData } from '~/api/Teacher';
 import { useQuery } from 'react-query';
 import LoadingPage from './LoadingPage';
 
@@ -32,7 +32,7 @@ const TeacherPage: React.FC<RouteComponentProps> = (
       <div className="flex flex-col">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="container p-3">Kode Mata Kuliah</div>
-          {/*<select
+          <select
             className="container p-3 rounded-md border-b bg-gray-200 mb-3 mx-2"
             name="course"
             ref={register({
@@ -40,10 +40,12 @@ const TeacherPage: React.FC<RouteComponentProps> = (
             })}
           >
             <option label=" "></option>
-            {data.map((d) => (
-              <option key={d.code}>{d.code}</option>
-            ))}
-            </select>*/}
+            <option>M001</option>
+            <option>M002</option>
+            <option>M003</option>
+            <option>M004</option>
+          </select>
+          {console.log(data)}
           <div className="container p-3">Semester</div>
           <select
             className="container p-3 rounded-md border-b bg-gray-200 mb-3 mx-2"
@@ -96,18 +98,53 @@ const TeacherPage: React.FC<RouteComponentProps> = (
             ></input>
           </div>
           <div className="container p-3">
-            <div>Upload File Pembobotan LO</div>
-            <input
-              className="container p-3 mb-3"
-              type="file"
-              accept="accept= .csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
-              name="loWeightFile"
-              ref={register({
-                required: 'Required',
-              })}
-            ></input>
-            <Button />
+            Input Pembobotan LO
           </div>
+          <label htmlFor="LOuas" className="p-3">UAS (Format: LO_A LO_B LO_C LO_D LO_E LO_F LO_G)</label>
+          <input
+            className="container p-3 rounded-md border-b bg-gray-200 mb-3 mx-2"
+            type="text"
+            name="LOuas"
+            pattern="^(\d+\.?\d{0,2} ){7}(\d+\.?\d{0,2})$"
+            placeholder="ex. 1.23 1.23 1.23 1.23 1.23 1.23 1.23"
+            ref={register({
+              required: 'Required',
+            })}
+          ></input>
+          <label htmlFor="LOuts" className="p-3">UTS (Format: LO_A LO_B LO_C LO_D LO_E LO_F LO_G)</label>
+          <input
+            className="container p-3 rounded-md border-b bg-gray-200 mb-3 mx-2"
+            type="text"
+            name="LOuts"
+            pattern="^(\d+\.?\d{0,2} ){7}(\d+\.?\d{0,2})$"
+            placeholder="ex. 1.23 1.23 1.23 1.23 1.23 1.23 1.23"
+            ref={register({
+              required: 'Required',
+            })}
+          ></input>
+          <label htmlFor="LOkuis" className="p-3">Kuis (Format: LO_A LO_B LO_C LO_D LO_E LO_F LO_G)</label>
+          <input
+            className="container p-3 rounded-md border-b bg-gray-200 mb-3 mx-2"
+            type="text"
+            name="LOkuis"
+            pattern="^(\d+\.?\d{0,2} ){7}(\d+\.?\d{0,2})$"
+            placeholder="ex. 1.23 1.23 1.23 1.23 1.23 1.23 1.23"
+            ref={register({
+              required: 'Required',
+            })}
+          ></input>
+          <label htmlFor="LOxrcs" className="p-3">Latihan (Format: LO_A LO_B LO_C LO_D LO_E LO_F LO_G)</label>
+          <input
+            className="container p-3 rounded-md border-b bg-gray-200 mb-3 mx-2"
+            type="text"
+            name="LOkxrcs"
+            pattern="^(\d+\.?\d{0,2} ){7}(\d+\.?\d{0,2})$"
+            placeholder="ex. 1.23 1.23 1.23 1.23 1.23 1.23 1.23"
+            ref={register({
+              required: 'Required',
+            })}
+          ></input>
+          <Button />
         </form>
       </div>
     </div>

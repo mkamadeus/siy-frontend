@@ -8,16 +8,16 @@ export const getCourseData = async (): Promise<Course[]> => {
   //   `${import.meta.env.SNOWPACK_PUBLIC_API_URL}/students/grades/13518035/2020/1`
   // );
   const res = await axios.get<Course[]>(
-    `${import.meta.env.SNOWPACK_PUBLIC_API_URL}/courses`
+    `${import.meta.env.SNOWPACK_PUBLIC_API_URL}/courses/`
   );
   return res.data;
 };
 
-export const postForm = async () => {
+//export const postForm = async () => {
   //   `${import.meta.env.SNOWPACK_PUBLIC_API_URL}/students/grades/13518035/2020/1`
   // );
   //   const res = await axios.get<Course[]>(
   //     `${import.meta.env.SNOWPACK_PUBLIC_API_URL}/courses`
   //   );
   //   return res.data;
-};
+//};
