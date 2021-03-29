@@ -8,7 +8,6 @@ export interface StudentBase {
   name: string;
   imgPath: string;
   ipk: number;
-  loAverage: number;
 }
 
 export interface Student extends StudentBase {

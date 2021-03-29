@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, RouteComponentProps } from '@reach/router';
-import { getStudentData, getStudentIP } from '~/api/Student';
+import { getStudentData/*, getStudentIP*/ } from '~/api/Student';
 import { useQuery } from 'react-query';
 import LazyLoadText from '~/components/LazyLoadText';
 import LazyLoadImage from '~/components/LazyLoadImage';
@@ -48,9 +48,6 @@ const StudentPage: React.FC<RouteComponentProps> = (
         </div>
         <div className="flex flex-col mb-4">
           <div className="font-bold text-xl text-center">LO Anda:</div>
-          <div className="text-center text-lg font-semibold">
-            <LazyLoadText isLoading={isLoading} text={data.loAverage} />
-          </div>
           <hr />
           <div className="flex flex-wrap justify-center">
             {isLoading
