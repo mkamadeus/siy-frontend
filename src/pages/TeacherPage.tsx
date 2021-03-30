@@ -143,6 +143,17 @@ const TeacherPage: React.FC<RouteComponentProps> = (
               required: 'Required',
             })}
           ></input>
+          <label htmlFor="LOprktm" className="p-3">Praktikum (Format: LO_A LO_B LO_C LO_D LO_E LO_F LO_G)</label>
+          <input
+            className="container p-3 rounded-md border-b bg-gray-200 mb-3 mx-2"
+            type="text"
+            name="LOkprktm"
+            pattern="^(\d+\.?\d{0,2} ){7}(\d+\.?\d{0,2})$"
+            placeholder="ex. 1.23 1.23 1.23 1.23 1.23 1.23 1.23"
+            ref={register({
+              required: 'Required',
+            })}
+          ></input>
           <Button />
         </form>
       </div>
