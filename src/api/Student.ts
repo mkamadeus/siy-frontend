@@ -19,7 +19,6 @@ export const getStudentData = async (): Promise<Student> => {
     name: 'Matthew Kevin Amadeus',
     imgPath:
       'https://gitlab.informatika.org/uploads/-/system/user/avatar/1646/avatar.png?width=90',
-    loAverage: 1.23,
     courses: [
       {
         code: 'MS0001',
@@ -81,7 +80,7 @@ export const getStudentData = async (): Promise<Student> => {
         id: 1,
         studentId: 1,
         courseId: 1,
-        year: 2020,
+        year: 2022,
         semester: 1,
         indeks: CourseGrade.A,
         course: {
@@ -93,6 +92,42 @@ export const getStudentData = async (): Promise<Student> => {
           silabusLengkap: 'lorem ipsum',
           outcome: '',
         },
+        loA: {
+          loId: 'LO A',
+          loName: 'Penyelesaian Masalah',
+          loScore: 0.00
+        },
+        loB: {
+          loId: 'LO B',
+          loName: 'Desain',
+          loScore: 2.23
+        },
+        loC: {
+          loId: 'LO C',
+          loName: 'Komunikasi',
+          loScore: 3.23
+        },
+        loD: {
+          loId: 'LO D',
+          loName: 'Etika',
+          loScore: 1.33
+        },
+        loE: {
+          loId: 'LO E',
+          loName: 'Kerja Sama',
+          loScore: 3.23
+        },
+        loF: {
+          loId: 'LO F',
+          loName: 'Eksperimen',
+          loScore: 3.56
+        },
+        loG: {
+          loId: 'LO G',
+          loName: 'Belajar Sepanjang Hayat',
+          loScore: 4.00
+        },
+
       },
       {
         id: 2,
@@ -110,13 +145,48 @@ export const getStudentData = async (): Promise<Student> => {
           silabusLengkap: 'lorem ipsum',
           outcome: '',
         },
+        loA: {
+          loId: 'LO A',
+          loName: 'Penyelesaian Masalah',
+          loScore: 1.23
+        },
+        loB: {
+          loId: 'LO B',
+          loName: 'Desain',
+          loScore: 0.00
+        },
+        loC: {
+          loId: 'LO C',
+          loName: 'Komunikasi',
+          loScore: 3.23
+        },
+        loD: {
+          loId: 'LO D',
+          loName: 'Etika',
+          loScore: 1.33
+        },
+        loE: {
+          loId: 'LO E',
+          loName: 'Kerja Sama',
+          loScore: 3.23
+        },
+        loF: {
+          loId: 'LO F',
+          loName: 'Eksperimen',
+          loScore: 3.56
+        },
+        loG: {
+          loId: 'LO G',
+          loName: 'Belajar Sepanjang Hayat',
+          loScore: 4.00
+        },
       },
       {
         id: 2,
         studentId: 1,
         courseId: 2,
-        year: 2020,
-        semester: 1,
+        year: 2021,
+        semester: 2,
         indeks: CourseGrade.B,
         course: {
           code: 'MS0002',
@@ -127,12 +197,47 @@ export const getStudentData = async (): Promise<Student> => {
           silabusLengkap: 'lorem ipsum',
           outcome: '',
         },
+        loA: {
+          loId: 'LO A',
+          loName: 'Penyelesaian Masalah',
+          loScore: 1.23
+        },
+        loB: {
+          loId: 'LO B',
+          loName: 'Desain',
+          loScore: 2.23
+        },
+        loC: {
+          loId: 'LO C',
+          loName: 'Komunikasi',
+          loScore: 0.00
+        },
+        loD: {
+          loId: 'LO D',
+          loName: 'Etika',
+          loScore: 1.33
+        },
+        loE: {
+          loId: 'LO E',
+          loName: 'Kerja Sama',
+          loScore: 3.23
+        },
+        loF: {
+          loId: 'LO F',
+          loName: 'Eksperimen',
+          loScore: 3.56
+        },
+        loG: {
+          loId: 'LO G',
+          loName: 'Belajar Sepanjang Hayat',
+          loScore: 4.00
+        },
       },
       {
         id: 3,
         studentId: 1,
         courseId: 3,
-        year: 2020,
+        year: 2021,
         semester: 1,
         indeks: CourseGrade.AB,
         course: {
@@ -143,6 +248,41 @@ export const getStudentData = async (): Promise<Student> => {
           silabusRingkas: 'lorem',
           silabusLengkap: 'lorem ipsum',
           outcome: '',
+        },
+        loA: {
+          loId: 'LO A',
+          loName: 'Penyelesaian Masalah',
+          loScore: 1.23
+        },
+        loB: {
+          loId: 'LO B',
+          loName: 'Desain',
+          loScore: 2.23
+        },
+        loC: {
+          loId: 'LO C',
+          loName: 'Komunikasi',
+          loScore: 3.23
+        },
+        loD: {
+          loId: 'LO D',
+          loName: 'Etika',
+          loScore: 0.00
+        },
+        loE: {
+          loId: 'LO E',
+          loName: 'Kerja Sama',
+          loScore: 3.23
+        },
+        loF: {
+          loId: 'LO F',
+          loName: 'Eksperimen',
+          loScore: 3.56
+        },
+        loG: {
+          loId: 'LO G',
+          loName: 'Belajar Sepanjang Hayat',
+          loScore: 4.00
         },
       },
       {
@@ -161,13 +301,48 @@ export const getStudentData = async (): Promise<Student> => {
           silabusLengkap: 'lorem ipsum',
           outcome: '',
         },
+        loA: {
+          loId: 'LO A',
+          loName: 'Penyelesaian Masalah',
+          loScore: 1.23
+        },
+        loB: {
+          loId: 'LO B',
+          loName: 'Desain',
+          loScore: 2.23
+        },
+        loC: {
+          loId: 'LO C',
+          loName: 'Komunikasi',
+          loScore: 3.23
+        },
+        loD: {
+          loId: 'LO D',
+          loName: 'Etika',
+          loScore: 1.33
+        },
+        loE: {
+          loId: 'LO E',
+          loName: 'Kerja Sama',
+          loScore: 0.00
+        },
+        loF: {
+          loId: 'LO F',
+          loName: 'Eksperimen',
+          loScore: 3.56
+        },
+        loG: {
+          loId: 'LO G',
+          loName: 'Belajar Sepanjang Hayat',
+          loScore: 4.00
+        },
       },
       {
         id: 5,
         studentId: 1,
         courseId: 5,
         year: 2020,
-        semester: 1,
+        semester: 2,
         indeks: CourseGrade.A,
         course: {
           code: 'MS0005',
@@ -178,13 +353,48 @@ export const getStudentData = async (): Promise<Student> => {
           silabusLengkap: 'lorem ipsum',
           outcome: '',
         },
+        loA: {
+          loId: 'LO A',
+          loName: 'Penyelesaian Masalah',
+          loScore: 1.23
+        },
+        loB: {
+          loId: 'LO B',
+          loName: 'Desain',
+          loScore: 2.23
+        },
+        loC: {
+          loId: 'LO C',
+          loName: 'Komunikasi',
+          loScore: 3.23
+        },
+        loD: {
+          loId: 'LO D',
+          loName: 'Etika',
+          loScore: 1.33
+        },
+        loE: {
+          loId: 'LO E',
+          loName: 'Kerja Sama',
+          loScore: 3.23
+        },
+        loF: {
+          loId: 'LO F',
+          loName: 'Eksperimen',
+          loScore: 0.00
+        },
+        loG: {
+          loId: 'LO G',
+          loName: 'Belajar Sepanjang Hayat',
+          loScore: 4.00
+        },
       },
       {
         id: 6,
         studentId: 1,
         courseId: 6,
-        year: 2020,
-        semester: 1,
+        year: 2021,
+        semester: 2,
         indeks: CourseGrade.A,
         course: {
           code: 'MS0006',
@@ -194,6 +404,41 @@ export const getStudentData = async (): Promise<Student> => {
           silabusRingkas: 'lorem',
           silabusLengkap: 'lorem ipsum',
           outcome: '',
+        },
+        loA: {
+          loId: 'LO A',
+          loName: 'Penyelesaian Masalah',
+          loScore: 1.23
+        },
+        loB: {
+          loId: 'LO B',
+          loName: 'Desain',
+          loScore: 2.23
+        },
+        loC: {
+          loId: 'LO C',
+          loName: 'Komunikasi',
+          loScore: 3.23
+        },
+        loD: {
+          loId: 'LO D',
+          loName: 'Etika',
+          loScore: 1.33
+        },
+        loE: {
+          loId: 'LO E',
+          loName: 'Kerja Sama',
+          loScore: 3.23
+        },
+        loF: {
+          loId: 'LO F',
+          loName: 'Eksperimen',
+          loScore: 3.56
+        },
+        loG: {
+          loId: 'LO G',
+          loName: 'Belajar Sepanjang Hayat',
+          loScore: 0.00
         },
       },
     ],
