@@ -5,7 +5,7 @@ import { getAllCourses } from '~/api/Course';
 import LoadingPage from '~/pages/common/LoadingPage';
 import CourseTable from '~/components/page/CourseTable';
 
-const AdminCoursePage: React.FC<RouteComponentProps> = (
+const AdminLecturePage: React.FC<RouteComponentProps> = (
   _props: RouteComponentProps
 ) => {
   const { data, isLoading } = useQuery('courses', getAllCourses);
@@ -16,38 +16,26 @@ const AdminCoursePage: React.FC<RouteComponentProps> = (
 
   return (
     <div className="container mx-auto p-6">
-<<<<<<< HEAD
-      <div className="flex justify-between mb-4">
-        <div className="font-bold text-3xl ">Courses</div>
-        <div>
-          <button
-            className="flex items-center justify-center text-sm rounded-md bg-blue-500 text-white py-2 px-4 transform shadow-none hover:shadow-lg focus:ring focus:outline-none focus:bg-blue-600 transition duration-300"
-=======
       <div className="flex flex-col space-y-4 text-sm">
         <div className="flex justify-between mb-4">
-          <div className="font-bold text-3xl">Courses</div>
+          <div className="font-bold text-3xl">Lectures</div>
           <button
             className="flex items-center justify-center rounded-md bg-blue-500 text-white py-2 px-4 transform shadow-none hover:shadow-lg focus:ring focus:outline-none focus:bg-blue-600 transition duration-300"
->>>>>>> 692d5a0 (Added lecture page template)
             onClick={() => {
               navigate('/admin/course/create');
             }}
           >
-            Create new course...
+            Create new lecture...
           </button>
         </div>
       </div>
       <div className="flex flex-col space-y-4">
-<<<<<<< HEAD
-        <CourseTable courses={data} />
-=======
         <div>
           <CourseTable courses={data} />
         </div>
->>>>>>> 692d5a0 (Added lecture page template)
       </div>
     </div>
   );
 };
 
-export default AdminCoursePage;
+export default AdminLecturePage;

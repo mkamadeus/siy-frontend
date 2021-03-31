@@ -8,12 +8,13 @@ type RouteProps = {
   id: number;
 };
 
-const AdminCoursePreviewPage: React.FC<RouteComponentProps> = (
+const AdminLecturePreviewPage: React.FC<RouteComponentProps> = (
   props: RouteComponentProps<RouteProps>
 ) => {
-  const courseId = props.id as number;
-  const { data, isLoading, error } = useQuery(['courses', courseId], () => {
-    return getCourseById(courseId);
+  const { data, isLoading, error } = useQuery(['courses', props.id], () => {
+    if (props.id) {
+      return getCourseById(props.id);
+    }
   });
 
   if (error) {
@@ -63,4 +64,4 @@ const AdminCoursePreviewPage: React.FC<RouteComponentProps> = (
   );
 };
 
-export default AdminCoursePreviewPage;
+export default AdminLecturePreviewPage;

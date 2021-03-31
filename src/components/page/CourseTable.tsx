@@ -43,7 +43,7 @@ const CourseTable: React.FunctionComponent<Props> = ({ courses }: Props) => {
                 <td className="p-1">{course.name}</td>
                 <td className="p-1 text-center flex justify-center space-x-3">
                   <Link to={`${course.id}`}>
-                    <EyeOutline className="h-6 w-6 text-gray-500" />
+                    <EyeOutline className="h-5 w-5 text-gray-500" />
                   </Link>
                   <div
                     onClick={async () => {
@@ -61,10 +61,10 @@ const CourseTable: React.FunctionComponent<Props> = ({ courses }: Props) => {
                       }
                     }}
                   >
-                    <TrashOutline className="h-6 w-6 text-gray-500" />
+                    <TrashOutline className="h-5 w-5 text-gray-600" />
                   </div>
                   <Link to={`edit/${course.id}`}>
-                    <PencilOutline className="h-6 w-6 text-gray-500" />
+                    <PencilOutline className="h-5 w-5 text-gray-600" />
                   </Link>
                 </td>
               </tr>

@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { createCourse } from '~/api/Course';
 import { Course } from '~/model/Course';
 
-const AdminCourseCreatePage: React.FC<RouteComponentProps> = (
+const AdminLectureCreatePage: React.FC<RouteComponentProps> = (
   _props: RouteComponentProps
 ) => {
   const { register, handleSubmit } = useForm();
@@ -102,4 +102,4 @@ const AdminCourseCreatePage: React.FC<RouteComponentProps> = (
   );
 };
 
-export default AdminCourseCreatePage;
+export default AdminLectureCreatePage;

@@ -1,18 +1,9 @@
-import axios from 'axios';
-// import { symlinkSync } from 'fs';
-// import { env } from '~/env';
 import { CourseGrade } from '~/model/Grade';
 import { Student } from '~/model/Student';
 import { dummyRequest } from './Dummy';
 import { BaseInstance } from './Base';
 
 export const getStudentData = async (): Promise<Student> => {
-  //   `${import.meta.env.SNOWPACK_PUBLIC_API_URL}/students/grades/13518035/2020/1`
-  // );
-  // const res = await axios.get<Student>(
-  //   `${import.meta.env.SNOWPACK_PUBLIC_API_URL}/students/grades/13518035`
-  // );
-  // return res.data;
   return await dummyRequest<Student>({
     id: 1,
     nim: '13518035',
@@ -25,54 +16,54 @@ export const getStudentData = async (): Promise<Student> => {
         code: 'MS0001',
         name: 'Mata Kuliah 1',
         id: 1,
-        sks: 2,
-        silabusRingkas: 'lorem',
-        silabusLengkap: 'lorem ipsum',
+        credits: 2,
+        briefSyllabus: 'lorem',
+        completeSyllabus: 'lorem ipsum',
         outcome: '',
       },
       {
         code: 'MS0002',
         name: 'Mata Kuliah 2',
         id: 2,
-        sks: 2,
-        silabusRingkas: 'lorem',
-        silabusLengkap: 'lorem ipsum',
+        credits: 2,
+        briefSyllabus: 'lorem',
+        completeSyllabus: 'lorem ipsum',
         outcome: '',
       },
       {
         code: 'MS0003',
         name: 'Mata Kuliah 3',
         id: 3,
-        sks: 4,
-        silabusRingkas: 'lorem',
-        silabusLengkap: 'lorem ipsum',
+        credits: 4,
+        briefSyllabus: 'lorem',
+        completeSyllabus: 'lorem ipsum',
         outcome: '',
       },
       {
         code: 'MS0004',
         name: 'Mata Kuliah 4',
         id: 4,
-        sks: 2,
-        silabusRingkas: 'lorem',
-        silabusLengkap: 'lorem ipsum',
+        credits: 2,
+        briefSyllabus: 'lorem',
+        completeSyllabus: 'lorem ipsum',
         outcome: '',
       },
       {
         code: 'MS0005',
         name: 'Mata Kuliah 5',
         id: 5,
-        sks: 3,
-        silabusRingkas: 'lorem',
-        silabusLengkap: 'lorem ipsum',
+        credits: 3,
+        briefSyllabus: 'lorem',
+        completeSyllabus: 'lorem ipsum',
         outcome: '',
       },
       {
         code: 'MS0006',
         name: 'Mata Kuliah 6',
         id: 6,
-        sks: 2,
-        silabusRingkas: 'lorem',
-        silabusLengkap: 'lorem ipsum',
+        credits: 2,
+        briefSyllabus: 'lorem',
+        completeSyllabus: 'lorem ipsum',
         outcome: '',
       },
     ],
@@ -88,47 +79,46 @@ export const getStudentData = async (): Promise<Student> => {
           code: 'MS0001',
           name: 'Mata Kuliah 1',
           id: 1,
-          sks: 2,
-          silabusRingkas: 'lorem',
-          silabusLengkap: 'lorem ipsum',
+          credits: 2,
+          briefSyllabus: 'lorem',
+          completeSyllabus: 'lorem ipsum',
           outcome: '',
         },
         loA: {
           loId: 'LO A',
           loName: 'Penyelesaian Masalah',
-          loScore: 0.00
+          loScore: 0.0,
         },
         loB: {
           loId: 'LO B',
           loName: 'Desain',
-          loScore: 2.23
+          loScore: 2.23,
         },
         loC: {
           loId: 'LO C',
           loName: 'Komunikasi',
-          loScore: 3.23
+          loScore: 3.23,
         },
         loD: {
           loId: 'LO D',
           loName: 'Etika',
-          loScore: 1.33
+          loScore: 1.33,
         },
         loE: {
           loId: 'LO E',
           loName: 'Kerja Sama',
-          loScore: 3.23
+          loScore: 3.23,
         },
         loF: {
           loId: 'LO F',
           loName: 'Eksperimen',
-          loScore: 3.56
+          loScore: 3.56,
         },
         loG: {
           loId: 'LO G',
           loName: 'Belajar Sepanjang Hayat',
-          loScore: 4.00
+          loScore: 4.0,
         },
-
       },
       {
         id: 2,
@@ -141,45 +131,45 @@ export const getStudentData = async (): Promise<Student> => {
           code: 'MS0002',
           name: 'Mata Kuliah 2',
           id: 1,
-          sks: 2,
-          silabusRingkas: 'lorem',
-          silabusLengkap: 'lorem ipsum',
+          credits: 2,
+          briefSyllabus: 'lorem',
+          completeSyllabus: 'lorem ipsum',
           outcome: '',
         },
         loA: {
           loId: 'LO A',
           loName: 'Penyelesaian Masalah',
-          loScore: 1.23
+          loScore: 1.23,
         },
         loB: {
           loId: 'LO B',
           loName: 'Desain',
-          loScore: 0.00
+          loScore: 0.0,
         },
         loC: {
           loId: 'LO C',
           loName: 'Komunikasi',
-          loScore: 3.23
+          loScore: 3.23,
         },
         loD: {
           loId: 'LO D',
           loName: 'Etika',
-          loScore: 1.33
+          loScore: 1.33,
         },
         loE: {
           loId: 'LO E',
           loName: 'Kerja Sama',
-          loScore: 3.23
+          loScore: 3.23,
         },
         loF: {
           loId: 'LO F',
           loName: 'Eksperimen',
-          loScore: 3.56
+          loScore: 3.56,
         },
         loG: {
           loId: 'LO G',
           loName: 'Belajar Sepanjang Hayat',
-          loScore: 4.00
+          loScore: 4.0,
         },
       },
       {
@@ -193,45 +183,45 @@ export const getStudentData = async (): Promise<Student> => {
           code: 'MS0002',
           name: 'Mata Kuliah 2',
           id: 2,
-          sks: 4,
-          silabusRingkas: 'lorem',
-          silabusLengkap: 'lorem ipsum',
+          credits: 4,
+          briefSyllabus: 'lorem',
+          completeSyllabus: 'lorem ipsum',
           outcome: '',
         },
         loA: {
           loId: 'LO A',
           loName: 'Penyelesaian Masalah',
-          loScore: 1.23
+          loScore: 1.23,
         },
         loB: {
           loId: 'LO B',
           loName: 'Desain',
-          loScore: 2.23
+          loScore: 2.23,
         },
         loC: {
           loId: 'LO C',
           loName: 'Komunikasi',
-          loScore: 0.00
+          loScore: 0.0,
         },
         loD: {
           loId: 'LO D',
           loName: 'Etika',
-          loScore: 1.33
+          loScore: 1.33,
         },
         loE: {
           loId: 'LO E',
           loName: 'Kerja Sama',
-          loScore: 3.23
+          loScore: 3.23,
         },
         loF: {
           loId: 'LO F',
           loName: 'Eksperimen',
-          loScore: 3.56
+          loScore: 3.56,
         },
         loG: {
           loId: 'LO G',
           loName: 'Belajar Sepanjang Hayat',
-          loScore: 4.00
+          loScore: 4.0,
         },
       },
       {
@@ -245,45 +235,45 @@ export const getStudentData = async (): Promise<Student> => {
           code: 'MS0003',
           name: 'Mata Kuliah 3',
           id: 3,
-          sks: 2,
-          silabusRingkas: 'lorem',
-          silabusLengkap: 'lorem ipsum',
+          credits: 2,
+          briefSyllabus: 'lorem',
+          completeSyllabus: 'lorem ipsum',
           outcome: '',
         },
         loA: {
           loId: 'LO A',
           loName: 'Penyelesaian Masalah',
-          loScore: 1.23
+          loScore: 1.23,
         },
         loB: {
           loId: 'LO B',
           loName: 'Desain',
-          loScore: 2.23
+          loScore: 2.23,
         },
         loC: {
           loId: 'LO C',
           loName: 'Komunikasi',
-          loScore: 3.23
+          loScore: 3.23,
         },
         loD: {
           loId: 'LO D',
           loName: 'Etika',
-          loScore: 0.00
+          loScore: 0.0,
         },
         loE: {
           loId: 'LO E',
           loName: 'Kerja Sama',
-          loScore: 3.23
+          loScore: 3.23,
         },
         loF: {
           loId: 'LO F',
           loName: 'Eksperimen',
-          loScore: 3.56
+          loScore: 3.56,
         },
         loG: {
           loId: 'LO G',
           loName: 'Belajar Sepanjang Hayat',
-          loScore: 4.00
+          loScore: 4.0,
         },
       },
       {
@@ -297,45 +287,45 @@ export const getStudentData = async (): Promise<Student> => {
           code: 'MS0004',
           name: 'Mata Kuliah 4',
           id: 4,
-          sks: 3,
-          silabusRingkas: 'lorem',
-          silabusLengkap: 'lorem ipsum',
+          credits: 3,
+          briefSyllabus: 'lorem',
+          completeSyllabus: 'lorem ipsum',
           outcome: '',
         },
         loA: {
           loId: 'LO A',
           loName: 'Penyelesaian Masalah',
-          loScore: 1.23
+          loScore: 1.23,
         },
         loB: {
           loId: 'LO B',
           loName: 'Desain',
-          loScore: 2.23
+          loScore: 2.23,
         },
         loC: {
           loId: 'LO C',
           loName: 'Komunikasi',
-          loScore: 3.23
+          loScore: 3.23,
         },
         loD: {
           loId: 'LO D',
           loName: 'Etika',
-          loScore: 1.33
+          loScore: 1.33,
         },
         loE: {
           loId: 'LO E',
           loName: 'Kerja Sama',
-          loScore: 0.00
+          loScore: 0.0,
         },
         loF: {
           loId: 'LO F',
           loName: 'Eksperimen',
-          loScore: 3.56
+          loScore: 3.56,
         },
         loG: {
           loId: 'LO G',
           loName: 'Belajar Sepanjang Hayat',
-          loScore: 4.00
+          loScore: 4.0,
         },
       },
       {
@@ -349,45 +339,45 @@ export const getStudentData = async (): Promise<Student> => {
           code: 'MS0005',
           name: 'Mata Kuliah 5',
           id: 5,
-          sks: 2,
-          silabusRingkas: 'lorem',
-          silabusLengkap: 'lorem ipsum',
+          credits: 2,
+          briefSyllabus: 'lorem',
+          completeSyllabus: 'lorem ipsum',
           outcome: '',
         },
         loA: {
           loId: 'LO A',
           loName: 'Penyelesaian Masalah',
-          loScore: 1.23
+          loScore: 1.23,
         },
         loB: {
           loId: 'LO B',
           loName: 'Desain',
-          loScore: 2.23
+          loScore: 2.23,
         },
         loC: {
           loId: 'LO C',
           loName: 'Komunikasi',
-          loScore: 3.23
+          loScore: 3.23,
         },
         loD: {
           loId: 'LO D',
           loName: 'Etika',
-          loScore: 1.33
+          loScore: 1.33,
         },
         loE: {
           loId: 'LO E',
           loName: 'Kerja Sama',
-          loScore: 3.23
+          loScore: 3.23,
         },
         loF: {
           loId: 'LO F',
           loName: 'Eksperimen',
-          loScore: 0.00
+          loScore: 0.0,
         },
         loG: {
           loId: 'LO G',
           loName: 'Belajar Sepanjang Hayat',
-          loScore: 4.00
+          loScore: 4.0,
         },
       },
       {
@@ -401,45 +391,45 @@ export const getStudentData = async (): Promise<Student> => {
           code: 'MS0006',
           name: 'Mata Kuliah 6',
           id: 6,
-          sks: 2,
-          silabusRingkas: 'lorem',
-          silabusLengkap: 'lorem ipsum',
+          credits: 2,
+          briefSyllabus: 'lorem',
+          completeSyllabus: 'lorem ipsum',
           outcome: '',
         },
         loA: {
           loId: 'LO A',
           loName: 'Penyelesaian Masalah',
-          loScore: 1.23
+          loScore: 1.23,
         },
         loB: {
           loId: 'LO B',
           loName: 'Desain',
-          loScore: 2.23
+          loScore: 2.23,
         },
         loC: {
           loId: 'LO C',
           loName: 'Komunikasi',
-          loScore: 3.23
+          loScore: 3.23,
         },
         loD: {
           loId: 'LO D',
           loName: 'Etika',
-          loScore: 1.33
+          loScore: 1.33,
         },
         loE: {
           loId: 'LO E',
           loName: 'Kerja Sama',
-          loScore: 3.23
+          loScore: 3.23,
         },
         loF: {
           loId: 'LO F',
           loName: 'Eksperimen',
-          loScore: 3.56
+          loScore: 3.56,
         },
         loG: {
           loId: 'LO G',
           loName: 'Belajar Sepanjang Hayat',
-          loScore: 0.00
+          loScore: 0.0,
         },
       },
     ],
@@ -475,6 +465,9 @@ export const updateStudent = async (
   id: number,
   studentData: Partial<Student>
 ): Promise<Student> => {
-  const students = await BaseInstance.put<Student>(`/courses/${id}`, studentData);
+  const students = await BaseInstance.put<Student>(
+    `/courses/${id}`,
+    studentData
+  );
   return students.data;
 };

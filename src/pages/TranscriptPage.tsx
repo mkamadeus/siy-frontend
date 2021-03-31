@@ -2,7 +2,6 @@ import React from 'react';
 import { RouteComponentProps } from '@reach/router';
 import { getStudentData } from '~/api/Student';
 import { useQuery } from 'react-query';
-import TranscriptTable from '~/components/page/TranscriptTable';
 import LoadingPage from './common/LoadingPage';
 
 const TranscriptPage: React.FC<RouteComponentProps> = (
