@@ -1,14 +1,14 @@
 import React from 'react';
 import { navigate, RouteComponentProps } from '@reach/router';
 import { useQuery } from 'react-query';
-import { getAllCourses } from '~/api/Course';
 import LoadingPage from '~/pages/common/LoadingPage';
-import CourseTable from '~/components/page/CourseTable';
+import LectureTable from '~/components/page/LectureTable';
+import { getAllLectures } from '~/api/Lecture';
 
 const AdminLecturePage: React.FC<RouteComponentProps> = (
   _props: RouteComponentProps
 ) => {
-  const { data, isLoading } = useQuery('courses', getAllCourses);
+  const { data, isLoading } = useQuery('lectures', getAllLectures);
 
   if (isLoading || !data) {
     return <LoadingPage />;
@@ -31,7 +31,7 @@ const AdminLecturePage: React.FC<RouteComponentProps> = (
       </div>
       <div className="flex flex-col space-y-4">
         <div>
-          <CourseTable courses={data} />
+          <LectureTable lectures={data} />
         </div>
       </div>
     </div>
