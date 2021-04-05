@@ -2,7 +2,7 @@ import React from 'react';
 import { RouteComponentProps } from '@reach/router';
 import { useQuery } from 'react-query';
 import { getStudentData } from '~/api/Student';
-import LoadingPage from './LoadingPage';
+import LoadingPage from './common/LoadingPage';
 import LazyLoadText from '~/components/LazyLoadText';
 import { StudentGrade } from '~/model/Grade';
 

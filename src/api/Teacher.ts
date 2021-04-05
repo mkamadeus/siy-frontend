@@ -8,7 +8,7 @@ import { Course } from '~/model/Course';
 
 export const getCourseData = async (): Promise<Course[]> => {
   const res = await axios.get<Course[]>(
-    `${import.meta.env.SNOWPACK_PUBLIC_API_URL}/courses`
+    `http://siy.mkamadeus.dev/courses/`
   );
   return res.data;
 };
