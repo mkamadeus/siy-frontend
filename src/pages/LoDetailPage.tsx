@@ -2,9 +2,8 @@ import React from 'react';
 import { RouteComponentProps } from '@reach/router';
 import { useQuery } from 'react-query';
 import { getStudentData } from '~/api/Student';
-import LoadingPage from './LoadingPage';
+import LoadingPage from './common/LoadingPage';
 import LazyLoadText from '~/components/LazyLoadText';
-import { StudentGrade } from '~/model/Grade';
 
 const LoDetailPage: React.FC<RouteComponentProps> = (
   _props: RouteComponentProps
@@ -19,19 +18,21 @@ const LoDetailPage: React.FC<RouteComponentProps> = (
     return <LoadingPage />;
   }
 
-  var items = [];
+  const items = [];
   const grades = data.studentGrades;
-  const maxYear = grades.reduce((max, b) => b.year > max.year ? b : max).year;
-  const minYear = grades.reduce((min, b) => b.year < min.year ? b : min).year;
+  const maxYear = grades.reduce((max, b) => (b.year > max.year ? b : max)).year;
+  const minYear = grades.reduce((min, b) => (b.year < min.year ? b : min)).year;
   for (let curYear = minYear; curYear <= maxYear; curYear++) {
     for (let curSemester = 1; curSemester <= 2; curSemester++) {
       items.push(
         <div className="mb-1 text-md-bold font-weight-bold">
-          Semester {curSemester} Tahun {curYear}/{curYear+1}
+          Semester {curSemester} Tahun {curYear}/{curYear + 1}
         </div>
-      )
-      var shownGrade = grades.filter((grade) => {return grade.year == curYear && grade.semester == curSemester})
-      if (shownGrade.length > 0){
+      );
+      const shownGrade = grades.filter((grade) => {
+        return grade.year == curYear && grade.semester == curSemester;
+      });
+      if (shownGrade.length > 0) {
         items.push(
           <div>
             <hr />
@@ -59,7 +60,6 @@ const LoDetailPage: React.FC<RouteComponentProps> = (
                             className="border-b border-gray-400"
                             key={`lazy-load-${curYear}-${curSemester}-course-${index}`}
                           >
-                            
                             <td className="p-1 text-center">
                               <LazyLoadText isLoading={isLoading} fit />
                             </td>
@@ -84,41 +84,38 @@ const LoDetailPage: React.FC<RouteComponentProps> = (
                           </tr>
                         );
                       })
-                  : shownGrade
-                    .map(({ course, loA, loB, loC, loD, loE, loF, loG }, index) => {
-                      return (
-                        <tr
-                          className="border-b border-gray-400"
-                          key={`${curYear}-${curSemester}-course-${index}`}
-                        >
-                          <td className="p-1">{course.code}</td>
-                          <td className="p-1">{course.name}</td>
-                          <td className="p-1 text-center">{loA.loScore}</td>
-                          <td className="p-1 text-center">{loB.loScore}</td>
-                          <td className="p-1 text-center">{loC.loScore}</td>
-                          <td className="p-1 text-center">{loD.loScore}</td>
-                          <td className="p-1 text-center">{loE.loScore}</td>
-                          <td className="p-1 text-center">{loF.loScore}</td>
-                          <td className="p-1 text-center">{loG.loScore}</td>
-                        </tr>
-                      );
-                    })}
-              </tbody>   
+                  : shownGrade.map(
+                      (
+                        { course, loA, loB, loC, loD, loE, loF, loG },
+                        index
+                      ) => {
+                        return (
+                          <tr
+                            className="border-b border-gray-400"
+                            key={`${curYear}-${curSemester}-course-${index}`}
+                          >
+                            <td className="p-1">{course.code}</td>
+                            <td className="p-1">{course.name}</td>
+                            <td className="p-1 text-center">{loA.loScore}</td>
+                            <td className="p-1 text-center">{loB.loScore}</td>
+                            <td className="p-1 text-center">{loC.loScore}</td>
+                            <td className="p-1 text-center">{loD.loScore}</td>
+                            <td className="p-1 text-center">{loE.loScore}</td>
+                            <td className="p-1 text-center">{loF.loScore}</td>
+                            <td className="p-1 text-center">{loG.loScore}</td>
+                          </tr>
+                        );
+                      }
+                    )}
+              </tbody>
             </table>
           </div>
-        )
+        );
       } else {
-        items.push(
-          <div>
-            Tidak ada nilai LO.
-          </div>
-        )
+        items.push(<div>Tidak ada nilai LO.</div>);
       }
-      
     }
-    
   }
-
 
   return (
     <div>
@@ -138,14 +135,12 @@ const LoDetailPage: React.FC<RouteComponentProps> = (
         </div>
         <hr className="mb-4" />
       </div>
-      <div className ="container mx-auto p-6">
+      <div className="container mx-auto p-6">
         {items}
-        {console.log("items", items)}
+        {console.log('items', items)}
       </div>
     </div>
   );
-  
 };
-
 
 export default LoDetailPage;

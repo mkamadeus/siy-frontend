@@ -1,17 +1,17 @@
 import { navigate, RouteComponentProps } from '@reach/router';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { createCourse } from '~/api/Course';
-import { Course } from '~/model/Course';
+import { createLecture } from '~/api/Lecture';
+import { Lecture } from '~/model/Lecture';
 
-const AdminCourseCreatePage: React.FC<RouteComponentProps> = (
+const AdminLectureCreatePage: React.FC<RouteComponentProps> = (
   _props: RouteComponentProps
 ) => {
   const { register, handleSubmit } = useForm();
 
-  const onSubmit = async (data: Course) => {
+  const onSubmit = async (data: Lecture) => {
     try {
-      await createCourse(data);
+      await createLecture(data);
       alert('Berhasil!');
       navigate('/admin/course');
     } catch (err) {
@@ -102,4 +102,4 @@ const AdminCourseCreatePage: React.FC<RouteComponentProps> = (
   );
 };
 
-export default AdminCourseCreatePage;
+export default AdminLectureCreatePage;

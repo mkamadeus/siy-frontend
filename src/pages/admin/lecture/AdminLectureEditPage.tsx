@@ -10,17 +10,20 @@ type RouteProps = {
   id: number;
 };
 
-const AdminCourseEditPage: React.FC<RouteComponentProps> = (
+const AdminLectureEditPage: React.FC<RouteComponentProps> = (
   props: RouteComponentProps<RouteProps>
 ) => {
-  const courseId = props.id as number;
   const { register, handleSubmit } = useForm();
-  const { data, isLoading, error } = useQuery(['courses', courseId], () => {
-    return getCourseById(courseId);
+  const { data, isLoading, error } = useQuery(['courses', props.id], () => {
+    if (props.id) {
+      return getCourseById(props.id);
+    }
   });
 
   const updateCourseMethod = async (data: Course) => {
-    await updateCourse(courseId, data);
+    if (props.id) {
+      await updateCourse(props.id, data);
+    }
   };
   const updateCourseMutation = useMutation(updateCourseMethod);
 
@@ -132,4 +135,4 @@ const AdminCourseEditPage: React.FC<RouteComponentProps> = (
   );
 };
 
-export default AdminCourseEditPage;
+export default AdminLectureEditPage;
