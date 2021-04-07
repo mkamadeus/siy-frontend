@@ -7,10 +7,8 @@ import { BaseInstance } from './Base';
 import { Course } from '~/model/Course';
 
 export const getCourseData = async (): Promise<Course[]> => {
-  const res = await axios.get<Course[]>(
-    `http://siy.mkamadeus.dev/courses/`
-  );
-  return res.data;
+  const courses = await BaseInstance.get<Course[]>(`/courses/`);
+  return courses.data;
 };
 
 export const postForm = async () => {
