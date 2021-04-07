@@ -2,6 +2,7 @@ import React from 'react';
 
 interface Props {
     title: string,
+    section?: string
 }
 
 function showLOInput(title : string) : undefined {
@@ -34,14 +35,14 @@ function hideButton(id: string) : undefined {
 const ButtonShowLO = ({title} : Props) => {
     return (
         <button
-            id={"show "+title}
+            id={"show-"+title}
             type="button"
             className="container mb-3 mx-2 items-center justify-center rounded-md bg-blue-500 text-white py-2 px-4 transform shadow-none hover:shadow-lg focus:ring focus:outline-none focus:bg-blue-600 transition duration-300"
             onClick={
                 () => {
                     showLOInput(title)
-                    showButton("hide "+title)
-                    hideButton("show "+title)
+                    showButton("hide-"+title)
+                    hideButton("show-"+title)
                 }
             }
             hidden={false}
@@ -64,14 +65,14 @@ function hideLOInput(title : string) : undefined {
 const ButtonHideLO = ({title} : Props) => {
     return (
         <button
-            id={"hide "+title}
+            id={"hide-"+title}
             type="button"
             className="container mb-3 mx-2 items-center justify-center rounded-md bg-gray-400 text-white py-2 px-4 transform shadow-none hover:shadow-lg focus:ring focus:outline-none focus:bg-gray-500 transition duration-300"
             onClick={
                 () => {
                     hideLOInput(title)
-                    showButton("show "+title)
-                    hideButton("hide "+title)
+                    showButton("show-"+title)
+                    hideButton("hide-"+title)
                 }
             }
             hidden={true}
@@ -81,16 +82,15 @@ const ButtonHideLO = ({title} : Props) => {
     )
 }
 
-const LOForm = ({title} : Props) => {
+const LOForm = ({title, section} : Props) => {
     return (
-        <div className="container">
-            <input
-                className="container rounded-md bg-gray-200 my-1.5 mx-0"
-                type="text"
-                placeholder={title}
-                pattern="^\d\.\d{0,2}$"
-            ></input>
-        </div>
+        <input
+            id={section+ '-' +title}
+            className="container rounded-md bg-gray-200 my-1.5 mx-0"
+            type="text"
+            placeholder={title}
+            pattern="^\d\.\d{0,2}$"
+        ></input>
     )
 }
 
@@ -100,17 +100,18 @@ const LOInput = ({title} : Props) => {
                 <ButtonShowLO title={title}></ButtonShowLO>
                 <ButtonHideLO title={title}></ButtonHideLO>
                 <div 
-                id={title}
-                className="container mb-3 mx-2"
-                hidden={true}
+                    id={title}
+                    className="container mb-3 mx-2"
+                    hidden={true}
                 >
-                    <LOForm title="LO A"></LOForm>
-                    <LOForm title="LO B"></LOForm>
-                    <LOForm title="LO C"></LOForm>
-                    <LOForm title="LO D"></LOForm>
-                    <LOForm title="LO E"></LOForm>
-                    <LOForm title="LO F"></LOForm>
-                    <LOForm title="LO G"></LOForm>
+                    <p className="container text-center text-sm">Abaikan bagian yang tidak ingin diisi</p>
+                    <LOForm title="LO-A" section={title}></LOForm>
+                    <LOForm title="LO-B" section={title}></LOForm>
+                    <LOForm title="LO-C" section={title}></LOForm>
+                    <LOForm title="LO-D" section={title}></LOForm>
+                    <LOForm title="LO-E" section={title}></LOForm>
+                    <LOForm title="LO-F" section={title}></LOForm>
+                    <LOForm title="LO-G" section={title}></LOForm>
                 </div>
             </div>
     );
