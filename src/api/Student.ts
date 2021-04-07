@@ -4,6 +4,7 @@ import axios from 'axios';
 import { CourseGrade } from '~/model/Grade';
 import { Student } from '~/model/Student';
 import { dummyRequest } from './Dummy';
+import { BaseInstance } from './Base';
 
 export const getStudentData = async (): Promise<Student> => {
   //   `${import.meta.env.SNOWPACK_PUBLIC_API_URL}/students/grades/13518035/2020/1`
@@ -215,3 +216,20 @@ export const getStudentData = async (): Promise<Student> => {
 //   );
 //   return res.data;
 // };
+export const getStudentById = async (id: number): Promise<Student> => {
+  const students = await BaseInstance.get<Student>(`/student/${id}`);
+  return students.data;
+};
+
+export const createStudent = async (studentData: Student): Promise<Student> => {
+  const students = await BaseInstance.post<Student>('/courses', studentData);
+  return students.data;
+};
+
+export const updateStudent = async (
+  id: number,
+  studentData: Partial<Student>
+): Promise<Student> => {
+  const students = await BaseInstance.put<Student>(`/courses/${id}`, studentData);
+  return students.data;
+};

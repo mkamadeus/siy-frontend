@@ -4,13 +4,15 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 
 import IndexPage from '~/pages/IndexPage';
 import StudentPage from '~/pages/StudentPage';
-import NotFoundPage from './pages/NotFoundPage';
+import NotFoundPage from './pages/common/NotFoundPage';
 import TeacherPage from '~/pages/TeacherPage';
 import Navbar from './components/Navbar';
 import TranscriptPage from './pages/TranscriptPage';
 import PeerAssesmentForm from './pages/PeerAssesmentForm';
-import AdminPageStudent from './pages/AdminPageStudent';
-import AdminPageTeacher from './pages/AdminPageTeacher';
+import AdminCoursePage from './pages/admin/course/AdminCoursePage';
+import AdminCourseCreatePage from './pages/admin/course/AdminCourseCreatePage';
+import AdminIndexPage from './pages/admin/AdminIndexPage';
+import AdminCourseEditPage from './pages/admin/course/AdminCourseEditPage';
 
 const queryClient = new QueryClient();
 
@@ -25,8 +27,11 @@ const App: React.FC = () => {
         <TranscriptPage path="/student/transcript" />
         <TeacherPage path="/teacher" />
         <PeerAssesmentForm path="/peer-assessment-form" />
-        <AdminPageStudent path="/admin/student" />
-        <AdminPageTeacher path="/admin/teacher" />
+
+        <AdminIndexPage path="/admin" />
+        <AdminCoursePage path="/admin/course" />
+        <AdminCourseCreatePage path="/admin/course/create" />
+        <AdminCourseEditPage path="/admin/course/edit/:id" />
       </Router>
     </QueryClientProvider>
   );

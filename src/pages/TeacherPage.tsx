@@ -1,23 +1,21 @@
 import React from 'react';
 import { RouteComponentProps } from '@reach/router';
 import { useForm } from 'react-hook-form';
-import Button from '../components/Button';
-import { getCourseData, postForm } from '~/api/Teacher';
+import Button from '../components/common/Button';
+import { getTeacherData } from '~/api/Teacher';
 import { useQuery } from 'react-query';
-import LoadingPage from './LoadingPage';
+import LoadingPage from './common/LoadingPage';
 
 const TeacherPage: React.FC<RouteComponentProps> = (
   props: RouteComponentProps
 ) => {
-  const { data, error, isLoading } = useQuery('courseData', getCourseData);
+  const { data, error, isLoading } = useQuery('teacherData', getCourseData);
   const { register, handleSubmit } = useForm();
-  //const onSubmit = (values) => useQuery('sendFile', postForm);
+
   const onSubmit = (values) => {
     console.log(values);
     alert('File berhasil tersimpan.');
   };
-
-  //const data = ['MS0001', 'MS0002', 'MS0003'];
 
   if (error) {
     alert(error);
@@ -34,7 +32,7 @@ const TeacherPage: React.FC<RouteComponentProps> = (
           <div className="container p-3">Kode Mata Kuliah</div>
           <select
             className="container p-3 rounded-md border-b bg-gray-200 mb-3 mx-2"
-            name="course"
+            name="teacher"
             ref={register({
               required: 'Required',
             })}
@@ -106,7 +104,7 @@ const TeacherPage: React.FC<RouteComponentProps> = (
                 required: 'Required',
               })}
             ></input>
-            <Button />
+            <Button type="submit">asd</Button>
           </div>
         </form>
       </div>
