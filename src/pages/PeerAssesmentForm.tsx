@@ -14,8 +14,8 @@ const PeerAssesmentForm: React.FC<RouteComponentProps> = (
   // const {namaAnggotaKelompok6, nimAnggotaKelompok6, kontribusi6, pemecahanMasalah6, sikap6, bekerjaDenganOrangLain6} = useForm();
   // const {namaAnggotaKelompok7, nimAnggotaKelompok7, kontribusi7, pemecahanMasalah7, sikap7, bekerjaDenganOrangLain7} = useForm();
 
-  const { register, peerSubmit, handleSubmit } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const { register, handleSubmit } = useForm();
+  const onSubmit = (data: unknown) => console.log(data);
 
   return (
     <div className="container mx-auto p-6">
@@ -24,11 +24,11 @@ const PeerAssesmentForm: React.FC<RouteComponentProps> = (
           <div>Rubrik Penilaian Kemampuan Kerja Sama</div>
           <div>Identitas Penilai</div>
           <div>Nama</div>
-          <input name="nama" ref={peerSubmit} />
+          <input name="nama" ref={register} />
           <div>NIM</div>
-          <input name="nim" ref={peerSubmit} />
+          <input name="nim" ref={register} />
           <div>Kelompok</div>
-          <input name="kelompok" ref={peerSubmit} />
+          <input name="kelompok" ref={register} />
         </div>
         <div className="scoring-1">
           <div>Penilaian Anggota Kelompok (1)</div>
@@ -39,9 +39,9 @@ const PeerAssesmentForm: React.FC<RouteComponentProps> = (
             mempengaruhi indeks prestasi (IP) Anda maupun anggota kelompok.
           </div>
           <div>Nama Anggota (1)</div>
-          <input name="nama1" ref={peerSubmit} />
+          <input name="nama1" ref={register} />
           <div>NIM Anggota (1)</div>
-          <input name="nim1" ref={peerSubmit} />
+          <input name="nim1" ref={register} />
           <div>Kontribusi</div>
           <select name="kontribusi1" ref={register}>
             <option value="1">
@@ -165,9 +165,9 @@ const PeerAssesmentForm: React.FC<RouteComponentProps> = (
             mempengaruhi indeks prestasi (IP) Anda maupun anggota kelompok.
           </div>
           <div>Nama Anggota (2)</div>
-          <input name="nama2" ref={peerSubmit} />
+          <input name="nama2" ref={register} />
           <div>NIM Anggota (2)</div>
-          <input name="nim2" ref={peerSubmit} />
+          <input name="nim2" ref={register} />
           <div>Kontribusi</div>
           <select name="kontribusi2" ref={register}>
             <option value="1">
@@ -291,9 +291,9 @@ const PeerAssesmentForm: React.FC<RouteComponentProps> = (
             mempengaruhi indeks prestasi (IP) Anda maupun anggota kelompok.
           </div>
           <div>Nama Anggota (3)</div>
-          <input name="nama3" ref={peerSubmit} />
+          <input name="nama3" ref={register} />
           <div>NIM Anggota (3)</div>
-          <input name="nim3" ref={peerSubmit} />
+          <input name="nim3" ref={register} />
           <div>Kontribusi</div>
           <select name="kontribusi3" ref={register}>
             <option value="1">
@@ -417,9 +417,9 @@ const PeerAssesmentForm: React.FC<RouteComponentProps> = (
             mempengaruhi indeks prestasi (IP) Anda maupun anggota kelompok.
           </div>
           <div>Nama Anggota (4)</div>
-          <input name="nama1" ref={peerSubmit} />
+          <input name="nama1" ref={register} />
           <div>NIM Anggota (4)</div>
-          <input name="nim1" ref={peerSubmit} />
+          <input name="nim1" ref={register} />
           <div>Kontribusi</div>
           <select name="kontribusi4" ref={register}>
             <option value="1">
@@ -543,9 +543,9 @@ const PeerAssesmentForm: React.FC<RouteComponentProps> = (
             mempengaruhi indeks prestasi (IP) Anda maupun anggota kelompok.
           </div>
           <div>Nama Anggota (5)</div>
-          <input name="nama1" ref={peerSubmit} />
+          <input name="nama1" ref={register} />
           <div>NIM Anggota (5)</div>
-          <input name="nim5" ref={peerSubmit} />
+          <input name="nim5" ref={register} />
           <div>Kontribusi</div>
           <select name="kontribusi5" ref={register}>
             <option value="1">
@@ -669,9 +669,9 @@ const PeerAssesmentForm: React.FC<RouteComponentProps> = (
             mempengaruhi indeks prestasi (IP) Anda maupun anggota kelompok.
           </div>
           <div>Nama Anggota (6)</div>
-          <input name="nama1" ref={peerSubmit} />
+          <input name="nama1" ref={register} />
           <div>NIM Anggota (6)</div>
-          <input name="nim1" ref={peerSubmit} />
+          <input name="nim1" ref={register} />
           <div>Kontribusi</div>
           <select name="kontribusi6" ref={register}>
             <option value="1">
@@ -795,9 +795,9 @@ const PeerAssesmentForm: React.FC<RouteComponentProps> = (
             mempengaruhi indeks prestasi (IP) Anda maupun anggota kelompok.
           </div>
           <div>Nama Anggota (7)</div>
-          <input name="nama7" ref={peerSubmit} />
+          <input name="nama7" ref={register} />
           <div>NIM Anggota (7)</div>
-          <input name="nim7" ref={peerSubmit} />
+          <input name="nim7" ref={register} />
           <div>Kontribusi</div>
           <select name="kontribusi7" ref={register}>
             <option value="1">
