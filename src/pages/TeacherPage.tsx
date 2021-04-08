@@ -6,6 +6,32 @@ import { getAllCourses } from '~/api/Course';
 import { useQuery } from 'react-query';
 import LoadingPage from './common/LoadingPage';
 
+function isLOValid(title: string, LOList: string[]) : boolean {
+  var value = 0;
+
+  LOList.forEach(lo => {
+    var elmt = document.getElementById(title + '-' + lo);
+    if (elmt && elmt instanceof HTMLInputElement && elmt.value !== "") {
+      value += parseFloat(elmt.value);
+    }
+  });
+
+  return value === 0 || value === 1;
+}
+
+function isAllLOValid() : boolean {
+  const LOlist = ['LO-A', 'LO-B', 'LO-C', 'LO-D', 'LO-E', 'LO-F', 'LO-G'];
+  const titleList = ['UAS', 'UTS', 'Praktikum', 'Kuis', 'Latihan'];
+
+  var LOValid = true;
+  titleList.forEach(title => {
+    LOValid = LOValid && isLOValid(title, LOlist);
+  });
+
+  return LOValid;
+}
+
+
 const TeacherPage: React.FC<RouteComponentProps> = (
   props: RouteComponentProps
 ) => {
@@ -29,7 +55,9 @@ const TeacherPage: React.FC<RouteComponentProps> = (
     <div className="container mx-auto p-6">
       <div className="flex flex-col">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="container p-3">Kode Mata Kuliah</div>
+          <div className="container p-3">Kode Mata Kuliah
+            <span className="text-red-500"> required</span>
+          </div>
           <select
             className="container p-3 rounded-md border-b bg-gray-200 mb-3 mx-2"
             name="teacher"
@@ -43,7 +71,10 @@ const TeacherPage: React.FC<RouteComponentProps> = (
             ))}
           </select>
           
-          <div className="container p-3">Semester</div>
+          <div className="container p-3">
+            Semester
+            <span className="text-red-500"> required</span>
+          </div>
           <select
             className="container p-3 rounded-md border-b bg-gray-200 mb-3 mx-2"
             name="semester"
@@ -57,7 +88,8 @@ const TeacherPage: React.FC<RouteComponentProps> = (
           </select>
           
           <div className="container p-3">
-            Tahun (format: Jika tahun ajar 2020/2021 tuliskan 2020)
+            Tahun (Format: Jika tahun ajar 2020/2021 tuliskan 2020)
+            <span className="text-red-500"> required</span>
           </div>
           <input
             className="container p-3 rounded-md border-b bg-gray-200 mb-3 mx-2"
@@ -71,11 +103,11 @@ const TeacherPage: React.FC<RouteComponentProps> = (
           ></input>
           
           <div className="container p-3">
-            <div>Upload File Rekap Nilai</div>
+            <div>Upload File Rekap Nilai (.csv, .xls, .xlsx)</div>
             <input
               className="container p-3"
               type="file"
-              accept="accept= .csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+              accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
               name="gradeFile"
             ></input>
           </div>
