@@ -9,7 +9,6 @@ export interface StudentGrade {
   semester: number;
   indeks: CourseGrade;
   course: Course;
-  //ip: number;
   loA: LearningOutcome;
   loB: LearningOutcome;
   loC: LearningOutcome;

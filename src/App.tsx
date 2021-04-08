@@ -19,6 +19,7 @@ import AdminLectureCreatePage from './pages/admin/lecture/AdminLectureCreatePage
 import AdminLectureEditPage from './pages/admin/lecture/AdminLectureEditPage';
 import AdminLecturePreviewPage from './pages/admin/lecture/AdminLecturePreviewPage';
 import AdminCoursePreviewPage from './pages/admin/course/AdminCoursePreviewPage';
+import LoginPage from './pages/LoginPage';
 
 const queryClient = new QueryClient();
 
@@ -48,6 +49,9 @@ const App: React.FC = () => {
         <AdminLecturePreviewPage path="/admin/course/:id" />
         <AdminLectureEditPage path="/admin/course/edit/:id" />
         <AdminLectureCreatePage path="/admin/course/create" />
+
+        {/* AUTH*/}
+        <LoginPage path="/login" />
       </Router>
     </QueryClientProvider>
   );
