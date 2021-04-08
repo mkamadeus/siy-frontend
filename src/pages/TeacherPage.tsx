@@ -6,55 +6,6 @@ import { getAllCourses } from '~/api/Course';
 import { useQuery } from 'react-query';
 import LoadingPage from './common/LoadingPage';
 
-
-/* LO Validation */
-function isLOValid(title: string, LOList: string[]) : boolean {
-  var value = 0;
-
-  LOList.forEach(lo => {
-    var elmt = document.getElementById(title + '-' + lo);
-    if (elmt && elmt instanceof HTMLInputElement && elmt.value !== "") {
-      value += parseFloat(elmt.value);
-    }
-  });
-
-  return value == 0 || value == 1;
-}
-
-function isAllLOValid() : boolean {
-  const LOlist = ['LO-A', 'LO-B', 'LO-C', 'LO-D', 'LO-E', 'LO-F', 'LO-G'];
-  const titleList = ['UAS', 'UTS', 'Praktikum', 'Kuis', 'Latihan'];
-
-  var LOValid = true;
-  titleList.forEach(title => {
-    LOValid = LOValid && isLOValid(title, LOlist);
-  });
-
-  return LOValid;
-}
-
-
-/* File Validation */
-function isFileValid() : boolean {
-  var elmt = document.getElementById('file-input');
-  
-  if (elmt && elmt instanceof HTMLInputElement) {
-    // No file attached
-    if (elmt.value === "") {
-      return true;
-    }
-    // File attached
-    else {
-      var splitPath = elmt.value.split('.');
-      var format = splitPath[splitPath.length - 1];
-      return (format === 'csv' || format === 'xls' || format === 'xlsx');
-    }
-  }
-  else {
-    return false;
-  }
-}
-
 const TeacherPage: React.FC<RouteComponentProps> = (
   props: RouteComponentProps
 ) => {
@@ -77,15 +28,10 @@ const TeacherPage: React.FC<RouteComponentProps> = (
   return (
     <div className="container mx-auto p-6">
       <div className="flex flex-col">
-        <form 
-          encType="multipart/form-data"
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          <div className="container py-3">Kode Mata Kuliah
-            <span className="text-red-500"> required</span>
-          </div>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="container p-3">Kode Mata Kuliah</div>
           <select
-            className="container p-3 rounded-md border-b bg-gray-200 mb-3"
+            className="container p-3 rounded-md border-b bg-gray-200 mb-3 mx-2"
             name="teacher"
             ref={register({
               required: 'Required',
@@ -96,13 +42,10 @@ const TeacherPage: React.FC<RouteComponentProps> = (
               <option key={d.code}>{d.code}</option>
             ))}
           </select>
-          
-          <div className="container py-3">
-            Semester
-            <span className="text-red-500"> required</span>
-          </div>
+          {console.log(data)}
+          <div className="container p-3">Semester</div>
           <select
-            className="container p-3 rounded-md border-b bg-gray-200 mb-3"
+            className="container p-3 rounded-md border-b bg-gray-200 mb-3 mx-2"
             name="semester"
             ref={register({
               required: 'Required',
@@ -112,13 +55,11 @@ const TeacherPage: React.FC<RouteComponentProps> = (
             <option>1</option>
             <option>2</option>
           </select>
-          
-          <div className="container py-3">
-            Tahun (Format: Jika tahun ajar 2020/2021 tuliskan 2020)
-            <span className="text-red-500"> required</span>
+          <div className="container p-3">
+            Tahun (format: Jika tahun ajar 2020/2021 tuliskan 2020)
           </div>
           <input
-            className="container p-3 rounded-md border-b bg-gray-200 mb-3"
+            className="container p-3 rounded-md border-b bg-gray-200 mb-3 mx-2"
             type="text"
             name="year"
             pattern="20\d{2}"
@@ -127,16 +68,29 @@ const TeacherPage: React.FC<RouteComponentProps> = (
               required: 'Required',
             })}
           ></input>
-          
-          <div className="container py-3">Upload File Rekap Nilai (.csv, .xls, .xlsx)</div>
+          <div className="container p-3">Nama Dosen Pengampu</div>
+          <select
+            className="container p-3 rounded-md border-b bg-gray-200 mb-3 mx-2"
+            name="teacher"
+            ref={register({
+              required: 'Required',
+            })}
+          >
+            <option label=" "></option>
+            <option>Nama Dosen 1</option>
+            <option>Nama Dosen 2</option>
+            <option>Nama Dosen 3</option>
+            <option>Nama Dosen 4</option>
+          </select>
+          <div className="container p-3">
+            <div>Upload File Rekap Nilai</div>
             <input
-              id="file-input"
-              className="container py-3"
+              className="container p-3"
               type="file"
-              accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+              accept="accept= .csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
               name="gradeFile"
               ref={register({
-
+                required: 'Required',
               })}
           ></input>
           
@@ -158,7 +112,7 @@ const TeacherPage: React.FC<RouteComponentProps> = (
             UAS (Format: LO_A LO_B LO_C LO_D LO_E LO_F LO_G)
           </label>
           <input
-            className="container p-3 rounded-md border-b bg-gray-200 mb-3"
+            className="container p-3 rounded-md border-b bg-gray-200 mb-3 mx-2"
             type="text"
             name="LOuas"
             pattern="^(\d+\.?\d{0,2} ){7}(\d+\.?\d{0,2})$"
