@@ -24,6 +24,7 @@ const App: React.FC = () => {
         <NotFoundPage default />
         <IndexPage path="/" />
         <StudentPage path="/student" />
+        <LoDetailPage path="/student/lo" />
         <TranscriptPage path="/student/transcript" />
         <TeacherPage path="/teacher" />
         <PeerAssesmentForm path="/peer-assessment-form" />

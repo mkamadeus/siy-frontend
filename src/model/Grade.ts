@@ -1,4 +1,5 @@
 import { Course } from './Course';
+import { LearningOutcome } from './LearningOutcome';
 
 export interface StudentGrade {
   id: number;
@@ -9,6 +10,13 @@ export interface StudentGrade {
   indeks: CourseGrade;
   course: Course;
   //ip: number;
+  loA: LearningOutcome;
+  loB: LearningOutcome;
+  loC: LearningOutcome;
+  loD: LearningOutcome;
+  loE: LearningOutcome;
+  loF: LearningOutcome;
+  loG: LearningOutcome;
 }
 
 export enum CourseGrade {

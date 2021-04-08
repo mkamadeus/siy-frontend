@@ -54,7 +54,7 @@ const TranscriptTable: React.FC<Props> = ({
                 >
                   <td className="p-1 text-center">{course.code}</td>
                   <td className="p-1">{course.name}</td>
-                  <td className="p-1 text-center">{course.sks}</td>
+                  <td className="p-1 text-center">{course.credits}</td>
                   <td className="p-1 text-center">{indeks || 'N/A'}</td>
                 </tr>
               );
