@@ -2,17 +2,17 @@ import React from 'react';
 import { RouteComponentProps } from '@reach/router';
 import { useForm } from 'react-hook-form';
 import Button from '../components/common/Button';
-import { getTeacherData } from '~/api/Teacher';
+import { getAllCourses } from '~/api/Course';
 import { useQuery } from 'react-query';
 import LoadingPage from './common/LoadingPage';
 
 const TeacherPage: React.FC<RouteComponentProps> = (
   props: RouteComponentProps
 ) => {
-  const { data, error, isLoading } = useQuery('teacherData', getCourseData);
+  const { data, error, isLoading } = useQuery('courseData', getAllCourses);
   const { register, handleSubmit } = useForm();
 
-  const onSubmit = (values) => {
+  const onSubmit = (values: unknown) => {
     console.log(values);
     alert('File berhasil tersimpan.');
   };

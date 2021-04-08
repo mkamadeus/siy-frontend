@@ -1,5 +1,4 @@
 export interface Teacher {
-
-    id: number;
-    name: string;
+  id: number;
+  name: string;
 }

@@ -5,9 +5,9 @@ import {
   TrashOutline,
   EyeOutline,
 } from '@graywolfai/react-heroicons';
-import { deleteCourse } from '~/api/Course';
 import { useMutation } from 'react-query';
 import { Lecture } from '~/model/Lecture';
+import { deleteCourse } from '~/api/Course';
 
 interface Props {
   lectures: Lecture[];

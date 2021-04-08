@@ -1,7 +1,7 @@
 import React from 'react';
 import { RouteComponentProps } from '@reach/router';
 import { useQuery } from 'react-query';
-import { getCourseData } from '~/api/Teacher';
+import { getAllCourses } from '~/api/Course';
 import LoadingPage from '../common/LoadingPage';
 import withReactContent from 'sweetalert2-react-content';
 import Swal from 'sweetalert2';
@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
 const AdminIndexPage: React.FC<RouteComponentProps> = (
   _props: RouteComponentProps
 ) => {
-  const { data, error, isLoading } = useQuery('courses', getCourseData);
+  const { isLoading } = useQuery('courses', getAllCourses);
 
   if (isLoading) {
     return <LoadingPage />;

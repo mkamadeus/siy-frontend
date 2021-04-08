@@ -2,11 +2,7 @@ import { navigate, RouteComponentProps } from '@reach/router';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { getCourseById, updateCourse } from '~/api/Course';
-import Button from '~/components/common/Button';
-import CourseTable from '~/components/page/CourseTable';
 import { Course } from '~/model/Course';
-import swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
 import { useQuery } from 'react-query';
 import LoadingPage from '~/pages/common/LoadingPage';
 
@@ -17,9 +13,11 @@ type RouteProps = {
 const AdminCourseEditPage: React.FC<RouteComponentProps> = (
   props: RouteComponentProps<RouteProps>
 ) => {
+  const courseId = props.id as number;
+
   const { register, handleSubmit } = useForm();
-  const { data, isLoading, error } = useQuery(['courses', props.id], () =>
-    getCourseById(props.id!)
+  const { data, isLoading, error } = useQuery(['courses', courseId], () =>
+    getCourseById(courseId)
   );
 
   if (error) {
@@ -32,22 +30,11 @@ const AdminCourseEditPage: React.FC<RouteComponentProps> = (
   }
 
   const onSubmit = async (data: Course) => {
-    const Swal = withReactContent(swal);
     try {
-      await updateCourse(props.id!, data);
-      // await Swal.fire({
-      //   title: 'Berhasil!',
-      //   text: 'Pembuatan course baru berhasil!',
-      //   icon: 'success',
-      // });
+      await updateCourse(courseId, data);
       alert('Berhasil!');
       navigate('/admin/course');
     } catch (err) {
-      // Swal.fire({
-      //   title: 'Gagal',
-      //   text: 'Pembuatan course baru gagal :(',
-      //   icon: 'error',
-      // });
       alert('Gagal :(');
     }
   };

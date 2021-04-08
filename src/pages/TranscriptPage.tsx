@@ -2,7 +2,6 @@ import React from 'react';
 import { RouteComponentProps } from '@reach/router';
 import { getStudentData } from '~/api/Student';
 import { useQuery } from 'react-query';
-import TranscriptTable from '~/components/page/TranscriptTable';
 import LoadingPage from './common/LoadingPage';
 
 const TranscriptPage: React.FC<RouteComponentProps> = (
@@ -34,34 +33,6 @@ const TranscriptPage: React.FC<RouteComponentProps> = (
         </div>
       </div>
       <hr className="mb-4" />
-      {/* <div>
-        {data.transcript
-          .sort((t1, t2) => {
-            if (t1.year > t2.year) return 1;
-            if (t1.year < t2.year) return -1;
-            return 0;
-          })
-          .map(({ year, semester, courses, ip }) => {
-            return (
-              <div
-                key={`transcript-table-${year}-${semester}`}
-                className="mb-4"
-              >
-                <div>
-                  <div className="font-bold text-lg">
-                    Tahun Ajaran {year}/{year + 1}
-                  </div>
-                  <div className="italic text-sm">
-                    Semester {semester} - IP : {ip}
-                  </div>
-                </div>
-                <div>
-                  <TranscriptTable studentGrades={courses} isLoading={isLoading} />
-                </div>
-              </div>
-            );
-          })}
-      </div> */}
     </div>
   );
 };
