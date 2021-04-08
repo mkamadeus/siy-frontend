@@ -11,8 +11,6 @@ export const getCourseData = async (): Promise<Course[]> => {
   return courses.data;
 };
 
-export const postForm = async () => {
-};
 export const getTeacherById = async (id: number): Promise<Teacher> => {
   const teachers = await BaseInstance.get<Teacher>(`/teacher/${id}`);
   return teachers.data;
