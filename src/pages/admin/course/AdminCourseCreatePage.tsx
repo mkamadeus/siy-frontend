@@ -2,7 +2,11 @@ import { navigate, RouteComponentProps } from '@reach/router';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { createCourse } from '~/api/Course';
+import Button from '~/components/common/Button';
+import CourseTable from '~/components/page/CourseTable';
 import { Course } from '~/model/Course';
+import swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
 const AdminCourseCreatePage: React.FC<RouteComponentProps> = (
   _props: RouteComponentProps
@@ -10,11 +14,22 @@ const AdminCourseCreatePage: React.FC<RouteComponentProps> = (
   const { register, handleSubmit } = useForm();
 
   const onSubmit = async (data: Course) => {
+    const Swal = withReactContent(swal);
     try {
       await createCourse(data);
+      // await Swal.fire({
+      //   title: 'Berhasil!',
+      //   text: 'Pembuatan course baru berhasil!',
+      //   icon: 'success',
+      // });
       alert('Berhasil!');
       navigate('/admin/course');
     } catch (err) {
+      // Swal.fire({
+      //   title: 'Gagal',
+      //   text: 'Pembuatan course baru gagal :(',
+      //   icon: 'error',
+      // });
       alert('Gagal :(');
     }
   };
@@ -59,11 +74,11 @@ const AdminCourseCreatePage: React.FC<RouteComponentProps> = (
           />
         </div>
         <div className="flex items-center space-x-2">
-          <label htmlFor="briefSyllabus" className="text-sm w-1/4">
+          <label htmlFor="completeSyllabus" className="text-sm w-1/4">
             Silabus Lengkap
           </label>
           <textarea
-            name="briefSyllabus"
+            name="completeSyllabus"
             ref={register}
             className="border-gray-300 rounded-md shadow-sm w-full"
           />

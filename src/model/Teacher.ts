@@ -1,3 +1,5 @@
-export interface TeacherBase {}
+export interface Teacher {
 
-export interface Teacher extends TeacherBase {}
+    id: number;
+    name: string;
+}

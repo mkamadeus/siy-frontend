@@ -465,9 +465,6 @@ export const updateStudent = async (
   id: number,
   studentData: Partial<Student>
 ): Promise<Student> => {
-  const students = await BaseInstance.put<Student>(
-    `/courses/${id}`,
-    studentData
-  );
+  const students = await BaseInstance.put<Student>(`/courses/${id}`, studentData);
   return students.data;
 };

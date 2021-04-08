@@ -1,21 +1,12 @@
 import { Link } from '@reach/router';
 import React from 'react';
 import { Course } from '~/model/Course';
-import {
-  PencilOutline,
-  TrashOutline,
-  EyeOutline,
-} from '@graywolfai/react-heroicons';
-import { deleteCourse } from '~/api/Course';
-import { useMutation } from 'react-query';
 
 interface Props {
   courses: Course[];
 }
 
 const CourseTable: React.FunctionComponent<Props> = ({ courses }: Props) => {
-  const deleteCourseMutation = useMutation(deleteCourse);
-
   if (courses.length === 0) {
     return (
       <div className="text-center italic text-gray-700">There is no data!</div>
@@ -28,7 +19,7 @@ const CourseTable: React.FunctionComponent<Props> = ({ courses }: Props) => {
         <tr className="border-b border-gray-400 ">
           <th className="p-1">ID</th>
           <th className="p-1 text-left">Kode</th>
-          <th className="p-1 text-left">Nama</th>
+          <th className="p-1">Nama</th>
           <th className="p-1">Action</th>
         </tr>
       </thead>

@@ -17,6 +17,6 @@
   "rules": {
     "@typescript-eslint/no-unused-vars": ["error", { "args": "none" }],
     "quotes": ["error", "single"],
-    "react/prop-types": "off"
+    "react/prop-types": "ignore"
   }
 }

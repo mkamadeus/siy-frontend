@@ -1,22 +1,23 @@
 import { navigate, RouteComponentProps } from '@reach/router';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { createStudent } from '~/api/Student';
+import { createTeacher } from '~/api/Teacher';
 import Button from '~/components/common/Button';
 import swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
+import { Teacher } from '~/model/Teacher';
 
-const AdminStudentCreatePage: React.FC<RouteComponentProps> = (
+const AdminTeacherCreatePage: React.FC<RouteComponentProps> = (
   _props: RouteComponentProps
 ) => {
   const { register, handleSubmit } = useForm();
 
-  const onSubmit = async (data: Student) => {
+  const onSubmit = async (data: Teacher) => {
     const Swal = withReactContent(swal);
     try {
-      await createStudent(data);
+      await createTeacher(data);
       alert('Berhasil!');
-      navigate('/admin/student');
+      navigate('/admin/teacher');
     } catch (err) {
       alert('Gagal :(');
     }
@@ -24,7 +25,7 @@ const AdminStudentCreatePage: React.FC<RouteComponentProps> = (
 
   return (
     <div className="container mx-auto p-6">
-      <div className="font-bold text-3xl mb-4">Create Student</div>
+      <div className="font-bold text-3xl mb-4">Create Teacher</div>
       <form
         className="flex flex-col space-y-3"
         onSubmit={handleSubmit(onSubmit)}
@@ -105,4 +106,4 @@ const AdminStudentCreatePage: React.FC<RouteComponentProps> = (
   );
 };
 
-export default AdminStudentCreatePage;
+export default AdminTeacherCreatePage;

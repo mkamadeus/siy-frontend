@@ -1,35 +1,32 @@
 import React from 'react';
 import { RouteComponentProps } from '@reach/router';
-
-const adminCards = [
-  {
-    title: 'Course',
-    path: '/admin/course',
-  },
-  {
-    title: 'Lecture',
-    path: '/admin/lecture',
-  },
-];
+import { useQuery } from 'react-query';
+import { getCourseData } from '~/api/Teacher';
+import LoadingPage from '../common/LoadingPage';
+import withReactContent from 'sweetalert2-react-content';
+import Swal from 'sweetalert2';
 
 const AdminIndexPage: React.FC<RouteComponentProps> = (
   _props: RouteComponentProps
 ) => {
+  const { data, error, isLoading } = useQuery('courses', getCourseData);
+
+  if (isLoading) {
+    return <LoadingPage />;
+  }
+
+  const hehe = () => {
+    const swal = withReactContent(Swal);
+    swal.fire('asdasd');
+  };
+
   return (
     <div className="container mx-auto p-6">
-      <div className="font-bold text-3xl mb-4">Admin Dashboard</div>
-      <div className="flex">
-        {adminCards.map(({ title, path }) => {
-          return (
-            <div
-              className="flex rounded shadow border border-gray-500"
-              key={`card-${title}`}
-            >
-              <div>{title}</div>
-              <div>{path}</div>
-            </div>
-          );
-        })}
+      <div>Welcome to SIY homepage</div>
+      <div>
+        <div>
+          <button onClick={hehe}>sadasd</button>
+        </div>
       </div>
     </div>
   );
