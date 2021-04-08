@@ -42,7 +42,7 @@ const TeacherPage: React.FC<RouteComponentProps> = (
               <option key={d.code}>{d.code}</option>
             ))}
           </select>
-          {console.log(data)}
+          
           <div className="container p-3">Semester</div>
           <select
             className="container p-3 rounded-md border-b bg-gray-200 mb-3 mx-2"
@@ -55,6 +55,7 @@ const TeacherPage: React.FC<RouteComponentProps> = (
             <option>1</option>
             <option>2</option>
           </select>
+          
           <div className="container p-3">
             Tahun (format: Jika tahun ajar 2020/2021 tuliskan 2020)
           </div>
@@ -68,20 +69,7 @@ const TeacherPage: React.FC<RouteComponentProps> = (
               required: 'Required',
             })}
           ></input>
-          <div className="container p-3">Nama Dosen Pengampu</div>
-          <select
-            className="container p-3 rounded-md border-b bg-gray-200 mb-3 mx-2"
-            name="teacher"
-            ref={register({
-              required: 'Required',
-            })}
-          >
-            <option label=" "></option>
-            <option>Nama Dosen 1</option>
-            <option>Nama Dosen 2</option>
-            <option>Nama Dosen 3</option>
-            <option>Nama Dosen 4</option>
-          </select>
+          
           <div className="container p-3">
             <div>Upload File Rekap Nilai</div>
             <input
@@ -89,11 +77,9 @@ const TeacherPage: React.FC<RouteComponentProps> = (
               type="file"
               accept="accept= .csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
               name="gradeFile"
-              ref={register({
-                required: 'Required',
-              })}
             ></input>
           </div>
+          
           <div className="container p-3">
             Input Pembobotan LO
             <div>Upload File Pembobotan LO</div>
@@ -127,12 +113,6 @@ const TeacherPage: React.FC<RouteComponentProps> = (
           <input
             className="container p-3 rounded-md border-b bg-gray-200 mb-3 mx-2"
             type="text"
-            name="LOuts"
-            pattern="^(\d+\.?\d{0,2} ){7}(\d+\.?\d{0,2})$"
-            placeholder="ex. 1.23 1.23 1.23 1.23 1.23 1.23 1.23"
-            ref={register({
-              required: 'Required',
-            })}
           ></input>
           <label htmlFor="LOkuis" className="p-3">
             Kuis (Format: LO_A LO_B LO_C LO_D LO_E LO_F LO_G)
