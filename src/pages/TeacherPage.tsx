@@ -6,6 +6,8 @@ import { getAllCourses } from '~/api/Course';
 import { useQuery } from 'react-query';
 import LoadingPage from './common/LoadingPage';
 
+
+/* LO Validation */
 function isLOValid(title: string, LOList: string[]) : boolean {
   var value = 0;
 
@@ -16,7 +18,7 @@ function isLOValid(title: string, LOList: string[]) : boolean {
     }
   });
 
-  return value === 0 || value === 1;
+  return value == 0 || value == 1;
 }
 
 function isAllLOValid() : boolean {
@@ -31,6 +33,27 @@ function isAllLOValid() : boolean {
   return LOValid;
 }
 
+
+/* File Validation */
+function isFileValid() : boolean {
+  var elmt = document.getElementById('file-input');
+  
+  if (elmt && elmt instanceof HTMLInputElement) {
+    // No file attached
+    if (elmt.value === "") {
+      return true;
+    }
+    // File attached
+    else {
+      var splitPath = elmt.value.split('.');
+      var format = splitPath[splitPath.length - 1];
+      return (format === 'csv' || format === 'xls' || format === 'xlsx');
+    }
+  }
+  else {
+    return false;
+  }
+}
 
 const TeacherPage: React.FC<RouteComponentProps> = (
   props: RouteComponentProps
@@ -54,12 +77,15 @@ const TeacherPage: React.FC<RouteComponentProps> = (
   return (
     <div className="container mx-auto p-6">
       <div className="flex flex-col">
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="container p-3">Kode Mata Kuliah
+        <form 
+          encType="multipart/form-data"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <div className="container py-3">Kode Mata Kuliah
             <span className="text-red-500"> required</span>
           </div>
           <select
-            className="container p-3 rounded-md border-b bg-gray-200 mb-3 mx-2"
+            className="container p-3 rounded-md border-b bg-gray-200 mb-3"
             name="teacher"
             ref={register({
               required: 'Required',
@@ -71,12 +97,12 @@ const TeacherPage: React.FC<RouteComponentProps> = (
             ))}
           </select>
           
-          <div className="container p-3">
+          <div className="container py-3">
             Semester
             <span className="text-red-500"> required</span>
           </div>
           <select
-            className="container p-3 rounded-md border-b bg-gray-200 mb-3 mx-2"
+            className="container p-3 rounded-md border-b bg-gray-200 mb-3"
             name="semester"
             ref={register({
               required: 'Required',
@@ -87,12 +113,12 @@ const TeacherPage: React.FC<RouteComponentProps> = (
             <option>2</option>
           </select>
           
-          <div className="container p-3">
+          <div className="container py-3">
             Tahun (Format: Jika tahun ajar 2020/2021 tuliskan 2020)
             <span className="text-red-500"> required</span>
           </div>
           <input
-            className="container p-3 rounded-md border-b bg-gray-200 mb-3 mx-2"
+            className="container p-3 rounded-md border-b bg-gray-200 mb-3"
             type="text"
             name="year"
             pattern="20\d{2}"
@@ -102,15 +128,17 @@ const TeacherPage: React.FC<RouteComponentProps> = (
             })}
           ></input>
           
-          <div className="container p-3">
-            <div>Upload File Rekap Nilai (.csv, .xls, .xlsx)</div>
+          <div className="container py-3">Upload File Rekap Nilai (.csv, .xls, .xlsx)</div>
             <input
-              className="container p-3"
+              id="file-input"
+              className="container py-3"
               type="file"
               accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
               name="gradeFile"
-            ></input>
-          </div>
+              ref={register({
+
+              })}
+          ></input>
           
           <div className="container p-3">
             Input Pembobotan LO
@@ -130,7 +158,7 @@ const TeacherPage: React.FC<RouteComponentProps> = (
             UAS (Format: LO_A LO_B LO_C LO_D LO_E LO_F LO_G)
           </label>
           <input
-            className="container p-3 rounded-md border-b bg-gray-200 mb-3 mx-2"
+            className="container p-3 rounded-md border-b bg-gray-200 mb-3"
             type="text"
             name="LOuas"
             pattern="^(\d+\.?\d{0,2} ){7}(\d+\.?\d{0,2})$"
