@@ -1,0 +1,28 @@
+stages:
+  - build
+  - deploy
+
+build-staging:
+  image: mhart/alpine-node:14
+  stage: build
+  artifacts:
+    paths:
+      - build
+  script:
+    - yarn install --frozen-lockfile
+    - yarn build
+  only:
+    - main
+    - f/login
+  only:
+    - main
+    - f/login
+
+deploy:
+  image: andreysenov/firebase-tools:latest
+  stage: deploy
+  script:
+    - firebase deploy --only hosting
+  only:
+    - main
+    - f/login
