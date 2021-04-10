@@ -5,9 +5,6 @@ stages:
 build-and-deploy:
   image: andreysenov/firebase-tools:latest
   stage: build
-  artifacts:
-    paths:
-      - build
   script:
     - yarn install --frozen-lockfile
     - yarn build
