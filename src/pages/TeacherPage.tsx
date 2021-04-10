@@ -30,7 +30,7 @@ const TeacherPage: React.FC<RouteComponentProps> = (
 
     const semesterValue = () => {
         let value = 0;
-        const elmt = document.getElementsByName('course')[0];
+        const elmt = document.getElementsByName('semester')[0];
         if (elmt instanceof HTMLSelectElement) {
             value = Number(elmt.value);
         }
@@ -50,7 +50,7 @@ const TeacherPage: React.FC<RouteComponentProps> = (
 
     const portofolioValue = () => {
         let value = 0;
-        const elmt = document.getElementsByName('year')[0];
+        const elmt = document.getElementsByName('portofolio')[0];
         if (elmt instanceof HTMLInputElement) {
             value = Number(elmt.value);
         }
