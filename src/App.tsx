@@ -6,6 +6,8 @@ import IndexPage from '~/pages/IndexPage';
 import StudentPage from '~/pages/StudentPage';
 import NotFoundPage from './pages/common/NotFoundPage';
 import TeacherPage from '~/pages/TeacherPage';
+import TeacherClassPage from './pages/TeacherClassPage';
+import TeacherDashboardPage from './pages/TeacherDashboardPage';
 import Navbar from './components/Navbar';
 import TranscriptPage from './pages/TranscriptPage';
 import PeerAssesmentForm from './pages/PeerAssesmentForm';
@@ -33,7 +35,9 @@ const App: React.FC = () => {
         <StudentPage path="/student" />
         <LoDetailPage path="/student/lo" />
         <TranscriptPage path="/student/transcript" />
-        <TeacherPage path="/teacher" />
+        <TeacherDashboardPage path="/teacher" />
+        <TeacherClassPage path="/teacher/class" />
+        <TeacherPage path="/teacher/class/form" />
         <PeerAssesmentForm path="/peer-assessment-form" />
 
         <AdminIndexPage path="/admin" />
