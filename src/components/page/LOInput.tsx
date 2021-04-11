@@ -16,7 +16,9 @@ interface IChildrenProp {
 
 interface IFormProp {
     section?: string
-    pattern?: string
+    min?: string
+    max?: string
+    step?: string
 }
 
 type Button = ICommonProp & IButtonProp & IChildrenProp
@@ -74,8 +76,11 @@ const FormLO : React.ForwardRefRenderFunction<HTMLInputElement ,Form> = (
             id={props.section + '-' + props.title}
             className="container p-3 rounded-md border-b bg-gray-200 mb-3"
             name={props.section + '-' + props.title}
+            type="number"
+            min={props.min}
+            max={props.max}
+            step={props.step}
             placeholder={props.title}
-            pattern={props.pattern}
         ></input>
     )
 }
@@ -109,14 +114,55 @@ const InputLO : React.ForwardRefRenderFunction<HTMLDivElement, Input> = (
                 hidden={true}
             >
                 <p className="container text-center text-sm mb-3">Abaikan bagian yang tidak ingin diisi</p>
-
-                <FormLO title="LO-A" section={props.title} pattern={props.pattern}></FormLO>
-                <FormLO title="LO-B" section={props.title} pattern={props.pattern}></FormLO>
-                <FormLO title="LO-C" section={props.title} pattern={props.pattern}></FormLO>
-                <FormLO title="LO-D" section={props.title} pattern={props.pattern}></FormLO>
-                <FormLO title="LO-E" section={props.title} pattern={props.pattern}></FormLO>
-                <FormLO title="LO-F" section={props.title} pattern={props.pattern}></FormLO>
-                <FormLO title="LO-G" section={props.title} pattern={props.pattern}></FormLO>
+                <FormLO
+                    title="LO-A"
+                    section={props.title}
+                    min={props.min}
+                    max={props.max}
+                    step={props.step}
+                ></FormLO>
+                <FormLO
+                    title="LO-B"
+                    section={props.title}
+                    min={props.min}
+                    max={props.max}
+                    step={props.step}
+                ></FormLO>
+                <FormLO
+                    title="LO-C"
+                    section={props.title}
+                    min={props.min}
+                    max={props.max}
+                    step={props.step}
+                ></FormLO>
+                <FormLO
+                    title="LO-D"
+                    section={props.title}
+                    min={props.min}
+                    max={props.max}
+                    step={props.step}
+                ></FormLO>
+                <FormLO
+                    title="LO-E"
+                    section={props.title}
+                    min={props.min}
+                    max={props.max}
+                    step={props.step}
+                ></FormLO>
+                <FormLO
+                    title="LO-F"
+                    section={props.title}
+                    min={props.min}
+                    max={props.max}
+                    step={props.step}
+                ></FormLO>
+                <FormLO
+                    title="LO-G"
+                    section={props.title}
+                    min={props.min}
+                    max={props.max}
+                    step={props.step}
+                ></FormLO>
             </div>
         </div>
     )
