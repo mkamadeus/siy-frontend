@@ -89,24 +89,36 @@ const InputLO : React.ForwardRefRenderFunction<HTMLDivElement, Input> = (
     props,
     ref
 ) => {
+    const LOList = ['LO-A', 'LO-B', 'LO-C', 'LO-D', 'LO-E', 'LO-F', 'LO-G'];
+
     return (
-        <div>
-            <ButtonLO 
-                title={props.title}
-                className="container mb-3 items-center justify-center rounded-md bg-blue-500 text-white py-2 px-4 transform shadow-none hover:shadow-lg focus:ring focus:outline-none focus:bg-blue-600 transition duration-300"
-                hidden={false}
-                type="show"
-            >
-                {props.children}
-            </ButtonLO>
-            <ButtonLO 
-                title={props.title}
-                className="container mb-3 items-center justify-center rounded-md bg-gray-400 text-white py-2 px-4 transform shadow-none hover:shadow-lg focus:ring focus:outline-none focus:bg-gray-500 transition duration-300"
-                hidden={true}
-                type="hide"
-            >
-                Tutup {props.children}
-            </ButtonLO>
+        <div className="container mb-3">
+            <div className="flex mb-3 bg-gray-200 border-b rounded-md justify-between items-center">
+                <div>
+                    <input
+                        className="m-3"
+                        type="checkbox"
+                        name={props.title + 'Checked'}
+                    ></input>
+                </div>
+                <ButtonLO 
+                    title={props.title}
+                    className="container items-center justify-center rounded-l-none rounded-r-md bg-blue-500 text-white py-3 px-4 transform shadow-none hover:shadow-lg focus:ring focus:outline-none focus:bg-blue-600 transition duration-300"
+                    hidden={false}
+                    type="show"
+                >
+                    Buka {props.children}
+                </ButtonLO>
+
+                <ButtonLO 
+                    title={props.title}
+                    className="container items-center justify-center rounded-l-none rounded-r-md bg-gray-400 text-white py-3 px-4 transform shadow-none hover:shadow-lg focus:ring focus:outline-none focus:bg-gray-500 transition duration-300"
+                    hidden={true}
+                    type="hide"
+                >
+                    Tutup {props.children}
+                </ButtonLO>
+            </div>
 
             <div
                 id={props.title} 
@@ -114,55 +126,18 @@ const InputLO : React.ForwardRefRenderFunction<HTMLDivElement, Input> = (
                 hidden={true}
             >
                 <p className="container text-center text-sm mb-3">Abaikan bagian yang tidak ingin diisi</p>
-                <FormLO
-                    title="LO-A"
-                    section={props.title}
-                    min={props.min}
-                    max={props.max}
-                    step={props.step}
-                ></FormLO>
-                <FormLO
-                    title="LO-B"
-                    section={props.title}
-                    min={props.min}
-                    max={props.max}
-                    step={props.step}
-                ></FormLO>
-                <FormLO
-                    title="LO-C"
-                    section={props.title}
-                    min={props.min}
-                    max={props.max}
-                    step={props.step}
-                ></FormLO>
-                <FormLO
-                    title="LO-D"
-                    section={props.title}
-                    min={props.min}
-                    max={props.max}
-                    step={props.step}
-                ></FormLO>
-                <FormLO
-                    title="LO-E"
-                    section={props.title}
-                    min={props.min}
-                    max={props.max}
-                    step={props.step}
-                ></FormLO>
-                <FormLO
-                    title="LO-F"
-                    section={props.title}
-                    min={props.min}
-                    max={props.max}
-                    step={props.step}
-                ></FormLO>
-                <FormLO
-                    title="LO-G"
-                    section={props.title}
-                    min={props.min}
-                    max={props.max}
-                    step={props.step}
-                ></FormLO>
+                {LOList.map((lo) => {
+                    return (
+                        <FormLO
+                            key={lo}
+                            title={lo}
+                            section={props.title}
+                            min={props.min}
+                            max={props.max}
+                            step={props.step}
+                        ></FormLO>
+                    )
+                })}
             </div>
         </div>
     )

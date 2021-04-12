@@ -15,6 +15,7 @@ const TeacherPage: React.FC<RouteComponentProps> = (
     const { data, error, isLoading } = useQuery('courseData', getAllCourses);
     const { register, handleSubmit } = useForm();
 
+    const titleList = ['UAS', 'UTS', 'Praktikum', 'Kuis', 'Latihan'];
 
     const courseIDValue = () => {
         let value = 0;
@@ -99,11 +100,13 @@ const TeacherPage: React.FC<RouteComponentProps> = (
 
     const isAllLOValid = () => {
         const LOList = ['LO-A', 'LO-B', 'LO-C', 'LO-D', 'LO-E', 'LO-F', 'LO-G'];
-        const titleList = ['UAS', 'UTS', 'Praktikum', 'Kuis', 'Latihan'];
         let LOValid = true;
 
         titleList.forEach(title => {
-            LOValid = LOValid && isLOValid(title, LOList);
+            const elmt = document.getElementsByName(title + 'Checked')[0];
+            if ((elmt instanceof HTMLInputElement) && (elmt.checked)) {
+                LOValid = LOValid && isLOValid(title, LOList);
+            }
         });
 
         return LOValid;
@@ -144,97 +147,139 @@ const TeacherPage: React.FC<RouteComponentProps> = (
         });
     }
 
-    const postLO = (courseID: number, year: number, semester: number) => {
-        const LoUAS = LOValue('UAS');
-        const LoUTS = LOValue('UTS');
-        const LoPraktikum = LOValue('Praktikum');
-        const LoKuis = LOValue('Kuis');
-        const LoLatihan = LOValue('Latihan');
+    const postLO = (courseID: number, year: number, semester: number, title: string) => {
+        const LO = LOValue(title);
 
         isLectureExist(courseID, year, semester)
         .then(({isExist, id}) => {
             if (isExist) {
-                updateLecture(
-                    id,
-                    {
-                        loAFinalWeight: LoUAS[0],
-                        loBFinalWeight: LoUAS[1],
-                        loCFinalWeight: LoUAS[2],
-                        loDFinalWeight: LoUAS[3],
-                        loEFinalWeight: LoUAS[4],
-                        loFFinalWeight: LoUAS[5],
-                        loGFinalWeight: LoUAS[6],
-                        loAMidWeight: LoUTS[0],
-                        loBMidWeight: LoUTS[1],
-                        loCMidWeight: LoUTS[2],
-                        loDMidWeight: LoUTS[3],
-                        loEMidWeight: LoUTS[4],
-                        loFMidWeight: LoUTS[5],
-                        loGMidWeight: LoUTS[6],
-                        loAPracticumWeight: LoPraktikum[0],
-                        loBPracticumWeight: LoPraktikum[1],
-                        loCPracticumWeight: LoPraktikum[2],
-                        loDPracticumWeight: LoPraktikum[3],
-                        loEPracticumWeight: LoPraktikum[4],
-                        loFPracticumWeight: LoPraktikum[5],
-                        loGPracticumWeight: LoPraktikum[6],
-                        loAQuizWeight: LoKuis[0],
-                        loBQuizWeight: LoKuis[1],
-                        loCQuizWeight: LoKuis[2],
-                        loDQuizWeight: LoKuis[3],
-                        loEQuizWeight: LoKuis[4],
-                        loFQuizWeight: LoKuis[5],
-                        loGQuizWeight: LoKuis[6],
-                        loAHomeworkWeight: LoLatihan[0],
-                        loBHomeworkWeight: LoLatihan[1],
-                        loCHomeworkWeight: LoLatihan[2],
-                        loDHomeworkWeight: LoLatihan[3],
-                        loEHomeworkWeight: LoLatihan[4],
-                        loFHomeworkWeight: LoLatihan[5],
-                        loGHomeworkWeight: LoLatihan[6] 
+                if (title == 'UAS') {
+                    updateLecture(id, {
+                        loAFinalWeight: LO[0],
+                        loBFinalWeight: LO[1],
+                        loCFinalWeight: LO[2],
+                        loDFinalWeight: LO[3],
+                        loEFinalWeight: LO[4],
+                        loFFinalWeight: LO[5],
+                        loGFinalWeight: LO[6]
                     } as Lecture);
+                }
+                else if (title == 'UTS') {
+                    updateLecture(id, {
+                        loAMidWeight: LO[0],
+                        loBMidWeight: LO[1],
+                        loCMidWeight: LO[2],
+                        loDMidWeight: LO[3],
+                        loEMidWeight: LO[4],
+                        loFMidWeight: LO[5],
+                        loGMidWeight: LO[6] 
+                    } as Lecture);
+                }
+                else if (title == 'Praktikum') {
+                    updateLecture(id, {
+                        loAPracticumWeight: LO[0],
+                        loBPracticumWeight: LO[1],
+                        loCPracticumWeight: LO[2],
+                        loDPracticumWeight: LO[3],
+                        loEPracticumWeight: LO[4],
+                        loFPracticumWeight: LO[5],
+                        loGPracticumWeight: LO[6] 
+                    } as Lecture);
+                }
+                else if (title == 'Kuis') {
+                    updateLecture( id, {
+                        loAQuizWeight: LO[0],
+                        loBQuizWeight: LO[1],
+                        loCQuizWeight: LO[2],
+                        loDQuizWeight: LO[3],
+                        loEQuizWeight: LO[4],
+                        loFQuizWeight: LO[5],
+                        loGQuizWeight: LO[6] 
+                    } as Lecture);
+                }
+                else if (title == 'Latihan') {
+                    updateLecture(id, {
+                        loAHomeworkWeight: LO[0],
+                        loBHomeworkWeight: LO[1],
+                        loCHomeworkWeight: LO[2],
+                        loDHomeworkWeight: LO[3],
+                        loEHomeworkWeight: LO[4],
+                        loFHomeworkWeight: LO[5],
+                        loGHomeworkWeight: LO[6] 
+                    } as Lecture);
+                }
             }
             else {
-                createLecture({
-                    courseId: courseID,
-                    semester: semester,
-                    year: year,
-                    loAFinalWeight: LoUAS[0],
-                    loBFinalWeight: LoUAS[1],
-                    loCFinalWeight: LoUAS[2],
-                    loDFinalWeight: LoUAS[3],
-                    loEFinalWeight: LoUAS[4],
-                    loFFinalWeight: LoUAS[5],
-                    loGFinalWeight: LoUAS[6],
-                    loAMidWeight: LoUTS[0],
-                    loBMidWeight: LoUTS[1],
-                    loCMidWeight: LoUTS[2],
-                    loDMidWeight: LoUTS[3],
-                    loEMidWeight: LoUTS[4],
-                    loFMidWeight: LoUTS[5],
-                    loGMidWeight: LoUTS[6],
-                    loAPracticumWeight: LoPraktikum[0],
-                    loBPracticumWeight: LoPraktikum[1],
-                    loCPracticumWeight: LoPraktikum[2],
-                    loDPracticumWeight: LoPraktikum[3],
-                    loEPracticumWeight: LoPraktikum[4],
-                    loFPracticumWeight: LoPraktikum[5],
-                    loGPracticumWeight: LoPraktikum[6],
-                    loAQuizWeight: LoKuis[0],
-                    loBQuizWeight: LoKuis[1],
-                    loCQuizWeight: LoKuis[2],
-                    loDQuizWeight: LoKuis[3],
-                    loEQuizWeight: LoKuis[4],
-                    loFQuizWeight: LoKuis[5],
-                    loGQuizWeight: LoKuis[6],
-                    loAHomeworkWeight: LoLatihan[0],
-                    loBHomeworkWeight: LoLatihan[1],
-                    loCHomeworkWeight: LoLatihan[2],
-                    loDHomeworkWeight: LoLatihan[3],
-                    loEHomeworkWeight: LoLatihan[4],
-                    loFHomeworkWeight: LoLatihan[5],
-                    loGHomeworkWeight: LoLatihan[6]
-                } as Lecture);
+                if (title == 'UAS') {
+                    createLecture({
+                        courseId: courseID,
+                        year: year,
+                        semester: semester,
+                        loAFinalWeight: LO[0],
+                        loBFinalWeight: LO[1],
+                        loCFinalWeight: LO[2],
+                        loDFinalWeight: LO[3],
+                        loEFinalWeight: LO[4],
+                        loFFinalWeight: LO[5],
+                        loGFinalWeight: LO[6]
+                    } as Lecture);
+                }
+                else if (title == 'UTS') {
+                    createLecture({
+                        courseId: courseID,
+                        year: year,
+                        semester: semester,    
+                        loAMidWeight: LO[0],
+                        loBMidWeight: LO[1],
+                        loCMidWeight: LO[2],
+                        loDMidWeight: LO[3],
+                        loEMidWeight: LO[4],
+                        loFMidWeight: LO[5],
+                        loGMidWeight: LO[6] 
+                    } as Lecture);
+                }
+                else if (title == 'Praktikum') {
+                    createLecture({
+                        courseId: courseID,
+                        year: year,
+                        semester: semester,
+                        loAPracticumWeight: LO[0],
+                        loBPracticumWeight: LO[1],
+                        loCPracticumWeight: LO[2],
+                        loDPracticumWeight: LO[3],
+                        loEPracticumWeight: LO[4],
+                        loFPracticumWeight: LO[5],
+                        loGPracticumWeight: LO[6] 
+                    } as Lecture);
+                }
+                else if (title == 'Kuis') {
+                    createLecture({
+                        courseId: courseID,
+                        year: year,
+                        semester: semester,
+                        loAQuizWeight: LO[0],
+                        loBQuizWeight: LO[1],
+                        loCQuizWeight: LO[2],
+                        loDQuizWeight: LO[3],
+                        loEQuizWeight: LO[4],
+                        loFQuizWeight: LO[5],
+                        loGQuizWeight: LO[6] 
+                    } as Lecture);
+                }
+                else if (title == 'Latihan') {
+                    createLecture({
+                        courseId: courseID,
+                        year: year,
+                        semester: semester,
+                        loAHomeworkWeight: LO[0],
+                        loBHomeworkWeight: LO[1],
+                        loCHomeworkWeight: LO[2],
+                        loDHomeworkWeight: LO[3],
+                        loEHomeworkWeight: LO[4],
+                        loFHomeworkWeight: LO[5],
+                        loGHomeworkWeight: LO[6] 
+                    } as Lecture);
+                }
             }
         });
     };
@@ -286,8 +331,7 @@ const TeacherPage: React.FC<RouteComponentProps> = (
             
             const fileCheckbox = document.getElementsByName('fileChecked')[0];
             const portoCheckbox = document.getElementsByName('portoChecked')[0];
-            const loCheckbox = document.getElementsByName('loChecked')[0];
-            const kmtCheckbox = document.getElementsByName('kmtChecked')[0];
+            const kmtCheckbox = document.getElementsByName('KMTChecked')[0];
 
             if (
                 (fileCheckbox instanceof HTMLInputElement) &&
@@ -303,12 +347,15 @@ const TeacherPage: React.FC<RouteComponentProps> = (
                 postPortofolio(courseID, year, semester);
             }
 
-            if (
-                (loCheckbox instanceof HTMLInputElement) &&
-                (loCheckbox.checked)
-            ) {
-                postLO(courseID, year, semester);
-            }
+            titleList.forEach((title) => {
+                const loCheckbox = document.getElementsByName(title+'Checked')[0];
+                if (
+                    (loCheckbox instanceof HTMLInputElement) &&
+                    (loCheckbox.checked)
+                ) {
+                    postLO(courseID, year, semester, title)
+                }
+            })
 
             if (
                 (kmtCheckbox instanceof HTMLInputElement) &&
@@ -316,6 +363,8 @@ const TeacherPage: React.FC<RouteComponentProps> = (
             ) {
                 postKMT(courseID, year, semester);
             }
+
+            alert('Input berhasil disimpan.');
         }
         else {
             if (!FileValid) alert('Input file masih belum benar.');
@@ -338,6 +387,7 @@ const TeacherPage: React.FC<RouteComponentProps> = (
                 <form 
                     encType="multipart/form-data"
                     onSubmit={handleSubmit(onSubmit)}
+                    method="post"
                 >
                     <div className="container py-3">
                         Kode Mata Kuliah
@@ -430,58 +480,21 @@ const TeacherPage: React.FC<RouteComponentProps> = (
 
 
                     <div className="container py-3">
-                        <input
-                            className="mr-2"
-                            type="checkbox"
-                            name="loChecked"
-                        ></input>
-                        <label htmlFor="loChecked">
-                            Bobot LO
-                        </label>
+                        Bobot LO dan Kontribusi Mata Kuliah (KMT) terhadap LO
+                        (centang setiap bagian yang ingin diisi)
                     </div>
-                    <InputLO
-                        title="UAS"
-                        min="0"
-                        max="1"
-                        step="0.01"
-                    >Bobot LO UAS</InputLO>
-                    <InputLO
-                        title="UTS"
-                        min="0"
-                        max="1"
-                        step="0.01"
-                    >Bobot LO UTS</InputLO>
-                    <InputLO
-                        title="Praktikum"
-                        min="0"
-                        max="1"
-                        step="0.01"
-                    >Bobot LO Praktikum</InputLO>
-                    <InputLO
-                        title="Kuis"
-                        min="0"
-                        max="1"
-                        step="0.01"
-                    >Bobot LO Kuis</InputLO>
-                    <InputLO
-                        title="Latihan"
-                        min="0"
-                        max="1"
-                        step="0.01"
-                    >Bobot LO Latihan</InputLO>
 
-
-                    <div className="container py-3">
-                        <input
-                            className="mr-2"
-                            type="checkbox"
-                            name="kmtChecked"
-                        ></input>
-                        <label htmlFor="kmtChecked">
-                            Kontribusi mata kuliah (KMT) terhadap LO
-                            (Skala 1 (rendah) hingga 3 (tinggi))
-                        </label>
-                    </div>
+                    {titleList.map((title) => {
+                        return (
+                            <InputLO
+                                key={title}
+                                title={title}
+                                min="0"
+                                max="1"
+                                step="0.01"
+                            >Bobot LO {title}</InputLO>
+                        )
+                    })}
                     <InputLO
                         title="KMT"
                         min="1"
