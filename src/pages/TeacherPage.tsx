@@ -8,6 +8,7 @@ import { getAllCourses } from '~/api/Course';
 import { useQuery } from 'react-query';
 import { createLecture, getLectureByYearSemester, updateLecture } from '~/api/Lecture';
 import { Lecture } from '~/model/Lecture';
+import axios from 'axios';
 
 const TeacherPage: React.FC<RouteComponentProps> = (
     props: RouteComponentProps
@@ -47,6 +48,16 @@ const TeacherPage: React.FC<RouteComponentProps> = (
         }
         
         return value;
+    }
+
+    const fileValue = () => {
+        let file = null;
+        const elmt = document.getElementsByName('gradeFile')[0];
+        if (elmt instanceof HTMLInputElement) {
+            file = elmt.files;
+        }
+
+        return file;
     }
 
     const portofolioValue = () => {
@@ -130,6 +141,34 @@ const TeacherPage: React.FC<RouteComponentProps> = (
         }
     };
 
+
+    const postFile = (courseID: number, year: number, semester: number) => {
+        const files = fileValue();
+        const formData = new FormData();
+
+        isLectureExist(courseID, year, semester)
+        .then(({isExist, id}) => {
+            if (isExist) {
+                if (files) {
+                    formData.append('lectureId', id.toString());
+                    formData.append('year', year.toString());
+                    formData.append('semester', semester.toString());
+                    formData.append('file', files[0]);
+
+                    axios.post(
+                        `${import.meta.env.SNOWPACK_PUBLIC_API_URL}/grades/upload`,
+                        formData,
+                        {
+                            headers: {
+                                'Content-Type': 'form-data'
+                            }
+                        }
+                    )
+                }
+                
+            }
+        });
+    }
 
     const postPortofolio = (courseID: number, year: number, semester: number) => {
         const portofolio = portofolioValue();
@@ -337,7 +376,7 @@ const TeacherPage: React.FC<RouteComponentProps> = (
                 (fileCheckbox instanceof HTMLInputElement) &&
                 (fileCheckbox.checked)
             ) {
-                // TODO : post file
+                postFile(courseID, year, semester);
             }
 
             if (
@@ -456,6 +495,9 @@ const TeacherPage: React.FC<RouteComponentProps> = (
                         type="file"
                         accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
                         name="gradeFile"
+                        onChange={(e) => {
+                            console.log(e.target.files);
+                        }}
                     ></input>
 
 
