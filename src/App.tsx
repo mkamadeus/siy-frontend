@@ -8,9 +8,9 @@ import NotFoundPage from './pages/common/NotFoundPage';
 import TeacherPage from '~/pages/TeacherPage';
 import TeacherLecturePage from './pages/teacher/TeacherLecturePage';
 import TeacherIndexPage from './pages/teacher/TeacherIndexPage';
-import Navbar from './components/Navbar';
+import Navbar from './components/common/Navbar';
 import StudentGradePage from './pages/student/StudentGradePage';
-import PeerAssesmentForm from './pages/student/PeerAssesmentForm';
+import StudentPeerAssessmentForm from './pages/student/StudentPeerAssessmentForm';
 import AdminCourseCreatePage from './pages/admin/course/AdminCourseCreatePage';
 import AdminIndexPage from './pages/admin/AdminIndexPage';
 import AdminCourseEditPage from './pages/admin/course/AdminCourseEditPage';
@@ -21,6 +21,7 @@ import AdminLectureEditPage from './pages/admin/lecture/AdminLectureEditPage';
 import AdminLecturePreviewPage from './pages/admin/lecture/AdminLecturePreviewPage';
 import AdminCoursePreviewPage from './pages/admin/course/AdminCoursePreviewPage';
 import LoginPage from './pages/LoginPage';
+import Footer from './components/common/Footer';
 
 const queryClient = new QueryClient();
 
@@ -28,13 +29,13 @@ const App: React.FC = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <Navbar />
-      <Router basepath="/">
+      <Router className="min-h-screen" basepath="/">
         <NotFoundPage default />
         <IndexPage path="/" />
         <StudentIndexPage path="/student" />
         <StudentLoPage path="/student/lo" />
         <StudentGradePage path="/student/transcript" />
-        <PeerAssesmentForm path="/peer-assessment-form" />
+        <StudentPeerAssessmentForm path="/peer-assessment-form" />
 
         {/* TEACHER */}
         <TeacherIndexPage path="/teacher" />
@@ -58,6 +59,7 @@ const App: React.FC = () => {
         {/* AUTH*/}
         <LoginPage path="/login" />
       </Router>
+      <Footer />
     </QueryClientProvider>
   );
 };

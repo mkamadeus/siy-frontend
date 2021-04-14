@@ -1,3 +1,59 @@
+@font-face {
+  font-family: 'Museo Sans';
+  src: url('/fonts/MuseoSans-300-italic.woff') format('woff');
+  font-weight: 300;
+  font-style: italic, oblique;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Museo Sans';
+  src: url('/fonts/MuseoSans-300.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Museo Sans';
+  src: url('/fonts/MuseoSans-500-italic.woff') format('woff');
+  font-weight: 500;
+  font-style: italic, oblique;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Museo Sans';
+  src: url('/fonts/MuseoSans-500.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Museo Sans';
+  src: url('/fonts/MuseoSans-700-italic.woff') format('woff');
+  font-weight: 700;
+  font-style: italic, oblique;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Museo Sans';
+  src: url('/fonts/MuseoSans-700.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Museo Sans';
+  src: url('/fonts/MuseoSans-900.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

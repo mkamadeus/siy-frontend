@@ -1,21 +1,10 @@
-import { Course } from './Course';
-import { LearningOutcome } from './LearningOutcome';
-
 export interface StudentGrade {
   id: number;
   studentId: number;
-  courseId: number;
+  lectureId: number;
   year: number;
   semester: number;
-  indeks: CourseGrade;
-  course: Course;
-  loA: LearningOutcome;
-  loB: LearningOutcome;
-  loC: LearningOutcome;
-  loD: LearningOutcome;
-  loE: LearningOutcome;
-  loF: LearningOutcome;
-  loG: LearningOutcome;
+  index: CourseGrade;
 }
 
 export enum CourseGrade {
