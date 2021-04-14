@@ -3,17 +3,17 @@ import { RouteComponentProps } from '@reach/router';
 import { useForm } from 'react-hook-form';
 import Button from '../components/common/Button';
 import InputLO from '../components/page/LOInput';
-import LoadingPage from './common/LoadingPage';
-import { getAllCourses } from '~/api/Course';
-import { useQuery } from 'react-query';
 import { createLecture, getLectureByYearSemester, updateLecture } from '~/api/Lecture';
 import { Lecture } from '~/model/Lecture';
 import { uploadFile } from '~/api/Grade';
 
+type RouteProps = {
+    id: number
+}
+
 const TeacherPage: React.FC<RouteComponentProps> = (
-    props: RouteComponentProps
+    props: RouteComponentProps<RouteProps>
 ) => {
-    const { data, error, isLoading } = useQuery('courseData', getAllCourses);
     const { register, handleSubmit } = useForm();
 
     const titleList = ['UAS', 'UTS', 'Praktikum', 'Kuis', 'Latihan'];
@@ -338,7 +338,8 @@ const TeacherPage: React.FC<RouteComponentProps> = (
         const FileValid = isFileValid();
         
         if (LOValid && FileValid) {
-            const courseID = 5;
+            const courseID = props.id? props.id : 0;
+            console.log(courseID);
             const semester = semesterValue();
             const year = yearValue();
             
@@ -385,14 +386,6 @@ const TeacherPage: React.FC<RouteComponentProps> = (
             if (!LOValid) alert('Input LO masih belum benar.');
         }
     };
-
-    if (error) {
-        alert(error);
-    }
-
-    if (isLoading || !data) {
-        return <LoadingPage />;
-    }
 
     return (
         <div className="container mx-auto p-6">
