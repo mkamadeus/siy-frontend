@@ -1,17 +1,14 @@
-import { Course } from './Course';
-import { LearningOutcome } from './LearningOutcome';
-import { StudentGrade } from './Grade';
-
-export interface StudentBase {
+export interface Student {
   id: number;
   nim: string;
   name: string;
   imgPath: string;
+  loA: number;
+  loB: number;
+  loC: number;
+  loD: number;
+  loE: number;
+  loF: number;
+  loG: number;
   ipk: number;
-}
-
-export interface Student extends StudentBase {
-  courses: Course[];
-  studentGrades: StudentGrade[];
-  lo: LearningOutcome[];
 }

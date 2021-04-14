@@ -1,21 +1,17 @@
 import React from 'react';
 import { RouteComponentProps } from '@reach/router';
-import { getStudentData } from '~/api/Student';
+import { getStudentByNim } from '~/api/Student';
 import { useQuery } from 'react-query';
-import LoadingPage from './common/LoadingPage';
+import LoadingPage from '../common/LoadingPage';
 
-const TranscriptPage: React.FC<RouteComponentProps> = (
+const StudentGradePage: React.FC<RouteComponentProps> = (
   _: RouteComponentProps
 ) => {
-  const { data, error, isLoading } = useQuery('userData', getStudentData);
+  const { data, isLoading } = useQuery(['student', '13518035'], () =>
+    getStudentByNim('13518035')
+  );
 
-  if (error) {
-    alert(error);
-  }
-
-  if (isLoading || !data) {
-    return <LoadingPage />;
-  }
+  if (isLoading || !data) return <LoadingPage />;
 
   return (
     <div className="container mx-auto p-6">
@@ -37,4 +33,4 @@ const TranscriptPage: React.FC<RouteComponentProps> = (
   );
 };
 
-export default TranscriptPage;
+export default StudentGradePage;
