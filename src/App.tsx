@@ -36,7 +36,7 @@ const App: React.FC = () => {
         <TranscriptPage path="/student/transcript" />
         <TeacherDashboardPage path="/teacher" />
         <TeacherClassPage path="/teacher/class" />
-        <TeacherPage path="/teacher/class/form" />
+        <TeacherPage path="/teacher/class/form/:id" />
         <PeerAssesmentForm path="/peer-assessment-form" />
 
         <AdminIndexPage path="/admin" />
