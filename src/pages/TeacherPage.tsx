@@ -18,18 +18,6 @@ const TeacherPage: React.FC<RouteComponentProps> = (
 
     const titleList = ['UAS', 'UTS', 'Praktikum', 'Kuis', 'Latihan'];
 
-    const courseIDValue = () => {
-        let value = 0;
-        const elmt = document.getElementsByName('course')[0];
-        if (elmt instanceof HTMLSelectElement) {
-            value = Number(data?.filter((d) => {
-                return d.code == elmt.value;
-            })[0].id);
-        }
-        
-        return value;
-    }
-
     const semesterValue = () => {
         let value = 0;
         const elmt = document.getElementsByName('semester')[0];
@@ -350,7 +338,7 @@ const TeacherPage: React.FC<RouteComponentProps> = (
         const FileValid = isFileValid();
         
         if (LOValid && FileValid) {
-            const courseID = courseIDValue();
+            const courseID = 5;
             const semester = semesterValue();
             const year = yearValue();
             
@@ -414,24 +402,6 @@ const TeacherPage: React.FC<RouteComponentProps> = (
                     onSubmit={handleSubmit(onSubmit)}
                     method="post"
                 >
-                    <div className="container py-3">
-                        Kode Mata Kuliah
-                        <span className="text-red-500"> required</span>
-                    </div>
-                    <select
-                        className="container py-3 rounded-md border-b bg-gray-200 mb-3"
-                        name="course"
-                        ref={register({
-                            required: 'Required',
-                        })}
-                    >
-                        <option label=" "></option>
-                        {data.map((d) => (
-                            <option key={d.code}>{d.code}</option>
-                        ))}
-                    </select>
-
-
                     <div className="container py-3">
                         Semester
                         <span className="text-red-500"> required</span>
