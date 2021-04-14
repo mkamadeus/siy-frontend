@@ -8,7 +8,7 @@ import { getAllCourses } from '~/api/Course';
 import { useQuery } from 'react-query';
 import { createLecture, getLectureByYearSemester, updateLecture } from '~/api/Lecture';
 import { Lecture } from '~/model/Lecture';
-import axios from 'axios';
+import { uploadFile } from '~/api/Grade';
 
 const TeacherPage: React.FC<RouteComponentProps> = (
     props: RouteComponentProps
@@ -144,26 +144,12 @@ const TeacherPage: React.FC<RouteComponentProps> = (
 
     const postFile = (courseID: number, year: number, semester: number) => {
         const files = fileValue();
-        const formData = new FormData();
 
         isLectureExist(courseID, year, semester)
         .then(({isExist, id}) => {
             if (isExist) {
                 if (files) {
-                    formData.append('lectureId', id.toString());
-                    formData.append('year', year.toString());
-                    formData.append('semester', semester.toString());
-                    formData.append('file', files[0]);
-
-                    axios.post(
-                        `${import.meta.env.SNOWPACK_PUBLIC_API_URL}/grades/upload`,
-                        formData,
-                        {
-                            headers: {
-                                'Content-Type': 'form-data'
-                            }
-                        }
-                    )
+                    uploadFile(id, year, semester, files[0]);
                 }
                 
             }
