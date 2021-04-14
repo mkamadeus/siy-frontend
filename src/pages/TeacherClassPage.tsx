@@ -37,7 +37,7 @@ const TeacherClassPage: React.FC<RouteComponentProps> = (
             return (
               <tr className="border-b border-gray-400" key={`course-${index}`}>
                 <td className="p-1 text-center flex justify-center space-x-3">
-                  <Link to={'form'}>
+                  <Link to={`form/${course.id}`}>
                     <PencilOutline className="h-5 w-5 text-gray-600" />
                   </Link>
                 </td>
