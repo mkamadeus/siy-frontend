@@ -2,17 +2,17 @@ import React from 'react';
 import { RouteComponentProps } from '@reach/router';
 import { useForm } from 'react-hook-form';
 import Button from '../components/common/Button';
-import { getTeacherData } from '~/api/Teacher';
+import { getAllCourses } from '~/api/Course';
 import { useQuery } from 'react-query';
 import LoadingPage from './common/LoadingPage';
 
 const TeacherPage: React.FC<RouteComponentProps> = (
   props: RouteComponentProps
 ) => {
-  const { data, error, isLoading } = useQuery('teacherData', getCourseData);
+  const { data, error, isLoading } = useQuery('courseData', getAllCourses);
   const { register, handleSubmit } = useForm();
 
-  const onSubmit = (values) => {
+  const onSubmit = (values: unknown) => {
     console.log(values);
     alert('File berhasil tersimpan.');
   };
@@ -42,6 +42,7 @@ const TeacherPage: React.FC<RouteComponentProps> = (
               <option key={d.code}>{d.code}</option>
             ))}
           </select>
+          {console.log(data)}
           <div className="container p-3">Semester</div>
           <select
             className="container p-3 rounded-md border-b bg-gray-200 mb-3 mx-2"
@@ -94,6 +95,7 @@ const TeacherPage: React.FC<RouteComponentProps> = (
             ></input>
           </div>
           <div className="container p-3">
+            Input Pembobotan LO
             <div>Upload File Pembobotan LO</div>
             <input
               className="container p-3 mb-3"
@@ -106,6 +108,72 @@ const TeacherPage: React.FC<RouteComponentProps> = (
             ></input>
             <Button type="submit">asd</Button>
           </div>
+          <label htmlFor="LOuas" className="p-3">
+            UAS (Format: LO_A LO_B LO_C LO_D LO_E LO_F LO_G)
+          </label>
+          <input
+            className="container p-3 rounded-md border-b bg-gray-200 mb-3 mx-2"
+            type="text"
+            name="LOuas"
+            pattern="^(\d+\.?\d{0,2} ){7}(\d+\.?\d{0,2})$"
+            placeholder="ex. 1.23 1.23 1.23 1.23 1.23 1.23 1.23"
+            ref={register({
+              required: 'Required',
+            })}
+          ></input>
+          <label htmlFor="LOuts" className="p-3">
+            UTS (Format: LO_A LO_B LO_C LO_D LO_E LO_F LO_G)
+          </label>
+          <input
+            className="container p-3 rounded-md border-b bg-gray-200 mb-3 mx-2"
+            type="text"
+            name="LOuts"
+            pattern="^(\d+\.?\d{0,2} ){7}(\d+\.?\d{0,2})$"
+            placeholder="ex. 1.23 1.23 1.23 1.23 1.23 1.23 1.23"
+            ref={register({
+              required: 'Required',
+            })}
+          ></input>
+          <label htmlFor="LOkuis" className="p-3">
+            Kuis (Format: LO_A LO_B LO_C LO_D LO_E LO_F LO_G)
+          </label>
+          <input
+            className="container p-3 rounded-md border-b bg-gray-200 mb-3 mx-2"
+            type="text"
+            name="LOkuis"
+            pattern="^(\d+\.?\d{0,2} ){7}(\d+\.?\d{0,2})$"
+            placeholder="ex. 1.23 1.23 1.23 1.23 1.23 1.23 1.23"
+            ref={register({
+              required: 'Required',
+            })}
+          ></input>
+          <label htmlFor="LOxrcs" className="p-3">
+            Latihan (Format: LO_A LO_B LO_C LO_D LO_E LO_F LO_G)
+          </label>
+          <input
+            className="container p-3 rounded-md border-b bg-gray-200 mb-3 mx-2"
+            type="text"
+            name="LOkxrcs"
+            pattern="^(\d+\.?\d{0,2} ){7}(\d+\.?\d{0,2})$"
+            placeholder="ex. 1.23 1.23 1.23 1.23 1.23 1.23 1.23"
+            ref={register({
+              required: 'Required',
+            })}
+          ></input>
+          <label htmlFor="LOprktm" className="p-3">
+            Praktikum (Format: LO_A LO_B LO_C LO_D LO_E LO_F LO_G)
+          </label>
+          <input
+            className="container p-3 rounded-md border-b bg-gray-200 mb-3 mx-2"
+            type="text"
+            name="LOkprktm"
+            pattern="^(\d+\.?\d{0,2} ){7}(\d+\.?\d{0,2})$"
+            placeholder="ex. 1.23 1.23 1.23 1.23 1.23 1.23 1.23"
+            ref={register({
+              required: 'Required',
+            })}
+          ></input>
+          <Button />
         </form>
       </div>
     </div>

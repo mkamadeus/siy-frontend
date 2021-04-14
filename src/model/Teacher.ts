@@ -1,5 +1,7 @@
-export interface Teacher {
+import {Course} from '~/model/Course';
 
-    id: number;
-    name: string;
+export interface Teacher {
+  id: number;
+  name: string;
+  teaches: Course[];
 }

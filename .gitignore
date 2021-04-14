@@ -1,4 +1,6 @@
 .snowpack
 .env
+.firebase
 build
 node_modules
+firebase-debug.log

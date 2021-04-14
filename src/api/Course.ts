@@ -23,3 +23,7 @@ export const updateCourse = async (
   const course = await BaseInstance.put<Course>(`/courses/${id}`, courseData);
   return course.data;
 };
+
+export const deleteCourse = async (id: number): Promise<void> => {
+  await BaseInstance.delete<Course>(`/courses/${id}`);
+};

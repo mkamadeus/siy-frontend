@@ -8,10 +8,14 @@ export interface StudentBase {
   name: string;
   imgPath: string;
   ipk: number;
-  loAverage: number;
 }
 
-export interface Student extends StudentBase {
+export interface Student {
+  id: number;
+  nim: string;
+  name: string;
+  imgPath: string;
+  ipk: number;
   courses: Course[];
   studentGrades: StudentGrade[];
   lo: LearningOutcome[];

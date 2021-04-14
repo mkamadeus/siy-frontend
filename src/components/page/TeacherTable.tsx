@@ -6,17 +6,17 @@ import {
   import { Link } from '@reach/router';
   import React from 'react';
   import { useMutation } from 'react-query';
-  import { deleteStudent } from '~/api/Student';
-  import { Student } from '~/model/Student';
+  import { deleteTeacher } from '~/api/Teacher';
+  import { Teacher } from '~/model/Teacher';
   
   interface Props {
-    students: Student[];
+    teachers: Teacher[];
   }
   
-  const StudentTable: React.FunctionComponent<Props> = ({ students }: Props) => {
-    const deleteStudentMutation = useMutation(deleteStudent);
+  const TeacherTable: React.FunctionComponent<Props> = ({ teachers }: Props) => {
+    const deleteTeacherMutation = useMutation(deleteTeacher);
   
-    if (students.length === 0) {
+    if (teachers.length === 0) {
       return (
         <div className="text-center italic text-gray-700">There is no data!</div>
       );
@@ -33,15 +33,15 @@ import {
           </tr>
         </thead>
         <tbody>
-          {students
+          {teachers
             .sort((a, b) => (a.id > b.id ? 1 : -1))
-            .map((student, index) => {
+            .map((teacher, index) => {
               return (
-                <tr className="border-b border-gray-400" key={`student-${index}`}>
-                  <td className="p-1 text-center">{student.id}</td>
-                  <td className="p-1">{student.name}</td>
+                <tr className="border-b border-gray-400" key={`course-${index}`}>
+                  <td className="p-1 text-center">{teacher.id}</td>
+                  <td className="p-1">{teacher.name}</td>
                   <td className="p-1 text-center flex justify-center space-x-3">
-                    <Link to={`${student.id}`}>
+                    <Link to={`${teacher.id}`}>
                       <EyeOutline className="h-5 w-5 text-gray-500" />
                     </Link>
                     <div
@@ -49,10 +49,10 @@ import {
                         try {
                           if (
                             confirm(
-                              `Apakah Anda yakin mau menghapus ${student.name}?`
+                              `Apakah Anda yakin mau menghapus ${teacher.name}?`
                             )
                           ) {
-                            await deleteStudentMutation.mutateAsync(student.id);
+                            await deleteTeacherMutation.mutateAsync(teacher.id);
                             alert('Berhasil!');
                           }
                         } catch {
@@ -62,7 +62,7 @@ import {
                     >
                       <TrashOutline className="h-5 w-5 text-gray-600" />
                     </div>
-                    <Link to={`edit/${student.id}`}>
+                    <Link to={`edit/${teacher.id}`}>
                       <PencilOutline className="h-5 w-5 text-gray-600" />
                     </Link>
                   </td>
@@ -74,5 +74,5 @@ import {
     );
   };
   
-  export default StudentTable;
+  export default TeacherTable;
   

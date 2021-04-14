@@ -2,9 +2,6 @@ import { navigate, RouteComponentProps } from '@reach/router';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { createTeacher } from '~/api/Teacher';
-import Button from '~/components/common/Button';
-import swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
 import { Teacher } from '~/model/Teacher';
 
 const AdminTeacherCreatePage: React.FC<RouteComponentProps> = (
@@ -13,7 +10,6 @@ const AdminTeacherCreatePage: React.FC<RouteComponentProps> = (
   const { register, handleSubmit } = useForm();
 
   const onSubmit = async (data: Teacher) => {
-    const Swal = withReactContent(swal);
     try {
       await createTeacher(data);
       alert('Berhasil!');

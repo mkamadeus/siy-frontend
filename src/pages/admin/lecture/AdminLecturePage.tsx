@@ -1,14 +1,14 @@
 import React from 'react';
 import { navigate, RouteComponentProps } from '@reach/router';
 import { useQuery } from 'react-query';
-import { getAllTeachers } from '~/api/Teacher';
 import LoadingPage from '~/pages/common/LoadingPage';
-import TeacherTable from '~/components/page/TeacherTable';
+import LectureTable from '~/components/page/LectureTable';
+import { getAllLectures } from '~/api/Lecture';
 
-const AdminTeacherPage: React.FC<RouteComponentProps> = (
+const AdminLecturePage: React.FC<RouteComponentProps> = (
   _props: RouteComponentProps
 ) => {
-  const { data, isLoading } = useQuery('teachers', getAllTeachers);
+  const { data, isLoading } = useQuery('lectures', getAllLectures);
 
   if (isLoading || !data) {
     return <LoadingPage />;
@@ -18,22 +18,24 @@ const AdminTeacherPage: React.FC<RouteComponentProps> = (
     <div className="container mx-auto p-6">
       <div className="flex flex-col space-y-4 text-sm">
         <div className="flex justify-between mb-4">
-          <div className="font-bold text-3xl">Teachers</div>
+          <div className="font-bold text-3xl">Lectures</div>
           <button
             className="flex items-center justify-center rounded-md bg-blue-500 text-white py-2 px-4 transform shadow-none hover:shadow-lg focus:ring focus:outline-none focus:bg-blue-600 transition duration-300"
             onClick={() => {
-              navigate('/admin/teacher/create');
+              navigate('/admin/course/create');
             }}
           >
-            Create new teacher...
+            Create new lecture...
           </button>
         </div>
       </div>
       <div className="flex flex-col space-y-4">
-        <TeacherTable teachers={data} />
+        <div>
+          <LectureTable lectures={data} />
+        </div>
       </div>
     </div>
   );
 };
 
-export default AdminTeacherPage;
+export default AdminLecturePage;

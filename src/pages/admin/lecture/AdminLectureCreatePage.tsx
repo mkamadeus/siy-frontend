@@ -1,37 +1,17 @@
 import { navigate, RouteComponentProps } from '@reach/router';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { getCourseById, updateCourse } from '~/api/Course';
-import { Course } from '~/model/Course';
-import { useQuery } from 'react-query';
-import LoadingPage from '~/pages/common/LoadingPage';
+import { createLecture } from '~/api/Lecture';
+import { Lecture } from '~/model/Lecture';
 
-type RouteProps = {
-  id: number;
-};
-
-const AdminCourseEditPage: React.FC<RouteComponentProps> = (
-  props: RouteComponentProps<RouteProps>
+const AdminLectureCreatePage: React.FC<RouteComponentProps> = (
+  _props: RouteComponentProps
 ) => {
-  const courseId = props.id as number;
-
   const { register, handleSubmit } = useForm();
-  const { data, isLoading, error } = useQuery(['courses', courseId], () =>
-    getCourseById(courseId)
-  );
 
-  if (error) {
-    alert('error bang');
-    return null;
-  }
-
-  if (isLoading || !data) {
-    return <LoadingPage />;
-  }
-
-  const onSubmit = async (data: Course) => {
+  const onSubmit = async (data: Lecture) => {
     try {
-      await updateCourse(courseId, data);
+      await createLecture(data);
       alert('Berhasil!');
       navigate('/admin/course');
     } catch (err) {
@@ -41,7 +21,7 @@ const AdminCourseEditPage: React.FC<RouteComponentProps> = (
 
   return (
     <div className="container mx-auto p-6">
-      <div className="font-bold text-3xl mb-4">Edit Course</div>
+      <div className="font-bold text-3xl mb-4">Create Course</div>
       <form
         className="flex flex-col space-y-3"
         onSubmit={handleSubmit(onSubmit)}
@@ -54,7 +34,6 @@ const AdminCourseEditPage: React.FC<RouteComponentProps> = (
             name="code"
             type="text"
             ref={register}
-            defaultValue={data.code}
             className="border-gray-300 rounded-md shadow-sm w-full"
           />
         </div>
@@ -66,7 +45,6 @@ const AdminCourseEditPage: React.FC<RouteComponentProps> = (
             name="name"
             type="text"
             ref={register}
-            defaultValue={data.name}
             className="border-gray-300 rounded-md shadow-sm w-full"
           />
         </div>
@@ -77,18 +55,16 @@ const AdminCourseEditPage: React.FC<RouteComponentProps> = (
           <textarea
             name="briefSyllabus"
             ref={register}
-            defaultValue={data.briefSyllabus}
             className="border-gray-300 rounded-md shadow-sm w-full"
           />
         </div>
         <div className="flex items-center space-x-2">
-          <label htmlFor="completeSyllabus" className="text-sm w-1/4">
+          <label htmlFor="briefSyllabus" className="text-sm w-1/4">
             Silabus Lengkap
           </label>
           <textarea
-            name="completeSyllabus"
+            name="briefSyllabus"
             ref={register}
-            defaultValue={data.completeSyllabus}
             className="border-gray-300 rounded-md shadow-sm w-full"
           />
         </div>
@@ -99,7 +75,6 @@ const AdminCourseEditPage: React.FC<RouteComponentProps> = (
           <textarea
             name="outcome"
             ref={register}
-            defaultValue={data.outcome}
             className="border-gray-300 rounded-md shadow-sm w-full"
           />
         </div>
@@ -110,7 +85,6 @@ const AdminCourseEditPage: React.FC<RouteComponentProps> = (
           <input
             name="credits"
             type="number"
-            defaultValue={data.credits}
             ref={register({ setValueAs: (val) => parseInt(val) })}
             className="border-gray-300 rounded-md shadow-sm w-full"
           />
@@ -120,7 +94,7 @@ const AdminCourseEditPage: React.FC<RouteComponentProps> = (
             type="submit"
             className="flex w-full items-center justify-center rounded-md bg-blue-500 text-white py-2 px-4 shadow-none hover:shadow-lg focus:ring focus:outline-none focus:bg-blue-600 transition duration-300"
           >
-            Update
+            Submit
           </button>
         </div>
       </form>
@@ -128,4 +102,4 @@ const AdminCourseEditPage: React.FC<RouteComponentProps> = (
   );
 };
 
-export default AdminCourseEditPage;
+export default AdminLectureCreatePage;

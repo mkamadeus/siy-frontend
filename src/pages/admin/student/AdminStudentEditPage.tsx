@@ -2,10 +2,7 @@ import { navigate, RouteComponentProps } from '@reach/router';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { getStudentById, updateStudent } from '~/api/Student';
-import Button from '~/components/common/Button';
 import { Student } from '~/model/Student';
-import swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
 import { useQuery } from 'react-query';
 import LoadingPage from '~/pages/common/LoadingPage';
 
@@ -16,9 +13,11 @@ type RouteProps = {
 const AdminStudentEditPage: React.FC<RouteComponentProps> = (
   props: RouteComponentProps<RouteProps>
 ) => {
+  const studentId = props.id as number;
+
   const { register, handleSubmit } = useForm();
-  const { data, isLoading, error } = useQuery(['student', props.id], () =>
-    getStudentById(props.id!)
+  const { data, isLoading, error } = useQuery(['students', studentId], () =>
+    getStudentById(studentId)
   );
 
   if (error) {
@@ -31,9 +30,8 @@ const AdminStudentEditPage: React.FC<RouteComponentProps> = (
   }
 
   const onSubmit = async (data: Student) => {
-    const Swal = withReactContent(swal);
     try {
-      await updateStudent(props.id!, data);
+      await updateStudent(studentId, data);
       alert('Berhasil!');
       navigate('/admin/student');
     } catch (err) {
@@ -56,7 +54,7 @@ const AdminStudentEditPage: React.FC<RouteComponentProps> = (
             name="code"
             type="text"
             ref={register}
-            defaultValue={data.code}
+            defaultValue={data.id}
             className="border-gray-300 rounded-md shadow-sm w-full"
           />
         </div>
@@ -69,51 +67,6 @@ const AdminStudentEditPage: React.FC<RouteComponentProps> = (
             type="text"
             ref={register}
             defaultValue={data.name}
-            className="border-gray-300 rounded-md shadow-sm w-full"
-          />
-        </div>
-        <div className="flex items-center space-x-2">
-          <label htmlFor="briefSyllabus" className="text-sm w-1/4">
-            Silabus Ringkas
-          </label>
-          <textarea
-            name="briefSyllabus"
-            ref={register}
-            defaultValue={data.briefSyllabus}
-            className="border-gray-300 rounded-md shadow-sm w-full"
-          />
-        </div>
-        <div className="flex items-center space-x-2">
-          <label htmlFor="completeSyllabus" className="text-sm w-1/4">
-            Silabus Lengkap
-          </label>
-          <textarea
-            name="completeSyllabus"
-            ref={register}
-            defaultValue={data.completeSyllabus}
-            className="border-gray-300 rounded-md shadow-sm w-full"
-          />
-        </div>
-        <div className="flex items-center space-x-2">
-          <label htmlFor="outcome" className="text-sm w-1/4">
-            Luaran
-          </label>
-          <textarea
-            name="outcome"
-            ref={register}
-            defaultValue={data.outcome}
-            className="border-gray-300 rounded-md shadow-sm w-full"
-          />
-        </div>
-        <div className="flex items-center space-x-2">
-          <label htmlFor="credits" className="text-sm w-1/4">
-            SKS
-          </label>
-          <input
-            name="credits"
-            type="number"
-            defaultValue={data.credits}
-            ref={register({ setValueAs: (val) => parseInt(val) })}
             className="border-gray-300 rounded-md shadow-sm w-full"
           />
         </div>
