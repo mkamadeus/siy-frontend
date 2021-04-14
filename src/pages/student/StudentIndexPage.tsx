@@ -6,6 +6,7 @@ import LoadingPage from '../common/LoadingPage';
 import QuickTileButton from '~/components/common/QuickTileButton';
 import { MenuSolid } from '@graywolfai/react-heroicons';
 import { getGradesByNim } from '~/api/Grade';
+import StudentGradeTable from '~/components/page/student/StudentGradeTable';
 
 const StudentIndexPage: React.FC<RouteComponentProps> = (
   props: RouteComponentProps
@@ -22,20 +23,21 @@ const StudentIndexPage: React.FC<RouteComponentProps> = (
   if (isStudentLoading || !student) return <LoadingPage />;
   if (isGradesLoading || !grades) return <LoadingPage />;
 
-  console.log(grades);
-
   return (
     <div className="container mx-auto p-6">
       <div className="flex flex-col items-center">
         <div className="flex flex-col mb-2 items-center">
-          <img src={student.imgPath} className="w-32 h-32 rounded-full" />
+          <img
+            src={student.imgPath}
+            className="w-32 h-32 rounded-full shadow-md"
+          />
           <div className="text-center text-xl font-bold">{student.name}</div>
           <div className="text-center italic font-semibold">
             IPK/NR : {student.ipk}
           </div>
         </div>
         <div className="flex w-full mb-4">
-          {/* <TranscriptTable grades={grades} /> */}
+          <StudentGradeTable grades={grades} />
         </div>
         <div className="flex flex-col mb-4">
           <div className="font-bold text-xl text-center mb-2">LO Anda:</div>

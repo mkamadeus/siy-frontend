@@ -21,7 +21,7 @@ const AdminLectureCreatePage: React.FC<RouteComponentProps> = (
 
   return (
     <div className="container mx-auto p-6">
-      <div className="font-bold text-3xl mb-4">Create Course</div>
+      <div className="font-bold text-3xl mb-4">Create Lecture</div>
       <form
         className="flex flex-col space-y-3"
         onSubmit={handleSubmit(onSubmit)}

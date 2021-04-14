@@ -1,6 +1,7 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import { Student } from '~/model/Student';
+import { getLectureById } from '~/api/Lecture';
 import { getGradesByNim } from '~/api/Grade';
 
 interface Props {
@@ -10,35 +11,46 @@ interface Props {
 
 interface ItemProps {
   student: Student;
-  courseId: number;
+  lectureId: number;
   index: number;
 }
 
 const TeacherStudentTableItem: React.FunctionComponent<ItemProps> = ({
   student,
   index,
-  courseId,
+  lectureId,
 }: ItemProps) => {
-  const { data: grade, isLoading: isGradeLoading } = useQuery(
-    ['grade', student.nim],
+  const { data: lecture, isLoading: isLectureLoading } = useQuery(
+    ['lecture', lectureId],
+    () => getLectureById(lectureId)
+  );
+  const { data: grades, isLoading: isGradeLoading } = useQuery(
+    ['grades', student.nim],
     () => getGradesByNim(student.nim)
   );
 
-  if (!grade || isGradeLoading) return null;
+  if (!lecture || isLectureLoading) return null;
+  if (!grades || isGradeLoading) return null;
 
   return (
     <tr className="border-b border-gray-400" key={`course-${index}`}>
       <td className="p-1 text-center">{student.id}</td>
       <td className="p-1">{student.nim}</td>
       <td className="p-1">{student.name}</td>
-      <td className="p-1">{grade.filter((g) => g.courseId == courseId)[0]}</td>
+      <td className="p-1 text-center">
+        {
+          grades.filter(
+            (g) => g.lectureId == lectureId && student.id == g.studentId
+          )[0].index
+        }
+      </td>
     </tr>
   );
 };
 
 const TeacherStudentTable: React.FunctionComponent<Props> = ({
   students,
-  lectureId: courseId,
+  lectureId,
 }: Props) => {
   if (students.length === 0) {
     return (
@@ -62,7 +74,7 @@ const TeacherStudentTable: React.FunctionComponent<Props> = ({
             key={`table-item-${index}`}
             student={student}
             index={index}
-            courseId={courseId}
+            lectureId={lectureId}
           />
         ))}
       </tbody>

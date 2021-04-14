@@ -36,42 +36,18 @@ const TeacherLecturePage: React.FC<RouteComponentProps<RouteProps>> = (
 
   return (
     <div className="container mx-auto p-6">
-      <div className="text-xl font-bold mb-4">
-        {course.code} {course.name}
+      <div className="flex items-center justify-between w-full mb-4">
+        <div className="text-xl font-bold">
+          {course.code} {course.name}
+        </div>
+        <button className="bg-white shadow border border-blue-500 text-blue-500 p-2 rounded-full text-sm focus:outline-none">
+          Bulk upload
+        </button>
       </div>
       <div className="mb-4">
         <TeacherStudentTable students={students} lectureId={lectureId} />
       </div>
     </div>
-
-    // <table className="table-auto w-full text-xs">
-    //   <thead>
-    //     <tr className="border-b border-gray-400 ">
-    //       <th className="p-1">Edit</th>
-    //       <th className="p-1">Kode Kuliah</th>
-    //       <th className="p-1 text-left">Mata Kuliah</th>
-    //       <th className="p-1">SKS</th>
-    //     </tr>
-    //   </thead>
-    //   <tbody>
-    //     {data
-    //       .sort((a, b) => (a.id > b.id ? 1 : -1))
-    //       .map((course, index) => {
-    //         return (
-    //           <tr className="border-b border-gray-400" key={`course-${index}`}>
-    //             <td className="p-1 text-center flex justify-center space-x-3">
-    //               <Link to={'form'}>
-    //                 <PencilOutline className="h-5 w-5 text-gray-600" />
-    //               </Link>
-    //             </td>
-    //             <td className="p-1 text-center">{course.code}</td>
-    //             <td className="p-1">{course.name}</td>
-    //             <td className="p-1 text-center">{course.credits}</td>
-    //           </tr>
-    //         );
-    //       })}
-    //   </tbody>
-    // </table>
   );
 };
 

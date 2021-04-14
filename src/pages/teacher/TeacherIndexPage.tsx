@@ -24,7 +24,7 @@ const TeacherIndexPage: React.FC<RouteComponentProps> = (
       <div className="mb-4">
         <TeacherLectureTable lectures={data} />
       </div>
-      <div className="text-xl font-bold mb-2">Dashboard</div>
+      <div className="text-xl font-bold mb-2">Navigasi</div>
       <div className="flex flex-wrap mb-4">
         <div className="p-1.5">
           <QuickTileButton
@@ -33,13 +33,6 @@ const TeacherIndexPage: React.FC<RouteComponentProps> = (
             title={'Pengaturan Bobot'}
           />
         </div>
-        {/* <div className="p-1.5">
-          <QuickTileButton
-            to={'/teacher/class'}
-            icon={<HeartSolid />}
-            title={'Kelas'}
-          />
-        </div> */}
       </div>
     </div>
   );

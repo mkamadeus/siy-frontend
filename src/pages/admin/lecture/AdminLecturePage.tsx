@@ -22,7 +22,7 @@ const AdminLecturePage: React.FC<RouteComponentProps> = (
           <button
             className="flex items-center justify-center rounded-md bg-blue-500 text-white py-2 px-4 transform shadow-none hover:shadow-lg focus:ring focus:outline-none focus:bg-blue-600 transition duration-300"
             onClick={() => {
-              navigate('/admin/course/create');
+              navigate('/admin/lecture/create');
             }}
           >
             Create new lecture...
