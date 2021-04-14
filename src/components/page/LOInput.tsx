@@ -1,120 +1,146 @@
 import React from 'react';
 
-interface Props {
-    title: string,
+interface ICommonProp {
+    title: string
+    className?: string
+}
+
+interface IButtonProp {
+    hidden?: boolean
+    type: string
+}
+
+interface IChildrenProp {
+    children?: React.ReactNode
+}
+
+interface IFormProp {
     section?: string
+    min?: string
+    max?: string
+    step?: string
 }
 
-function showLOInput(title : string) : undefined {
-    var form = document.getElementById(title);
-    if (form !== null) {
-        form.hidden = false;
-    }
+type Button = ICommonProp & IButtonProp & IChildrenProp
+type Form = ICommonProp & IFormProp
+type Input = ICommonProp & IChildrenProp & IFormProp
+
+function showElmt(id : string) : undefined {
+    const elmt = document.getElementById(id)
+    if (elmt) elmt.hidden = false;
 
     return;
 }
 
-function showButton(id: string) : undefined {
-    var btn = document.getElementById(id)
-    if (btn !== null) {
-        btn.hidden = false
-    }
+function hideElmt(id : string) : undefined {
+    const elmt = document.getElementById(id)
+    if (elmt) elmt.hidden = true;
     
     return;
 }
 
-function hideButton(id: string) : undefined {
-    var btn = document.getElementById(id)
-    if (btn !== null) {
-        btn.hidden = true
-    }
-    
-    return;
-}
-
-const ButtonShowLO = ({title} : Props) => {
+const ButtonLO : React.ForwardRefRenderFunction<HTMLButtonElement, Button> = (
+    props
+) => {
     return (
         <button
-            id={"show-"+title}
+            id={props.type + '-' + props.title}
             type="button"
-            className="container mb-3 mx-2 items-center justify-center rounded-md bg-blue-500 text-white py-2 px-4 transform shadow-none hover:shadow-lg focus:ring focus:outline-none focus:bg-blue-600 transition duration-300"
+            className={props.className}
+            hidden={props.hidden}
             onClick={
                 () => {
-                    showLOInput(title)
-                    showButton("hide-"+title)
-                    hideButton("show-"+title)
+                    if (props.type == 'show') {
+                        showElmt(props.title)
+                        showElmt('hide-' + props.title)
+                        hideElmt('show-' + props.title)
+                    }
+                    else {
+                        hideElmt(props.title)
+                        showElmt('show-' + props.title)
+                        hideElmt('hide-' + props.title)
+                    }
                 }
             }
-            hidden={false}
         >
-            Tambahkan Bobot LO {title}
+            {props.children}
         </button>
     )
 }
 
-function hideLOInput(title : string) : undefined {
-    var form = document.getElementById(title);
-
-    if (form !== null) {
-        form.hidden = true;
-    }
-    
-    return;
-}
-
-const ButtonHideLO = ({title} : Props) => {
-    return (
-        <button
-            id={"hide-"+title}
-            type="button"
-            className="container mb-3 mx-2 items-center justify-center rounded-md bg-gray-400 text-white py-2 px-4 transform shadow-none hover:shadow-lg focus:ring focus:outline-none focus:bg-gray-500 transition duration-300"
-            onClick={
-                () => {
-                    hideLOInput(title)
-                    showButton("show-"+title)
-                    hideButton("hide-"+title)
-                }
-            }
-            hidden={true}
-        >
-            Tutup Bobot LO {title}
-        </button>
-    )
-}
-
-const LOForm = ({title, section} : Props) => {
+const FormLO : React.ForwardRefRenderFunction<HTMLInputElement ,Form> = (
+    props
+) => {
     return (
         <input
-            id={section+ '-' +title}
-            className="container rounded-md bg-gray-200 my-1.5 mx-0"
-            type="text"
-            placeholder={title}
-            pattern="^\d\.\d{0,2}$"
+            id={props.section + '-' + props.title}
+            className="container p-3 rounded-md border-b bg-gray-200 mb-3"
+            name={props.section + '-' + props.title}
+            type="number"
+            min={props.min}
+            max={props.max}
+            step={props.step}
+            placeholder={props.title}
         ></input>
     )
 }
 
-const LOInput = ({title} : Props) => {    
+const InputLO : React.ForwardRefRenderFunction<HTMLDivElement, Input> = (
+    props,
+    ref
+) => {
+    const LOList = ['LO-A', 'LO-B', 'LO-C', 'LO-D', 'LO-E', 'LO-F', 'LO-G'];
+
     return (
-            <div>
-                <ButtonShowLO title={title}></ButtonShowLO>
-                <ButtonHideLO title={title}></ButtonHideLO>
-                <div 
-                    id={title}
-                    className="container mb-3 mx-2"
-                    hidden={true}
-                >
-                    <p className="container text-center text-sm">Abaikan bagian yang tidak ingin diisi</p>
-                    <LOForm title="LO-A" section={title}></LOForm>
-                    <LOForm title="LO-B" section={title}></LOForm>
-                    <LOForm title="LO-C" section={title}></LOForm>
-                    <LOForm title="LO-D" section={title}></LOForm>
-                    <LOForm title="LO-E" section={title}></LOForm>
-                    <LOForm title="LO-F" section={title}></LOForm>
-                    <LOForm title="LO-G" section={title}></LOForm>
+        <div className="container mb-3">
+            <div className="flex mb-3 bg-gray-200 border-b rounded-md justify-between items-center">
+                <div>
+                    <input
+                        className="m-3"
+                        type="checkbox"
+                        name={props.title + 'Checked'}
+                    ></input>
                 </div>
+                <ButtonLO 
+                    title={props.title}
+                    className="container items-center justify-center rounded-l-none rounded-r-md bg-blue-500 text-white py-3 px-4 transform shadow-none hover:shadow-lg focus:ring focus:outline-none focus:bg-blue-600 transition duration-300"
+                    hidden={false}
+                    type="show"
+                >
+                    Buka {props.children}
+                </ButtonLO>
+
+                <ButtonLO 
+                    title={props.title}
+                    className="container items-center justify-center rounded-l-none rounded-r-md bg-gray-400 text-white py-3 px-4 transform shadow-none hover:shadow-lg focus:ring focus:outline-none focus:bg-gray-500 transition duration-300"
+                    hidden={true}
+                    type="hide"
+                >
+                    Tutup {props.children}
+                </ButtonLO>
             </div>
-    );
+
+            <div
+                id={props.title} 
+                className="container mb-3"
+                hidden={true}
+            >
+                <p className="container text-center text-sm mb-3">Abaikan bagian yang tidak ingin diisi</p>
+                {LOList.map((lo) => {
+                    return (
+                        <FormLO
+                            key={lo}
+                            title={lo}
+                            section={props.title}
+                            min={props.min}
+                            max={props.max}
+                            step={props.step}
+                        ></FormLO>
+                    )
+                })}
+            </div>
+        </div>
+    )
 }
 
-export default LOInput;
+export default InputLO;
