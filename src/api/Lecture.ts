@@ -2,10 +2,10 @@ import { Lecture } from '~/model/Lecture';
 import { BaseInstance } from './Base';
 
 export const getAllLectures = async (): Promise<Lecture[]> => {
-  return [];
+  const lectures = await BaseInstance.get<Lecture[]>('/lectures');
+  return lectures.data;
 };
 
-// TODO: waiting for endpoint
 export const getLecturesByTeacherId = async (
   _teacherId: number
 ): Promise<Lecture[]> => {
@@ -19,7 +19,24 @@ export const getLectureById = async (id: number): Promise<Lecture> => {
   return lecture;
 };
 
-// TODO: implementation
-export const createLecture = async (lecture: Lecture): Promise<void> => {
-  return;
+export const getLectureByYearSemester = async (
+  year: number,
+  semester: number
+  ): Promise<Lecture[]> => {
+    const lectures = await BaseInstance.get<Lecture[]>(`/lectures/year/${year}/${semester}`);
+    return lectures.data;
+}
+
+export const createLecture = async (lectureData: Lecture): Promise<Lecture> => {
+  const lecture = await BaseInstance.post<Lecture>('/lectures', lectureData);
+  return lecture.data;
+
 };
+
+export const updateLecture = async (
+  id: number,
+  lectureData: Partial<Lecture>
+): Promise<Lecture> => {
+  const lecture = await BaseInstance.put<Lecture>(`/lectures/${id}`, lectureData);
+  return lecture.data;
+}
