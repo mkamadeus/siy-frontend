@@ -6,6 +6,14 @@ export const getAllLectures = async (): Promise<Lecture[]> => {
   return lectures.data;
 };
 
+export const getLecturesByTeacherId = async (
+  _teacherId: number
+): Promise<Lecture[]> => {
+  const lectures = (await BaseInstance.get<Lecture[]>('/lectures/year/2020/1'))
+    .data;
+  return lectures;
+};
+
 export const getLectureById = async (id: number): Promise<Lecture> => {
   const lecture = await BaseInstance.get<Lecture>(`/lectures/${id}`);
   return lecture.data;
@@ -24,14 +32,6 @@ export const getLectureByYearSemester = async (
 export const createLecture = async (lectureData: Lecture): Promise<Lecture> => {
   const lecture = await BaseInstance.post<Lecture>('/lectures', lectureData);
   return lecture.data;
-};
-// TODO: waiting for endpoint
-export const getLecturesByTeacherId = async (
-  _teacherId: number
-): Promise<Lecture[]> => {
-  const lectures = (await BaseInstance.get<Lecture[]>('/lectures/year/2020/1'))
-    .data;
-  return lectures;
 };
 
 export const updateLecture = async (
