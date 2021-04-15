@@ -6,10 +6,18 @@ export const getAllLectures = async (): Promise<Lecture[]> => {
   return lectures.data;
 };
 
+export const getLecturesByTeacherId = async (
+  _teacherId: number
+): Promise<Lecture[]> => {
+  const lectures = (await BaseInstance.get<Lecture[]>('/lectures/year/2020/1'))
+    .data;
+  return lectures;
+};
+
 export const getLectureById = async (id: number): Promise<Lecture> => {
-  const lecture = await BaseInstance.get<Lecture>(`/lectures/${id}`);
-  return lecture.data;
-}
+  const lecture = (await BaseInstance.get<Lecture>(`/lectures/${id}`)).data;
+  return lecture;
+};
 
 export const getLectureByYearSemester = async (
   year: number,
@@ -22,6 +30,7 @@ export const getLectureByYearSemester = async (
 export const createLecture = async (lectureData: Lecture): Promise<Lecture> => {
   const lecture = await BaseInstance.post<Lecture>('/lectures', lectureData);
   return lecture.data;
+
 };
 
 export const updateLecture = async (

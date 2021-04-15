@@ -28,7 +28,7 @@ const AdminLecturePreviewPage: React.FC<RouteComponentProps> = (
 
   return (
     <div className="container mx-auto p-6">
-      <div className="font-bold text-3xl mb-4">Preview Course</div>
+      <div className="font-bold text-3xl mb-4">Preview Lecture</div>
       <div className="flex flex-col space-y-3 text-sm">
         <div className="flex items-start space-x-2">
           <div className="w-1/4 font-semibold">Kode</div>
