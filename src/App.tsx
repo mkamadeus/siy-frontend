@@ -22,6 +22,7 @@ import AdminLecturePreviewPage from './pages/admin/lecture/AdminLecturePreviewPa
 import AdminCoursePreviewPage from './pages/admin/course/AdminCoursePreviewPage';
 import LoginPage from './pages/LoginPage';
 import Footer from './components/common/Footer';
+import AdminCoursePage from './pages/admin/course/AdminCoursePage';
 
 const queryClient = new QueryClient();
 
@@ -45,7 +46,7 @@ const App: React.FC = () => {
         <AdminIndexPage path="/admin" />
 
         {/* ADMIN COURSE */}
-        {/* TODO: <AdminCoursePage path="/admin/course" /> */}
+        <AdminCoursePage path="/admin/course" />
         <AdminCoursePreviewPage path="/admin/course/:id" />
         <AdminCourseCreatePage path="/admin/course/create" />
         <AdminCourseEditPage path="/admin/course/edit/:id" />

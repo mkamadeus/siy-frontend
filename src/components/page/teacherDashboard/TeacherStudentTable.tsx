@@ -32,18 +32,19 @@ const TeacherStudentTableItem: React.FunctionComponent<ItemProps> = ({
   if (!lecture || isLectureLoading) return null;
   if (!grades || isGradeLoading) return null;
 
+  const getIndex = () => {
+    const res = grades.find((g) => {
+      return g.lectureId == lectureId && student.id == g.studentId;
+    });
+    return res ? res.index : '';
+  };
+
   return (
     <tr className="border-b border-gray-400" key={`course-${index}`}>
       <td className="p-1 text-center">{student.id}</td>
       <td className="p-1">{student.nim}</td>
       <td className="p-1">{student.name}</td>
-      <td className="p-1 text-center">
-        {
-          grades.filter(
-            (g) => g.lectureId == lectureId && student.id == g.studentId
-          )[0].index
-        }
-      </td>
+      <td className="p-1 text-center">{getIndex()}</td>
     </tr>
   );
 };
