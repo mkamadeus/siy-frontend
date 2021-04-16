@@ -39,7 +39,7 @@ export const updateLecture = async (
   lectureData: Partial<Lecture>
 ): Promise<Lecture> => {
   const lecture = await BaseInstance.put<Lecture>(
-    `/lectures/${id}`,
+    `/lectures/${id}/`,
     lectureData
   );
   return lecture.data;

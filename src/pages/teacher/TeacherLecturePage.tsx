@@ -9,6 +9,7 @@ import { getAllStudents } from '~/api/Student';
 import QuickTileButton from '~/components/common/QuickTileButton';
 import { MenuSolid } from '@graywolfai/react-heroicons';
 import TeacherLoTable from '~/components/page/teacherDashboard/TeacherLoTable';
+import TeacherUpload from '~/components/page/teacherDashboard/TeacherUpload';
 // import CourseTable from '~/components/page/CourseTable';
 
 interface RouteProps {
@@ -57,6 +58,10 @@ const TeacherLecturePage: React.FC<RouteComponentProps<RouteProps>> = (
       <div className="text-xl font-bold mb-2">Bobot LO</div>
       <div className="flex flex-col mb-4">
         <TeacherLoTable lecture={lecture} />
+      </div>
+      <div className="text-xl font-bold mb-2">Input Nilai Mahasiswa</div>
+      <div className="mb-4">
+        <TeacherUpload lecture={lecture} />
       </div>
       <div className="text-xl font-bold mb-2">Navigasi</div>
       <div className="flex flex-wrap mb-4">

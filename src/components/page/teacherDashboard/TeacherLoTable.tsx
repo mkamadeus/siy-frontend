@@ -23,7 +23,6 @@ const TeacherLoTable: React.FunctionComponent<Props> = ({ lecture }: Props) => {
 
   const onSubmit = async (data: Partial<Lecture>) => {
     try {
-      console.log(data);
       for (const loType of LoTypes) {
         let value = 0;
         for (const loCharacter of LoCharacters) {
@@ -31,13 +30,13 @@ const TeacherLoTable: React.FunctionComponent<Props> = ({ lecture }: Props) => {
           value += data[loKey] || 0;
         }
 
-        console.log(value);
         if (value > 0 && value < 1) {
           throw new Error(
             'Pastikan bobot bertotal satu atau nol di semua bagian.'
           );
         }
       }
+      console.log(lecture.id, data);
       await updateLecture(lecture.id, data);
       // return true;
       alert('Berhasil update lecture!');
