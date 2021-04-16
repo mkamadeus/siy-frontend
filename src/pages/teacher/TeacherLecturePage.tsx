@@ -6,10 +6,10 @@ import LoadingPage from '~/pages/common/LoadingPage';
 import { getLectureById } from '~/api/Lecture';
 import TeacherStudentTable from '~/components/page/teacherDashboard/TeacherStudentTable';
 import { getAllStudents } from '~/api/Student';
-import QuickTileButton from '~/components/common/QuickTileButton';
-import { MenuSolid } from '@graywolfai/react-heroicons';
 import TeacherLoTable from '~/components/page/teacherDashboard/TeacherLoTable';
 import TeacherUpload from '~/components/page/teacherDashboard/TeacherUpload';
+import TeacherPortfolio from '~/components/page/teacherDashboard/TeacherPortfolio';
+import { getTeacherById } from '~/api/Teacher';
 // import CourseTable from '~/components/page/CourseTable';
 
 interface RouteProps {
@@ -36,10 +36,17 @@ const TeacherLecturePage: React.FC<RouteComponentProps<RouteProps>> = (
     'students',
     getAllStudents
   );
+  // TODO: Fix with login system duh
+  const teacherId = 1;
+  const { data: teacher, isLoading: isTeacherLoading } = useQuery(
+    ['teacher', teacherId],
+    () => getTeacherById(teacherId)
+  );
 
   if (!lecture || isLectureloading) return <LoadingPage />;
   if (!course || isCourseLoading) return <LoadingPage />;
   if (!students || isStudentsLoading) return <LoadingPage />;
+  if (!teacher || isTeacherLoading) return <LoadingPage />;
 
   return (
     <div className="container mx-auto p-6">
@@ -63,15 +70,9 @@ const TeacherLecturePage: React.FC<RouteComponentProps<RouteProps>> = (
       <div className="mb-4">
         <TeacherUpload lecture={lecture} />
       </div>
-      <div className="text-xl font-bold mb-2">Navigasi</div>
-      <div className="flex flex-wrap mb-4">
-        <div className="p-1.5">
-          <QuickTileButton
-            to={'/teacher/class/form'}
-            icon={<MenuSolid />}
-            title={'Pengaturan Bobot'}
-          />
-        </div>
+      <div className="text-xl font-bold mb-2">Portfolio</div>
+      <div className="mb-4">
+        <TeacherPortfolio lecture={lecture} teacher={teacher} />
       </div>
     </div>
   );
