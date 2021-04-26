@@ -42,8 +42,8 @@ const TeacherStudentTableItem: React.FunctionComponent<ItemProps> = ({
   return (
     <tr className="border-b border-gray-400" key={`course-${index}`}>
       <td className="p-1 text-center">{student.id}</td>
-      <td className="p-1">{student.nim}</td>
-      <td className="p-1">{student.name}</td>
+      <td className="p-1 text-center">{student.nim}</td>
+      <td className="p-1 text-left">{student.name}</td>
       <td className="p-1 text-center">{getIndex()}</td>
     </tr>
   );
@@ -63,10 +63,10 @@ const TeacherStudentTable: React.FunctionComponent<Props> = ({
     <table className="table-auto w-full text-xs">
       <thead>
         <tr className="border-b border-gray-400 ">
-          <th className="p-1">ID</th>
-          <th className="p-1 text-left">NIM</th>
-          <th className="p-1">Nama</th>
-          <th className="p-1">Nilai</th>
+          <th className="p-1 text-center w-1/12">ID</th>
+          <th className="p-1 text-center w-1/12">NIM</th>
+          <th className="p-1 text-left w-9/12">Nama</th>
+          <th className="p-1 text-center w-1/12">Nilai</th>
         </tr>
       </thead>
       <tbody>

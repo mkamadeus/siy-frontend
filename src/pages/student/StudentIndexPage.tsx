@@ -23,6 +23,14 @@ const StudentIndexPage: React.FC<RouteComponentProps> = (
   if (isStudentLoading || !student) return <LoadingPage />;
   if (isGradesLoading || !grades) return <LoadingPage />;
 
+  const gradeThisSemester = grades.filter((grade) => {
+    const today = new Date();
+    return (
+      grade.year == today.getFullYear() &&
+      grade.semester == (Math.floor(today.getMonth()/6) + 1)
+    );
+  });
+
   return (
     <div className="container mx-auto p-6">
       <div className="flex flex-col items-center">
@@ -37,7 +45,7 @@ const StudentIndexPage: React.FC<RouteComponentProps> = (
           </div>
         </div>
         <div className="flex w-full mb-4">
-          <StudentGradeTable grades={grades} />
+          <StudentGradeTable grades={gradeThisSemester} />
         </div>
         <div className="flex flex-col mb-4">
           <div className="font-bold text-xl text-center mb-2">LO Anda:</div>

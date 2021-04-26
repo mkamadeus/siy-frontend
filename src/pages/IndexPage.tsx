@@ -12,9 +12,9 @@ const IndexPage: React.FC<RouteComponentProps> = (
       </div>
       <div className="flex flex-col min-h-screen">
         <div className="flex flex-1 min-h-screen">
-          <div className="hidden lg:flex lg:flex-col lg:w-full h-full bg-gradient-to-b from-blue-500 to-green-500">
+          {/*<div className="hidden lg:flex lg:flex-col lg:w-full h-full bg-gradient-to-b from-blue-500 to-green-500">
             <div className="flex-1">sad</div>
-          </div>
+          </div>*/}
           <div className="container mx-auto p-6">
             <div className="mb-2">Silakan login untuk melanjutkan.</div>
             <div className="p-4 rounded shadow border border-gray-300">
