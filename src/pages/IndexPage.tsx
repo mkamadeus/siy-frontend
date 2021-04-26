@@ -1,4 +1,5 @@
 import React from 'react';
+import ITBBackground from '~/images/itbBackground.png';
 import { navigate, RouteComponentProps } from '@reach/router';
 
 const IndexPage: React.FC<RouteComponentProps> = (
@@ -10,11 +11,32 @@ const IndexPage: React.FC<RouteComponentProps> = (
         <div className="text-4xl">Sistem Informasi Akademik</div>
         <div>Institut Teknologi Bandung</div>
       </div>
-      <div className="flex flex-col min-h-screen">
-        <div className="flex flex-1 min-h-screen">
-          {/*<div className="hidden lg:flex lg:flex-col lg:w-full h-full bg-gradient-to-b from-blue-500 to-green-500">
-            <div className="flex-1">sad</div>
-          </div>*/}
+      <div className="flex flex-col h-screen">
+        <div className="flex h-screen">
+          <div className="hidden lg:flex lg:flex-col lg:w-full items-start lg:justify-center h-full bg-gradient-to-br from-blue-500 to-purple-500 relative text-white">
+            <div className="p-6">
+              <div className="mb-4">
+                <div className="text-xl font-semibold mb-2">
+                  Layanan Login SIY
+                </div>
+                <div>
+                  Layanan Login SIY tidak memanfaatkan berbasis SSO (Single Sign
+                  On) yang memungkinkan civitas akademika ITB untuk mengakses
+                  beberapa aplikasi pendukung kegiatan ITB dengan menggunakan
+                  satu akun saja yaitu akun INA (ITB Network Account). Sehingga,
+                  perlu menggunakan akun baru yang dibuatkan.
+                </div>
+              </div>
+              <div className="mb-4">
+                <div className="text-xl font-semibold mb-2">Daftar Akun</div>
+                <div>
+                  Untuk mendaftarkan diri, bisa digunakan link yang tersedia
+                  pada link yang ada.
+                </div>
+              </div>
+            </div>
+            <img className="absolute bottom-0" src={ITBBackground} />
+          </div>
           <div className="container mx-auto p-6">
             <div className="mb-2">Silakan login untuk melanjutkan.</div>
             <div className="p-4 rounded shadow border border-gray-300">
