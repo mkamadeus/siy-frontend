@@ -66,11 +66,17 @@ const TeacherLecturePage: React.FC<RouteComponentProps<RouteProps>> = (
       <div className="flex flex-col mb-4">
         <TeacherLoTable lecture={lecture} />
       </div>
-      <div className="text-xl font-bold mb-2">Input Nilai Mahasiswa</div>
+      <div className="text-xl font-bold mb-2">
+        Input Nilai Mahasiswa
+        <p className="text-sm font-normal text-gray-500">Masukan file bertipe .csv, .xls, atau .xlsx</p>
+      </div>
       <div className="mb-4">
         <TeacherUpload lecture={lecture} />
       </div>
-      <div className="text-xl font-bold mb-2">Portfolio</div>
+      <div className="text-xl font-bold mb-2">
+        Portfolio
+        <p className="text-sm font-normal text-gray-500">Masukan nilai antara 0 hingga 100</p>
+      </div>
       <div className="mb-4">
         <TeacherPortfolio lecture={lecture} teacher={teacher} />
       </div>

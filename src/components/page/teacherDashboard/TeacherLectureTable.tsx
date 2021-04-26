@@ -28,9 +28,9 @@ const TeacherLectureTableItem: React.FunctionComponent<ItemProps> = ({
   return (
     <tr className="border-b border-gray-400" key={`course-${index}`}>
       <td className="p-1 text-center">{lecture.id}</td>
-      <td className="p-1">{course?.name}</td>
-      <td className="p-1">{lecture.year}</td>
-      <td className="p-1">{lecture.semester}</td>
+      <td className="p-1 text-left">{course?.name}</td>
+      <td className="p-1 text-center">{lecture.year}</td>
+      <td className="p-1 text-center">{lecture.semester}</td>
       <td className="p-1 text-center flex justify-center space-x-3">
         <Link to={`/teacher/lecture/${lecture.id}`}>
           <EyeOutline className="h-5 w-5 text-gray-500" />
@@ -53,11 +53,11 @@ const TeacherLectureTable: React.FunctionComponent<Props> = ({
     <table className="table-auto w-full text-xs">
       <thead>
         <tr className="border-b border-gray-400 ">
-          <th className="p-1">ID</th>
-          <th className="p-1 text-left">Mata Kuliah</th>
-          <th className="p-1">Tahun</th>
-          <th className="p-1">Semester</th>
-          <th className="p-1">Action</th>
+          <th className="p-1 text-center w-1/10">ID</th>
+          <th className="p-1 text-left w-6/10">Mata Kuliah</th>
+          <th className="p-1 text-center w-1/10">Tahun</th>
+          <th className="p-1 text-center w-1/10">Semester</th>
+          <th className="p-1 text-center w-1/10">Action</th>
         </tr>
       </thead>
       <tbody>

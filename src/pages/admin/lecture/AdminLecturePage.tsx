@@ -4,13 +4,19 @@ import { useQuery } from 'react-query';
 import LoadingPage from '~/pages/common/LoadingPage';
 import LectureTable from '~/components/page/LectureTable';
 import { getAllLectures } from '~/api/Lecture';
+import { getAllCourses } from '~/api/Course';
 
 const AdminLecturePage: React.FC<RouteComponentProps> = (
   _props: RouteComponentProps
 ) => {
-  const { data, isLoading } = useQuery('lectures', getAllLectures);
+  const { data: lectureData, isLoading: isLectureLoading } = useQuery('lectures', getAllLectures);
+  const { data: courseData, isLoading: isCourseLoading } = useQuery('courses', getAllCourses);
 
-  if (isLoading || !data) {
+  if (isLectureLoading || !lectureData) {
+    return <LoadingPage />;
+  }
+  
+  if (isCourseLoading || !courseData) {
     return <LoadingPage />;
   }
 
@@ -31,7 +37,7 @@ const AdminLecturePage: React.FC<RouteComponentProps> = (
       </div>
       <div className="flex flex-col space-y-4">
         <div>
-          <LectureTable lectures={data} />
+          <LectureTable lectures={lectureData} courses={courseData} />
         </div>
       </div>
     </div>

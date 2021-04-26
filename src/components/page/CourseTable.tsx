@@ -26,10 +26,10 @@ const CourseTable: React.FunctionComponent<Props> = ({ courses }: Props) => {
     <table className="table-auto w-full text-xs">
       <thead>
         <tr className="border-b border-gray-400 ">
-          <th className="p-1">ID</th>
-          <th className="p-1 text-left">Kode</th>
-          <th className="p-1">Nama</th>
-          <th className="p-1">Action</th>
+          <th className="p-1 text-center w-1/12">ID</th>
+          <th className="p-1 text-center w-1/12">Kode</th>
+          <th className="p-1 text-left w-9/12">Nama</th>
+          <th className="p-1 text-center w-1/12">Action</th>
         </tr>
       </thead>
       <tbody>
@@ -39,8 +39,8 @@ const CourseTable: React.FunctionComponent<Props> = ({ courses }: Props) => {
             return (
               <tr className="border-b border-gray-400" key={`course-${index}`}>
                 <td className="p-1 text-center">{course.id}</td>
-                <td className="p-1">{course.code}</td>
-                <td className="p-1">{course.name}</td>
+                <td className="p-1 text-center">{course.code}</td>
+                <td className="p-1 text-left">{course.name}</td>
                 <td className="p-1 text-center flex justify-center space-x-3">
                   <Link to={`${course.id}`}>
                     <EyeOutline className="h-5 w-5 text-gray-500" />

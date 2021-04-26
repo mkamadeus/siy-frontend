@@ -34,9 +34,10 @@ const StudentGradeTableItem: React.FunctionComponent<ItemProps> = ({
   return (
     <tr className="border-b border-gray-400" key={`course-${index}`}>
       <td className="p-1 text-center">{index}</td>
-      <td className="p-1">{course.code}</td>
-      <td className="p-1">{course.name}</td>
-      <td className="p-1">{grade.index}</td>
+      <td className="p-1 text-center">{course.code}</td>
+      <td className="p-1 text-left">{course.name}</td>
+      <td className="p-1 text-center">{course.credits}</td>
+      <td className="p-1 text-center">{grade.index}</td>
     </tr>
   );
 };
@@ -46,7 +47,7 @@ const StudentGradeTable: React.FunctionComponent<Props> = ({
 }: Props) => {
   if (grades.length === 0) {
     return (
-      <div className="text-center italic text-gray-700">There is no data!</div>
+      <div className="text-center italic w-full text-gray-700">There is no data!</div>
     );
   }
 
@@ -54,10 +55,11 @@ const StudentGradeTable: React.FunctionComponent<Props> = ({
     <table className="table-auto w-full text-xs">
       <thead>
         <tr className="border-b border-gray-400 ">
-          <th className="p-1">No</th>
-          <th className="p-1 text-left">Kode</th>
-          <th className="p-1">Nama</th>
-          <th className="p-1">Indeks</th>
+          <th className="p-1 text-center w-1/10">No</th>
+          <th className="p-1 text-center w-1/10">Kode</th>
+          <th className="p-1 text-left w-6/10">Nama</th>
+          <th className="p-1 text-center w-1/10">SKS</th>
+          <th className="p-1 text-center w-1/10">Indeks</th>
         </tr>
       </thead>
       <tbody>
