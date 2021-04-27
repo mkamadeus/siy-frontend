@@ -1,7 +1,7 @@
 [{"id":1, "kode":"IF1234", "nama_mata_kuliah":"Pengantar Dinamika Rancangan", "kelas":"07", "course_outcome_score":3.6, "avg_kuesioner":3.6, "portofolio":4.00, "course_assessment":3.8, "mark":"MAINTAIN"},
     {"id":2, "kode":"IF1235", "nama_mata_kuliah":"Pengantar Rancang Bangun", "kelas":"07", "course_outcome_score":3.6, "avg_kuesioner":3.6, "portofolio":4.00, "course_assessment":3.8, "mark":"MAINTAIN"},
     {"id":3, "kode":"IF1237", "nama_mata_kuliah":"Tata Kelola Lanjutan", "kelas":"07", "course_outcome_score":3.6, "avg_kuesioner":3.6, "portofolio":4.00, "course_assessment":3.8, "mark":"MAINTAIN"},
-    {"id":4, "kode":"IF1331", "nama_mata_kuliah":"Pemrograman Mesin", "kelas":"07", "course_outcome_score":3.6, "avg_kuesioner":3.6, "portofolio":4.00, "course_assessment":3.8, "mark":"MAINTAIN"},
+    {"id":4, "kode":"IF1331", "nama_mata_kuliah":"Pemrograman Mesin", "kelas":"07", "course_outcome_score":2.6, "avg_kuesioner":2.6, "portofolio":4.00, "course_assessment":2.8, "mark":"IMPROVE"},
     {"id":5, "kode":"IF1332", "nama_mata_kuliah":"Estetika 01", "kelas":"07", "course_outcome_score":3.6, "avg_kuesioner":3.6, "portofolio":4.00, "course_assessment":3.8, "mark":"MAINTAIN"},
     {"id":6, "kode":"IF2234", "nama_mata_kuliah":"Kalkulus Sambung Lanjut", "kelas":"07", "course_outcome_score":3.6, "avg_kuesioner":3.6, "portofolio":4.00, "course_assessment":3.8, "mark":"MAINTAIN"},
     {"id":7, "kode":"IF3234", "nama_mata_kuliah":"Dirgantara Industri", "kelas":"07", "course_outcome_score":3.6, "avg_kuesioner":3.6, "portofolio":4.00, "course_assessment":3.8, "mark":"MAINTAIN"}
