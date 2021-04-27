@@ -8,7 +8,7 @@ export const getAllGrades = async (): Promise<StudentGrade[]> => {
 
 export const getGradesByNim = async (nim: string): Promise<StudentGrade[]> => {
   const grades = await BaseInstance.get<StudentGrade[]>(
-    `/grades/student/${nim}`
+    `student/nim/${nim}/grades`
   );
   return grades.data;
 };

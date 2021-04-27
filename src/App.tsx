@@ -23,44 +23,47 @@ import AdminCoursePreviewPage from './pages/admin/course/AdminCoursePreviewPage'
 import LoginPage from './pages/LoginPage';
 import Footer from './components/common/Footer';
 import AdminCoursePage from './pages/admin/course/AdminCoursePage';
+import AuthContextProvider from './context/AuthContext';
 
 const queryClient = new QueryClient();
 
 const App: React.FC = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <Navbar />
-      <Router className="min-h-screen" basepath="/">
-        <NotFoundPage default />
-        <IndexPage path="/" />
-        <StudentIndexPage path="/student" />
-        <StudentLoPage path="/student/lo" />
-        <StudentGradePage path="/student/transcript" />
-        <StudentPeerAssessmentForm path="/peer-assessment-form" />
+      <AuthContextProvider>
+        <Navbar />
+        <Router className="min-h-screen" basepath="/">
+          <NotFoundPage default />
+          <IndexPage path="/" />
+          <StudentIndexPage path="/student" />
+          <StudentLoPage path="/student/lo" />
+          <StudentGradePage path="/student/transcript" />
+          <StudentPeerAssessmentForm path="/peer-assessment-form" />
 
-        {/* TEACHER */}
-        <TeacherIndexPage path="/teacher" />
-        <TeacherLecturePage path="/teacher/lecture/:id" />
-        <TeacherPage path="/teacher/class/form" />
+          {/* TEACHER */}
+          <TeacherIndexPage path="/teacher" />
+          <TeacherLecturePage path="/teacher/lecture/:id" />
+          <TeacherPage path="/teacher/class/form" />
 
-        <AdminIndexPage path="/admin" />
+          <AdminIndexPage path="/admin" />
 
-        {/* ADMIN COURSE */}
-        <AdminCoursePage path="/admin/course" />
-        <AdminCoursePreviewPage path="/admin/course/:id" />
-        <AdminCourseCreatePage path="/admin/course/create" />
-        <AdminCourseEditPage path="/admin/course/edit/:id" />
+          {/* ADMIN COURSE */}
+          <AdminCoursePage path="/admin/course" />
+          <AdminCoursePreviewPage path="/admin/course/:id" />
+          <AdminCourseCreatePage path="/admin/course/create" />
+          <AdminCourseEditPage path="/admin/course/edit/:id" />
 
-        {/* ADMIN LECTURE */}
-        <AdminLecturePage path="/admin/lecture" />
-        <AdminLecturePreviewPage path="/admin/lecture/:id" />
-        <AdminLectureEditPage path="/admin/lecture/edit/:id" />
-        <AdminLectureCreatePage path="/admin/lecture/create" />
+          {/* ADMIN LECTURE */}
+          <AdminLecturePage path="/admin/lecture" />
+          <AdminLecturePreviewPage path="/admin/lecture/:id" />
+          <AdminLectureEditPage path="/admin/lecture/edit/:id" />
+          <AdminLectureCreatePage path="/admin/lecture/create" />
 
-        {/* AUTH*/}
-        <LoginPage path="/login" />
-      </Router>
-      <Footer />
+          {/* AUTH*/}
+          <LoginPage path="/login" />
+        </Router>
+        <Footer />
+      </AuthContextProvider>
     </QueryClientProvider>
   );
 };

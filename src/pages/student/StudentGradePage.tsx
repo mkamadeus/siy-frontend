@@ -1,24 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { RouteComponentProps } from '@reach/router';
-import { getStudentByNim } from '~/api/Student';
-import { useQuery } from 'react-query';
-import LoadingPage from '../common/LoadingPage';
-import { getGradesByNim } from '~/api/Grade';
+
+import { AuthContext } from '~/context/AuthContext';
+import StudentGradeTable from '~/components/page/student/StudentGradeTable';
 
 const StudentGradePage: React.FC<RouteComponentProps> = (
   _: RouteComponentProps
 ) => {
-  const { data: student, isLoading: isStudentLoading } = useQuery(
-    ['students', '13518035'],
-    () => getStudentByNim('13518035')
-  );
-  const { data: grades, isLoading: isGradesLoading } = useQuery(
-    ['grades', '13518035'],
-    () => getGradesByNim('13518035')
-  );
-
-  if (isStudentLoading || !student) return <LoadingPage />;
-  if (isGradesLoading || !grades) return <LoadingPage />;
+  const { student, grades } = useContext(AuthContext);
 
   return (
     <div className="container mx-auto p-6">
@@ -36,6 +25,9 @@ const StudentGradePage: React.FC<RouteComponentProps> = (
         </div>
       </div>
       <hr className="mb-4" />
+      <div>
+        <StudentGradeTable grades={grades} />
+      </div>
     </div>
   );
 };
