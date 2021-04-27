@@ -12,7 +12,7 @@ export const BasicTable = () => {
         columns,
         data
     })
-    const { getTableProps, getTableBodyProps, headerGroups, row, prepareRow,} = tableInstance
+    const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow,} = tableInstance
     return (
             <table {...getTableProps()}>
                 <thead>
@@ -27,7 +27,7 @@ export const BasicTable = () => {
                     ))}
                 </thead>
                 <tbody {...getTableBodyProps()}>
-                    {rows.map(row) =>{
+                    {rows.map((row) => {
                         prepareRow(row)
                         return(
                             <tr {...row.getRowProps()}>
@@ -36,7 +36,7 @@ export const BasicTable = () => {
                                 })}
                             </tr>
                             )
-                    }}
+                    })}
                 </tbody>
             </table>
         )
