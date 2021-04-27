@@ -36,3 +36,22 @@ export const COLUMNS = [
         accessor: 'mark'
     },
 ]
+
+export const COLUMNSLO = [
+    {
+        Header: 'No',
+        accessor: 'id'
+    },
+    {
+        Header: 'Learning Outcome',
+        accessor: 'learning_outcome'
+    },
+    {
+        Header: 'Point',
+        accessor: 'point'
+    },
+    {
+        Header: 'Mark',
+        accessor: 'mark'
+    }
+]

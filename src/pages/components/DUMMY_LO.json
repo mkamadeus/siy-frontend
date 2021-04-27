@@ -1,0 +1,8 @@
+[
+    {"id":1, "learning_outcome":"LO A", "point":3.40, "mark":"MAINTAIN"},
+    {"id":2, "learning_outcome":"LO B", "point":3.40, "mark":"MAINTAIN"},
+    {"id":3, "learning_outcome":"LO C", "point":3.40, "mark":"MAINTAIN"},
+    {"id":4, "learning_outcome":"LO D", "point":2.40, "mark":"IMPROVE"},
+    {"id":5, "learning_outcome":"LO E", "point":3.40, "mark":"MAINTAIN"},
+    {"id":6, "learning_outcome":"LO F", "point":3.40, "mark":"MAINTAIN"}
+]
