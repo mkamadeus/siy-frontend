@@ -6,6 +6,11 @@ export const getAllStudents = async (): Promise<Student[]> => {
   return students.data;
 };
 
+export const getStudentById = async (id: string): Promise<Student> => {
+  const students = await BaseInstance.get<Student>(`/students/${id}`);
+  return students.data;
+};
+
 export const getStudentByNim = async (nim: string): Promise<Student> => {
   const students = await BaseInstance.get<Student>(`/students/nim/${nim}`);
   return students.data;
