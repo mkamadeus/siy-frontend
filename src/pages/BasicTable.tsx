@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { useTable } from 'react-table';
 import DUMMY_COURSE from './components/DUMMY_COURSE.json';
 import { COLUMNS } from './components/columns';
+import './table.css';
 
 export const BasicTable = () => {
 
