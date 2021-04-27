@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { useTable } from 'react-table';
-import DUMMY_COURSE from './DUMMY_COURSE.json';
-import { COLUMNS } from './columns';
+import DUMMY_COURSE from './components/DUMMY_COURSE.json';
+import { COLUMNS } from './components/columns';
 
 export const BasicTable = () => {
 

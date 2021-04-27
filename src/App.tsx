@@ -28,6 +28,7 @@ import AdminStudentPage from './pages/admin/student/AdminStudentPage';
 import AdminStudentCreatePage from './pages/admin/student/AdminStudentCreatePage';
 import AdminStudentEditPage from './pages/admin/student/AdminStudentEditPage';
 import AdminStudentPreviewPage from './pages/admin/student/AdminStudentPreviewPage';
+import CourseAssessmentPage from './pages/CourseAssessmentPage';
 
 const queryClient = new QueryClient();
 
@@ -43,6 +44,7 @@ const App: React.FC = () => {
         <TranscriptPage path="/student/transcript" />
         <TeacherPage path="/teacher" />
         <PeerAssesmentForm path="/peer-assessment-form" />
+        <CourseAssessmentPage path="/course-assessment" />
 
         <AdminIndexPage path="/admin" />
 
