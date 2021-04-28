@@ -1,6 +1,6 @@
 import React from 'react';
 import ITBBackground from '~/images/itbBackground.png';
-import { navigate, RouteComponentProps } from '@reach/router';
+import { Link, navigate, RouteComponentProps } from '@reach/router';
 import { useForm } from 'react-hook-form';
 import { CredentialsBody } from '~/model/Auth';
 import { login } from '~/api/Auth';
@@ -93,7 +93,9 @@ const IndexPage: React.FC<RouteComponentProps> = (
                 <div className="flex justify-center space-x-1 w-full text-xs">
                   <div className="text-blue-500 underline">Lupa password?</div>
                   <div>·</div>
-                  <div className="text-blue-500 underline">Daftar</div>
+                  <div className="text-blue-500 underline">
+                    <Link to="/register">Daftar</Link>
+                  </div>
                 </div>
               </form>
             </div>

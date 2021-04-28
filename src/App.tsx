@@ -24,6 +24,7 @@ import LoginPage from './pages/LoginPage';
 import Footer from './components/common/Footer';
 import AdminCoursePage from './pages/admin/course/AdminCoursePage';
 import AuthContextProvider from './context/AuthContext';
+import RegisterPage from './pages/RegisterPage';
 
 const queryClient = new QueryClient();
 
@@ -61,6 +62,7 @@ const App: React.FC = () => {
 
           {/* AUTH*/}
           <LoginPage path="/login" />
+          <RegisterPage path="/register" />
         </Router>
         <Footer />
       </AuthContextProvider>

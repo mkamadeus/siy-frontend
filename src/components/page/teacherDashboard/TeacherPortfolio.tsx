@@ -8,7 +8,7 @@ interface Props {
   lecture: Lecture;
 }
 
-const TeacherPortfolio = ({ teacher, lecture }: Props) => {
+const TeacherPortfolio : React.FunctionComponent<Props> = ({ teacher, lecture }: Props) => {
   const { register, handleSubmit } = useForm();
 
   const onSubmit = async (data: { teacherPresence: number }) => {
