@@ -1,11 +1,10 @@
+import { navigate } from '@reach/router';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useQuery } from 'react-query';
 import { getCourseById } from '~/api/Course';
-import { getTeacherById } from '~/api/Teacher';
 import { getTeachesByLecture } from '~/api/Teaches';
 import { Lecture } from '~/model/Lecture';
-import { Teacher } from '~/model/Teacher';
 import LoadingPage from '~/pages/common/LoadingPage';
 // import { StudentGrade } from '~/model/Grade';
 
@@ -162,6 +161,7 @@ const QuestionnaireTable: React.FunctionComponent<Props> = ({
     const {register, handleSubmit} = useForm();
     const onSubmit = (data: unknown) => {
         console.log(data);
+        navigate('/questionnaire');
     }
 
 
