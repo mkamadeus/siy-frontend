@@ -55,6 +55,19 @@ const StudentPeerAssessmentForm: React.FC<RouteComponentProps> = (
             />
           </div>
           <div className="mb-2">
+            <label htmlFor="course">Mata Kuliah</label>
+            <select
+              name="course"
+              className="border-gray-300 rounded-md shadow-sm w-full"
+              ref={register}
+            >
+              <option label=" "></option>
+              <option value="IF1111">IF1111</option>
+              <option value="IF1112">IF1112</option>
+              <option value="IF1113">IF1113</option>
+            </select>
+          </div>
+          <div className="mb-2">
             <label htmlFor="group">Kelompok</label>
             <input
               name="group"
