@@ -101,9 +101,9 @@ const StudentIndexPage: React.FC<RouteComponentProps> = (
           </div>
           <div className="p-1.5">
             <QuickTileButton
-              to={'/student/'}
+              to={'/questionnaire'}
               icon={<MenuSolid />}
-              title="Daftar Form"
+              title="Kuesioner Evaluasi"
             />
           </div>
           <div className="p-1.5">
