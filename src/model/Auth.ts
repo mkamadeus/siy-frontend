@@ -8,6 +8,13 @@ export interface CredentialsBody {
   password: string;
 }
 
+export interface RegisterBody {
+  username: string;
+  nim: string;
+  password: string;
+  role: string;
+}
+
 export interface RefreshBody {
   refreshToken: string;
 }

@@ -33,7 +33,7 @@ const App: React.FC = () => {
     <QueryClientProvider client={queryClient}>
       <AuthContextProvider>
         <Navbar />
-        <Router className="min-h-screen" basepath="/">
+        <Router className="min-h-screen mt-16" basepath="/">
           <NotFoundPage default />
           <IndexPage path="/" />
           <StudentIndexPage path="/student" />

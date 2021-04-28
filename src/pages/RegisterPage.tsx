@@ -5,7 +5,6 @@ import { useForm } from 'react-hook-form';
 interface RegisterForm {
   username: string;
   password: string;
-  repeatPassword: string;
   role: string;
 }
 
@@ -15,7 +14,7 @@ const RegisterPage: React.FC<RouteComponentProps> = (
   const { register, handleSubmit, watch, errors } = useForm();
   const password = useRef({});
   password.current = watch('password', '');
-  const onSubmit = (data: RegisterForm) => {
+  const onSubmit = async (data: RegisterForm) => {
     console.log(data);
   };
 
@@ -48,6 +47,17 @@ const RegisterPage: React.FC<RouteComponentProps> = (
               <option value="teacher">Dosen</option>
               <option value="admin">Administrator</option>
             </select>
+          </div>
+          <div className="mb-2">
+            <label className="text-sm" htmlFor="nim">
+              NIM
+            </label>
+            <input
+              name="nim"
+              type="text"
+              ref={register({ minLength: 8, maxLength: 8 })}
+              className="border-gray-300 rounded-md shadow-sm w-full"
+            />
           </div>
           <div className="mb-2">
             <label className="text-sm" htmlFor="password">
