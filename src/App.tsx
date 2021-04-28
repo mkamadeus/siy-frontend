@@ -25,6 +25,8 @@ import Footer from './components/common/Footer';
 import AdminCoursePage from './pages/admin/course/AdminCoursePage';
 import AuthContextProvider from './context/AuthContext';
 import RegisterPage from './pages/RegisterPage';
+import QuestionnaireIndexPage from './pages/questionnaire/QuestionnaireIndex';
+import QuestionnairePage from './pages/questionnaire/QuestionnairePage';
 
 const queryClient = new QueryClient();
 
@@ -40,6 +42,8 @@ const App: React.FC = () => {
           <StudentLoPage path="/student/lo" />
           <StudentGradePage path="/student/transcript" />
           <StudentPeerAssessmentForm path="/peer-assessment-form" />
+          <QuestionnaireIndexPage path="/questionnaire" />
+          <QuestionnairePage path="/questionnaire/lecture/:lId/grade/:gId" />
 
           {/* TEACHER */}
           <TeacherIndexPage path="/teacher" />
