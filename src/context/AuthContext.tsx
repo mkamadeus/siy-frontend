@@ -35,7 +35,11 @@ export const AuthContext = React.createContext<IAuthContext>({
 });
 
 const AuthContextProvider: React.FunctionComponent = (props) => {
-  const [accessToken, setAccessToken] = useLocalStorage<string>('accessToken');
+  const [
+    accessToken,
+    setAccessToken,
+    removeAccessToken,
+  ] = useLocalStorage<string>('accessToken');
   const [refreshToken, , removeRefreshToken] = useLocalStorage<string>(
     'refreshToken'
   );
@@ -45,15 +49,21 @@ const AuthContextProvider: React.FunctionComponent = (props) => {
     isLoading: isStudentLoading,
     error: studentError,
     refetch: refetchStudent,
-  } = useQuery('student', () => getStudentDataBySession(accessToken as string));
+  } = useQuery(
+    'student',
+    () => getStudentDataBySession(accessToken as string),
+    { refetchInterval: false }
+  );
 
   const {
     data: grades,
     isLoading: isGradesLoading,
     error: gradesError,
     refetch: refetchGrades,
-  } = useQuery('grades', () =>
-    getStudentGradesBySession(accessToken as string)
+  } = useQuery(
+    'grades',
+    () => getStudentGradesBySession(accessToken as string),
+    { refetchInterval: false }
   );
 
   const isLoading = useMemo(() => isStudentLoading || isGradesLoading, [
@@ -64,17 +74,13 @@ const AuthContextProvider: React.FunctionComponent = (props) => {
   useAsync(async () => {
     console.log(accessToken, studentError, gradesError);
     if (studentError || gradesError) {
-      // removeAccessToken();
-      console.log('No token');
+      removeAccessToken();
       try {
         const token = await refresh({ refreshToken: refreshToken as string });
-        console.log('Token set');
         setAccessToken(token.accessToken);
-        console.log('Refetching');
         refetchStudent();
         refetchGrades();
       } catch (err) {
-        console.log('asdasdasd');
         removeRefreshToken();
         navigate('/');
       }

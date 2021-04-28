@@ -3,7 +3,7 @@ import { Link } from '@reach/router';
 import { MenuAlt3Solid } from '@graywolfai/react-heroicons';
 
 interface MenuProps {
-  open: boolean
+  open: boolean;
 }
 
 const navigationButtons = [
@@ -25,27 +25,28 @@ const navigationButtons = [
   },
 ];
 
-const Menu = ({open} : MenuProps) => {
+const Menu = ({ open }: MenuProps) => {
   return (
-    <div
-      className={`${open ? 'flex' : 'hidden'} lg:flex flex-col lg:flex-row`}
-    >
+    <div className={`${open ? 'flex' : 'hidden'} lg:flex flex-col lg:flex-row`}>
       {navigationButtons.map(({ title, path }) => {
         return (
-          <div key={`navbar-${title}`} className="py-2 lg:py-0 lg:px-2.5 w-max italic text-white">
+          <div
+            key={`navbar-${title}`}
+            className="py-2 lg:py-0 lg:px-2.5 w-max italic text-white"
+          >
             <Link to={path}>{title}</Link>
           </div>
         );
       })}
     </div>
   );
-}
+};
 
 const Navbar: React.FC = () => {
   const [open, setOpen] = useState<boolean>(false);
 
   return (
-    <nav className="bg-gray-900">
+    <nav className="bg-gray-900 z-50 fixed w-full top-0">
       <div className="flex w-full justify-between p-4 flex-col lg:flex-row">
         <div className="flex w-full justify-between">
           <div className="flex font-bold text-xl text-gray-100">
