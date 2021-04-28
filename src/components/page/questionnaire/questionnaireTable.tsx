@@ -1,10 +1,11 @@
-import { navigate } from '@reach/router';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useQuery } from 'react-query';
 import { getCourseById } from '~/api/Course';
+import { getTeacherById } from '~/api/Teacher';
 import { getTeachesByLecture } from '~/api/Teaches';
 import { Lecture } from '~/model/Lecture';
+import { Teacher } from '~/model/Teacher';
 import LoadingPage from '~/pages/common/LoadingPage';
 // import { StudentGrade } from '~/model/Grade';
 
@@ -59,19 +60,19 @@ const QuestionnaireTableItem: React.FunctionComponent<ItemProps> =({
                                     </td>
                                 <td className="text-center w-4/12">
                                     <div className="form-check">
-                                        <input className="form-check-input" type="radio" name={`m-${2}-${index}`} key={`m-${2}-${index}-1`} value={1}/>
+                                        <input className="form-check-input" type="radio" name={`m-${2}-${index}`} id={`m-${2}-${index}-1`} value={1}/>
                                         <label className="form-check-label" htmlFor={`m-${2}-${index}-1`}>
                                             1
                                         </label>
-                                        <input className="form-check-input" type="radio" name={`m-${2}-${index}`} key={`m-${2}-${index}-2`} value={2}/>
+                                        <input className="form-check-input" type="radio" name={`m-${2}-${index}`} id={`m-${2}-${index}-2`} value={2}/>
                                         <label className="form-check-label" htmlFor={`m-${2}-${index}-2`}>
                                             2
                                         </label>
-                                        <input className="form-check-input" type="radio" name={`m-${2}-${index}`} key={`m-${2}-${index}-3`} value={3}/>
+                                        <input className="form-check-input" type="radio" name={`m-${2}-${index}`} id={`m-${2}-${index}-3`} value={3}/>
                                         <label className="form-check-label" htmlFor={`m-${2}-${index}-3`}>
                                             3
                                         </label>
-                                        <input className="form-check-input" type="radio" name={`m-${0}-${index}`} key={`m-${2}-${index}-4`} value={4}/>
+                                        <input className="form-check-input" type="radio" name={`m-${0}-${index}`} id={`m-${2}-${index}-4`} value={4}/>
                                         <label className="form-check-label" htmlFor={`m-${2}-${index}-4`}>
                                             4
                                         </label>
@@ -85,19 +86,19 @@ const QuestionnaireTableItem: React.FunctionComponent<ItemProps> =({
                                     </td>
                                 <td className="text-center w-4/12">
                                     <div className="form-check">
-                                        <input className="form-check-input" type="radio" name={`m-${6}-${index}`} key={`m-${6}-${index}-1`} value={1}/>
+                                        <input className="form-check-input" type="radio" name={`m-${6}-${index}`} id={`m-${6}-${index}-1`} value={1}/>
                                         <label className="form-check-label" htmlFor={`m-${6}-${index}-1`}>
                                             1
                                         </label>
-                                        <input className="form-check-input" type="radio" name={`m-${6}-${index}`} key={`m-${6}-${index}-2`} value={2}/>
+                                        <input className="form-check-input" type="radio" name={`m-${6}-${index}`} id={`m-${6}-${index}-2`} value={2}/>
                                         <label className="form-check-label" htmlFor={`m-${6}-${index}-2`}>
                                             2
                                         </label>
-                                        <input className="form-check-input" type="radio" name={`m-${6}-${index}`} key={`m-${6}-${index}-3`} value={3}/>
+                                        <input className="form-check-input" type="radio" name={`m-${6}-${index}`} id={`m-${6}-${index}-3`} value={3}/>
                                         <label className="form-check-label" htmlFor={`m-${6}-${index}-3`}>
                                             3
                                         </label>
-                                        <input className="form-check-input" type="radio" name={`m-${6}-${index}`} key={`m-${6}-${index}-4`} value={4}/>
+                                        <input className="form-check-input" type="radio" name={`m-${6}-${index}`} id={`m-${6}-${index}-4`} value={4}/>
                                         <label className="form-check-label" htmlFor={`m-${6}-${index}-4`}>
                                             4
                                         </label>
@@ -111,19 +112,19 @@ const QuestionnaireTableItem: React.FunctionComponent<ItemProps> =({
                                     </td>
                                 <td className="text-center w-4/12">
                                     <div className="form-check">
-                                        <input className="form-check-input" type="radio" name={`m-${9}`} key={`m-${9}-1`} value={1}/>
+                                        <input className="form-check-input" type="radio" name={`m-${9}`} id={`m-${9}-1`} value={1}/>
                                         <label className="form-check-label" htmlFor={`m-${9}-1`}>
                                             1
                                         </label>
-                                        <input className="form-check-input" type="radio" name={`m-${9}`} key={`m-${9}-2`} value={2}/>
+                                        <input className="form-check-input" type="radio" name={`m-${9}`} id={`m-${9}-2`} value={2}/>
                                         <label className="form-check-label" htmlFor={`m-${9}-2`}>
                                             2
                                         </label>
-                                        <input className="form-check-input" type="radio" name={`m-${9}`} key={`m-${9}-3`} value={3}/>
+                                        <input className="form-check-input" type="radio" name={`m-${9}`} id={`m-${9}-3`} value={3}/>
                                         <label className="form-check-label" htmlFor={`m-${9}-3`}>
                                             3
                                         </label>
-                                        <input className="form-check-input" type="radio" name={`m-${9}`} key={`m-${9}-4`} value={4}/>
+                                        <input className="form-check-input" type="radio" name={`m-${9}`} id={`m-${9}-4`} value={4}/>
                                         <label className="form-check-label" htmlFor={`m-${9}-4`}>
                                             4
                                         </label>
@@ -161,7 +162,6 @@ const QuestionnaireTable: React.FunctionComponent<Props> = ({
     const {register, handleSubmit} = useForm();
     const onSubmit = (data: unknown) => {
         console.log(data);
-        navigate('/questionnaire');
     }
 
 
@@ -191,19 +191,19 @@ const QuestionnaireTable: React.FunctionComponent<Props> = ({
                                     </td>
                                 <td className="text-center w-4/12">
                                     <div className="form-check" ref={register}>
-                                        <input className="form-check-input" type="radio" name={`m-${7}`} key={`m-${7}-1`} value={1}/>
+                                        <input className="form-check-input" type="radio" name={`m-${7}`} id={`m-${7}-1`} value={1}/>
                                         <label className="form-check-label" htmlFor={`m-${7}-1`}>
                                             1
                                         </label>
-                                        <input className="form-check-input" type="radio" name={`m-${7}`} key={`m-${7}-2`} value={2}/>
+                                        <input className="form-check-input" type="radio" name={`m-${7}`} id={`m-${7}-2`} value={2}/>
                                         <label className="form-check-label" htmlFor={`m-${7}-2`}>
                                             2
                                         </label>
-                                        <input className="form-check-input" type="radio" name={`m-${7}`} key={`m-${7}-3`} value={3}/>
+                                        <input className="form-check-input" type="radio" name={`m-${7}`} id={`m-${7}-3`} value={3}/>
                                         <label className="form-check-label" htmlFor={`m-${7}-3`}>
                                             3
                                         </label>
-                                        <input className="form-check-input" type="radio" name={`m-${7}`} key={`m-${7}-4`} value={4}/>
+                                        <input className="form-check-input" type="radio" name={`m-${7}`} id={`m-${7}-4`} value={4}/>
                                         <label className="form-check-label" htmlFor={`m-${7}-4`}>
                                             4
                                         </label>
@@ -217,19 +217,19 @@ const QuestionnaireTable: React.FunctionComponent<Props> = ({
                                     </td>
                                 <td className="text-center w-4/12">
                                     <div className="form-check">
-                                        <input className="form-check-input" type="radio" name={`m-${1}`} key={`m-${1}-1`} value={1}/>
+                                        <input className="form-check-input" type="radio" name={`m-${1}`} id={`m-${1}-1`} value={1}/>
                                         <label className="form-check-label" htmlFor={`m-${1}-1`}>
                                             1
                                         </label>
-                                        <input className="form-check-input" type="radio" name={`m-${1}`} key={`m-${1}-2`} value={2}/>
+                                        <input className="form-check-input" type="radio" name={`m-${1}`} id={`m-${1}-2`} value={2}/>
                                         <label className="form-check-label" htmlFor={`m-${1}-2`}>
                                             2
                                         </label>
-                                        <input className="form-check-input" type="radio" name={`m-${1}`} key={`m-${1}-3`} value={3}/>
+                                        <input className="form-check-input" type="radio" name={`m-${1}`} id={`m-${1}-3`} value={3}/>
                                         <label className="form-check-label" htmlFor={`m-${1}-3`}>
                                             3
                                         </label>
-                                        <input className="form-check-input" type="radio" name={`m-${1}`} key={`m-${1}-4`} value={4}/>
+                                        <input className="form-check-input" type="radio" name={`m-${1}`} id={`m-${1}-4`} value={4}/>
                                         <label className="form-check-label" htmlFor={`m-${1}-4`}>
                                             4
                                         </label>
@@ -243,19 +243,19 @@ const QuestionnaireTable: React.FunctionComponent<Props> = ({
                                     </td>
                                 <td className="text-center w-4/12">
                                     <div className="form-check">
-                                        <input className="form-check-input" type="radio" name={`m-${10}`} key={`m-${10}-1`} value={1}/>
+                                        <input className="form-check-input" type="radio" name={`m-${10}`} id={`m-${10}-1`} value={1}/>
                                         <label className="form-check-label" htmlFor={`m-${10}-1`}>
                                             1
                                         </label>
-                                        <input className="form-check-input" type="radio" name={`m-${10}`} key={`m-${10}-2`} value={2}/>
+                                        <input className="form-check-input" type="radio" name={`m-${10}`} id={`m-${10}-2`} value={2}/>
                                         <label className="form-check-label" htmlFor={`m-${10}-2`}>
                                             2
                                         </label>
-                                        <input className="form-check-input" type="radio" name={`m-${10}`} key={`m-${10}-3`} value={3}/>
+                                        <input className="form-check-input" type="radio" name={`m-${10}`} id={`m-${10}-3`} value={3}/>
                                         <label className="form-check-label" htmlFor={`m-${10}-3`}>
                                             3
                                         </label>
-                                        <input className="form-check-input" type="radio" name={`m-${10}`} key={`m-${10}-4`} value={4}/>
+                                        <input className="form-check-input" type="radio" name={`m-${10}`} id={`m-${10}-4`} value={4}/>
                                         <label className="form-check-label" htmlFor={`m-${10}-4`}>
                                             4
                                         </label>
@@ -269,19 +269,19 @@ const QuestionnaireTable: React.FunctionComponent<Props> = ({
                                     </td>
                                 <td className="text-center w-4/12">
                                     <div className="form-check">
-                                        <input className="form-check-input" type="radio" name={`m-${5}`} key={`m-${5}-1`} value={1}/>
+                                        <input className="form-check-input" type="radio" name={`m-${5}`} id={`m-${5}-1`} value={1}/>
                                         <label className="form-check-label" htmlFor={`m-${5}-1`}>
                                             1
                                         </label>
-                                        <input className="form-check-input" type="radio" name={`m-${5}`} key={`m-${5}-2`} value={2}/>
+                                        <input className="form-check-input" type="radio" name={`m-${5}`} id={`m-${5}-2`} value={2}/>
                                         <label className="form-check-label" htmlFor={`m-${5}-2`}>
                                             2
                                         </label>
-                                        <input className="form-check-input" type="radio" name={`m-${5}`} key={`m-${5}-3`} value={3}/>
+                                        <input className="form-check-input" type="radio" name={`m-${5}`} id={`m-${5}-3`} value={3}/>
                                         <label className="form-check-label" htmlFor={`m-${5}-3`}>
                                             3
                                         </label>
-                                        <input className="form-check-input" type="radio" name={`m-${5}`} key={`m-${5}-4`} value={4}/>
+                                        <input className="form-check-input" type="radio" name={`m-${5}`} id={`m-${5}-4`} value={4}/>
                                         <label className="form-check-label" htmlFor={`m-${5}-4`}>
                                             4
                                         </label>
@@ -295,19 +295,19 @@ const QuestionnaireTable: React.FunctionComponent<Props> = ({
                                     </td>
                                 <td className="text-center w-4/12">
                                     <div className="form-check">
-                                        <input className="form-check-input" type="radio" name={`m-${8}`} key={`m-${8}-1`} value={1}/>
+                                        <input className="form-check-input" type="radio" name={`m-${8}`} id={`m-${8}-1`} value={1}/>
                                         <label className="form-check-label" htmlFor={`m-${8}-1`}>
                                             1
                                         </label>
-                                        <input className="form-check-input" type="radio" name={`m-${8}`} key={`m-${8}-2`} value={2}/>
+                                        <input className="form-check-input" type="radio" name={`m-${8}`} id={`m-${8}-2`} value={2}/>
                                         <label className="form-check-label" htmlFor={`m-${8}-2`}>
                                             2
                                         </label>
-                                        <input className="form-check-input" type="radio" name={`m-${8}`} key={`m-${8}-3`} value={3}/>
+                                        <input className="form-check-input" type="radio" name={`m-${8}`} id={`m-${8}-3`} value={3}/>
                                         <label className="form-check-label" htmlFor={`m-${8}-3`}>
                                             3
                                         </label>
-                                        <input className="form-check-input" type="radio" name={`m-${8}`} key={`m-${8}-4`} value={4}/>
+                                        <input className="form-check-input" type="radio" name={`m-${8}`} id={`m-${8}-4`} value={4}/>
                                         <label className="form-check-label" htmlFor={`m-${8}-4`}>
                                             4
                                         </label>
@@ -321,19 +321,19 @@ const QuestionnaireTable: React.FunctionComponent<Props> = ({
                                     </td>
                                 <td className="text-center w-4/12">
                                     <div className="form-check">
-                                        <input className="form-check-input" type="radio" name={`m-${3}`} key={`m-${3}-1`} value={1}/>
+                                        <input className="form-check-input" type="radio" name={`m-${3}`} id={`m-${3}-1`} value={1}/>
                                         <label className="form-check-label" htmlFor={`m-${3}-1`}>
                                             1
                                         </label>
-                                        <input className="form-check-input" type="radio" name={`m-${3}`} key={`m-${3}-2`} value={2}/>
+                                        <input className="form-check-input" type="radio" name={`m-${3}`} id={`m-${3}-2`} value={2}/>
                                         <label className="form-check-label" htmlFor={`m-${3}-2`}>
                                             2
                                         </label>
-                                        <input className="form-check-input" type="radio" name={`m-${3}`} key={`m-${3}-3`} value={3}/>
+                                        <input className="form-check-input" type="radio" name={`m-${3}`} id={`m-${3}-3`} value={3}/>
                                         <label className="form-check-label" htmlFor={`m-${3}-3`}>
                                             3
                                         </label>
-                                        <input className="form-check-input" type="radio" name={`m-${3}`} key={`m-${3}-4`} value={4}/>
+                                        <input className="form-check-input" type="radio" name={`m-${3}`} id={`m-${3}-4`} value={4}/>
                                         <label className="form-check-label" htmlFor={`m-${3}-4`}>
                                             4
                                         </label>
@@ -347,19 +347,19 @@ const QuestionnaireTable: React.FunctionComponent<Props> = ({
                                     </td>
                                 <td className="text-center w-4/12">
                                     <div className="form-check">
-                                        <input className="form-check-input" type="radio" name={`m-${4}`} key={`m-${4}-1`} value={1}/>
+                                        <input className="form-check-input" type="radio" name={`m-${4}`} id={`m-${4}-1`} value={1}/>
                                         <label className="form-check-label" htmlFor={`m-${4}-1`}>
                                             1
                                         </label>
-                                        <input className="form-check-input" type="radio" name={`m-${4}`} key={`m-${4}-2`} value={2}/>
+                                        <input className="form-check-input" type="radio" name={`m-${4}`} id={`m-${4}-2`} value={2}/>
                                         <label className="form-check-label" htmlFor={`m-${4}-2`}>
                                             2
                                         </label>
-                                        <input className="form-check-input" type="radio" name={`m-${4}`} key={`m-${4}-3`} value={3}/>
+                                        <input className="form-check-input" type="radio" name={`m-${4}`} id={`m-${4}-3`} value={3}/>
                                         <label className="form-check-label" htmlFor={`m-${4}-3`}>
                                             3
                                         </label>
-                                        <input className="form-check-input" type="radio" name={`m-${4}`} key={`m-${4}-4`} value={4}/>
+                                        <input className="form-check-input" type="radio" name={`m-${4}`} id={`m-${4}-4`} value={4}/>
                                         <label className="form-check-label" htmlFor={`m-${4}-4`}>
                                             4
                                         </label>
@@ -373,19 +373,19 @@ const QuestionnaireTable: React.FunctionComponent<Props> = ({
                                     </td>
                                 <td className="text-center w-4/12">
                                     <div className="form-check">
-                                        <input className="form-check-input" type="radio" name={`m-${11}`} key={`m-${11}-1`} value={1}/>
+                                        <input className="form-check-input" type="radio" name={`m-${11}`} id={`m-${11}-1`} value={1}/>
                                         <label className="form-check-label" htmlFor={`m-${11}-1`}>
                                             1
                                         </label>
-                                        <input className="form-check-input" type="radio" name={`m-${11}`} key={`m-${11}-2`} value={2}/>
+                                        <input className="form-check-input" type="radio" name={`m-${11}`} id={`m-${11}-2`} value={2}/>
                                         <label className="form-check-label" htmlFor={`m-${11}-2`}>
                                             2
                                         </label>
-                                        <input className="form-check-input" type="radio" name={`m-${11}`} key={`m-${11}-3`} value={3}/>
+                                        <input className="form-check-input" type="radio" name={`m-${11}`} id={`m-${11}-3`} value={3}/>
                                         <label className="form-check-label" htmlFor={`m-${11}-3`}>
                                             3
                                         </label>
-                                        <input className="form-check-input" type="radio" name={`m-${11}`} key={`m-${11}-4`} value={4}/>
+                                        <input className="form-check-input" type="radio" name={`m-${11}`} id={`m-${11}-4`} value={4}/>
                                         <label className="form-check-label" htmlFor={`m-${11}-4`}>
                                             4
                                         </label>
@@ -399,19 +399,19 @@ const QuestionnaireTable: React.FunctionComponent<Props> = ({
                                     </td>
                                 <td className="text-center w-4/12">
                                     <div className="form-check">
-                                        <input className="form-check-input" type="radio" name={`m-${12}`} key={`m-${12}-1`} value={1}/>
+                                        <input className="form-check-input" type="radio" name={`m-${12}`} id={`m-${12}-1`} value={1}/>
                                         <label className="form-check-label" htmlFor={`m-${12}-1`}>
                                             1
                                         </label>
-                                        <input className="form-check-input" type="radio" name={`m-${12}`} key={`m-${12}-2`} value={2}/>
+                                        <input className="form-check-input" type="radio" name={`m-${12}`} id={`m-${12}-2`} value={2}/>
                                         <label className="form-check-label" htmlFor={`m-${12}-2`}>
                                             2
                                         </label>
-                                        <input className="form-check-input" type="radio" name={`m-${12}`} key={`m-${12}-3`} value={3}/>
+                                        <input className="form-check-input" type="radio" name={`m-${12}`} id={`m-${12}-3`} value={3}/>
                                         <label className="form-check-label" htmlFor={`m-${12}-3`}>
                                             3
                                         </label>
-                                        <input className="form-check-input" type="radio" name={`m-${12}`} key={`m-${12}-4`} value={4}/>
+                                        <input className="form-check-input" type="radio" name={`m-${12}`} id={`m-${12}-4`} value={4}/>
                                         <label className="form-check-label" htmlFor={`m-${12}-4`}>
                                             4
                                         </label>
