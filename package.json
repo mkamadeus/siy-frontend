@@ -43,7 +43,11 @@
     "react-hook-form": "^6.15.4",
     "react-identicons": "^1.2.5",
     "react-query": "^3.8.2",
+    "react-redux": "^7.2.4",
     "react-use": "^17.2.4",
+    "redux": "^4.1.0",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-thunk": "^2.3.0",
     "sweetalert2": "^10.15.7",
     "sweetalert2-react-content": "^3.3.1"
   }

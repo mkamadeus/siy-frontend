@@ -1,6 +1,6 @@
 import { StudentGrade } from '~/model/Grade';
+import { SessionData } from '~/model/Session';
 import { Student } from '~/model/Student';
-import { Teacher } from '~/model/Teacher';
 import { AuthInstance } from './Base';
 
 export const getStudentDataBySession = async (
@@ -21,7 +21,7 @@ export const getStudentGradesBySession = async (
 
 export const getAuthenticatedUserData = async (
   token: string
-): Promise<Student | Teacher | null> => {
-  const user = await AuthInstance(token).get<Student | Teacher | null>('/me');
+): Promise<SessionData> => {
+  const user = await AuthInstance(token).get<SessionData>('/me');
   return user.data;
 };

@@ -1,12 +1,10 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import { getCourseById } from '~/api/Course';
+import { getGradesByAuthenticatedUser } from '~/api/Grade';
 import { getLectureById } from '~/api/Lecture';
+import { useAuth } from '~/hooks/useAuth';
 import { StudentGrade } from '~/model/Grade';
-
-interface Props {
-  grades: StudentGrade[];
-}
 
 interface ItemProps {
   grade: StudentGrade;
@@ -42,12 +40,22 @@ const StudentGradeTableItem: React.FunctionComponent<ItemProps> = ({
   );
 };
 
-const StudentGradeTable: React.FunctionComponent<Props> = ({
-  grades,
-}: Props) => {
+const StudentGradeTable: React.FunctionComponent = () => {
+  const { authState } = useAuth();
+
+  const { data: grades, isLoading: isLoading } = useQuery('grades', () =>
+    getGradesByAuthenticatedUser(authState.accessToken)
+  );
+
+  if (isLoading || !grades) {
+    return null;
+  }
+
   if (grades.length === 0) {
     return (
-      <div className="text-center italic w-full text-gray-700">There is no data!</div>
+      <div className="text-center italic w-full text-gray-700">
+        There is no data!
+      </div>
     );
   }
 
