@@ -7,6 +7,7 @@ import {
   PresentationChartLineOutline,
   UserGroupOutline,
 } from '@graywolfai/react-heroicons';
+import Identicon from 'react-identicons';
 import StudentGradeTable from '~/components/page/student/StudentGradeTable';
 import ITBBackground from '~/images/itbBackground.png';
 import { AuthContext } from '~/context/AuthContext';
@@ -14,25 +15,26 @@ import { AuthContext } from '~/context/AuthContext';
 const StudentIndexPage: React.FC<RouteComponentProps> = (
   props: RouteComponentProps
 ) => {
-  const { student, grades } = useContext(AuthContext);
+  const { userData: student } = useContext(AuthContext);
 
   // console.log(student, grades);
 
-  const gradeThisSemester = grades.filter((grade) => {
-    // const today = new Date();
+  // const gradeThisSemester = grades.filter((grade) => {
+  //   // const today = new Date();
 
-    // TODO: fix based on current time
-    return grade.year == 2020 && grade.semester == 2;
-  });
+  //   // TODO: fix based on current time
+  //   return grade.year == 2020 && grade.semester == 2;
+  // });
+  const gradeThisSemester = [];
+  console.log(student);
 
   return (
     <>
       <div className="flex flex-col mb-2 items-center relative bg-gradient-to-b from-blue-500 to to-blue-600 p-6">
         <div className="flex flex-col items-center z-10">
-          <img
-            src={student.imgPath}
-            className="w-32 h-32 rounded-full shadow-md mb-2"
-          />
+          {/* <div className="w-32 h-32 rounded-full bg-white shadow"> */}
+          <Identicon string={student.nim} size={100} bg="white" />
+          {/* </div> */}
           <div className="text-center text-xl font-bold text-white">
             {student.name}
           </div>
@@ -40,7 +42,7 @@ const StudentIndexPage: React.FC<RouteComponentProps> = (
             <div className="w-6 h-6 text-white">
               <AcademicCapSolid />
             </div>
-            <div className="text-white">IPK/NR : {student.ipk || 'N/A'}</div>
+            <div className="text-white">IPK/NR : {student.gpa}</div>
           </div>
         </div>
         <img className="absolute bottom-0 z-0" src={ITBBackground} />
@@ -56,31 +58,31 @@ const StudentIndexPage: React.FC<RouteComponentProps> = (
             <div className="flex flex-wrap justify-center">
               <div className="flex flex-col justify-center items-center w-20 h-20 p-2 rounded border border-gray-300 shadow m-1">
                 <div className="font-semibold text-sm">LO A</div>
-                <div className="font-bold">{student.loA.toPrecision(3)}</div>
+                <div className="font-bold">{student.lok[0].toPrecision(3)}</div>
               </div>
               <div className="flex flex-col justify-center items-center w-20 h-20 p-2 rounded border border-gray-300 shadow m-1">
                 <div className="font-semibold text-sm">LO B</div>
-                <div className="font-bold">{student.loB.toPrecision(3)}</div>
+                <div className="font-bold">{student.lok[0].toPrecision(3)}</div>
               </div>
               <div className="flex flex-col justify-center items-center w-20 h-20 p-2 rounded border border-gray-300 shadow m-1">
                 <div className="font-semibold text-sm">LO C</div>
-                <div className="font-bold">{student.loC.toPrecision(3)}</div>
+                <div className="font-bold">{student.lok[0].toPrecision(3)}</div>
               </div>
               <div className="flex flex-col justify-center items-center w-20 h-20 p-2 rounded border border-gray-300 shadow m-1">
                 <div className="font-semibold text-sm">LO D</div>
-                <div className="font-bold">{student.loD.toPrecision(3)}</div>
+                <div className="font-bold">{student.lok[0].toPrecision(3)}</div>
               </div>
               <div className="flex flex-col justify-center items-center w-20 h-20 p-2 rounded border border-gray-300 shadow m-1">
                 <div className="font-semibold text-sm">LO E</div>
-                <div className="font-bold">{student.loE.toPrecision(3)}</div>
+                <div className="font-bold">{student.lok[0].toPrecision(3)}</div>
               </div>
               <div className="flex flex-col justify-center items-center w-20 h-20 p-2 rounded border border-gray-300 shadow m-1">
                 <div className="font-semibold text-sm">LO F</div>
-                <div className="font-bold">{student.loF.toPrecision(3)}</div>
+                <div className="font-bold">{student.lok[0].toPrecision(3)}</div>
               </div>
               <div className="flex flex-col justify-center items-center w-20 h-20 p-2 rounded border border-gray-300 shadow m-1">
                 <div className="font-semibold text-sm">LO G</div>
-                <div className="font-bold">{student.loG.toPrecision(3)}</div>
+                <div className="font-bold">{student.lok[0].toPrecision(3)}</div>
               </div>
             </div>
           </div>

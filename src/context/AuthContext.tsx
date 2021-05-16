@@ -4,94 +4,77 @@ import { useQuery } from 'react-query';
 import { useAsync, useLocalStorage } from 'react-use';
 import { refresh } from '~/api/Auth';
 import {
+  getAuthenticatedUserData,
   getStudentDataBySession,
   getStudentGradesBySession,
 } from '~/api/Session';
 import { StudentGrade } from '~/model/Grade';
 import { Student } from '~/model/Student';
+import { Teacher } from '~/model/Teacher';
+import { UserRole } from '~/model/User';
 import LoadingPage from '~/pages/common/LoadingPage';
 
 export interface IAuthContext {
-  student: Student;
-  grades: StudentGrade[];
+  isLoading: boolean;
+  isAuthenticated: boolean;
+  authorizedAs: UserRole;
+  userData: Student | Teacher | null;
 }
 
 export const AuthContext = React.createContext<IAuthContext>({
-  student: {
-    id: 0,
-    name: 'N/A',
-    nim: '99999999',
-    imgPath: 'N/A',
-    loA: 0,
-    loB: 0,
-    loC: 0,
-    loD: 0,
-    loE: 0,
-    loF: 0,
-    loG: 0,
-    ipk: 0,
-  },
-  grades: [],
+  isLoading: false,
+  isAuthenticated: false,
+  authorizedAs: UserRole.STUDENT,
+  userData: null,
 });
 
-const AuthContextProvider: React.FunctionComponent = (props) => {
-  const [
-    accessToken,
-    setAccessToken,
-    removeAccessToken,
-  ] = useLocalStorage<string>('accessToken');
-  const [refreshToken, , removeRefreshToken] = useLocalStorage<string>(
-    'refreshToken'
-  );
+export type AuthContextProps = {
+  debug?: boolean;
+};
+
+const AuthContextProvider: React.FunctionComponent<AuthContextProps> = ({
+  debug,
+  children,
+}) => {
+  const [accessToken, setAccessToken, removeAccessToken] =
+    useLocalStorage<string>('accessToken');
+  const [refreshToken, , removeRefreshToken] =
+    useLocalStorage<string>('refreshToken');
 
   const {
-    data: student,
-    isLoading: isStudentLoading,
-    error: studentError,
-    refetch: refetchStudent,
-  } = useQuery(
-    'student',
-    () => getStudentDataBySession(accessToken as string),
-    { refetchInterval: false }
-  );
+    data: userData,
+    isLoading: isUserLoading,
+    error: userError,
+  } = useQuery('student', () => {
+    if (!accessToken) throw new Error('No access token!');
+    return getAuthenticatedUserData(accessToken);
+  });
 
-  const {
-    data: grades,
-    isLoading: isGradesLoading,
-    error: gradesError,
-    refetch: refetchGrades,
-  } = useQuery(
-    'grades',
-    () => getStudentGradesBySession(accessToken as string),
-    { refetchInterval: false }
-  );
-
-  const isLoading = useMemo(() => isStudentLoading || isGradesLoading, [
-    isStudentLoading,
-    isGradesLoading,
-  ]);
+  const isLoading = useMemo(() => isUserLoading, [isUserLoading]);
 
   useAsync(async () => {
-    console.log(accessToken, studentError, gradesError);
-    if (studentError || gradesError) {
+    try {
+      if (userError) throw userError;
+      // if (gradesError) throw gradesError;
+      if (!refreshToken) throw new Error('No refresh token!');
+
+      const token = await refresh({ refreshToken: refreshToken as string });
+      setAccessToken(token.accessToken);
+    } catch (err) {
       removeAccessToken();
-      try {
-        const token = await refresh({ refreshToken: refreshToken as string });
-        setAccessToken(token.accessToken);
-        refetchStudent();
-        refetchGrades();
-      } catch (err) {
-        removeRefreshToken();
-        navigate('/');
-      }
+      removeRefreshToken();
+      if (!debug) navigate('/');
     }
-  }, [accessToken, studentError, gradesError]);
+  }, [accessToken, userError]);
 
   return (
     <AuthContext.Provider
-      value={{ student: student as Student, grades: grades as StudentGrade[] }}
+      value={{
+        isLoading,
+        userData,
+      }}
     >
-      {isLoading ? <LoadingPage /> : props.children}
+      {isLoading ? <LoadingPage /> : children}
     </AuthContext.Provider>
   );
 };
