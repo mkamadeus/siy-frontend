@@ -9,25 +9,12 @@ import Swal from 'sweetalert2';
 const AdminIndexPage: React.FC<RouteComponentProps> = (
   _props: RouteComponentProps
 ) => {
-  const { isLoading } = useQuery('courses', getAllCourses);
-
-  if (isLoading) {
-    return <LoadingPage />;
-  }
-
-  const hehe = () => {
-    const swal = withReactContent(Swal);
-    swal.fire('asdasd');
-  };
+  const { data, isLoading } = useQuery('loAssessment', getLoAsssessment);
 
   return (
     <div className="container mx-auto p-6">
-      <div>Welcome to SIY homepage</div>
-      <div>
-        <div>
-          <button onClick={hehe}>sadasd</button>
-        </div>
-      </div>
+      <div className="text-4xl font-bold">Preview LO Assessment</div>
+      <div className="font-bold text-center">{data}</div>
     </div>
   );
 };
