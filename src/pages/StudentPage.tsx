@@ -28,6 +28,13 @@ const StudentPage: React.FC<RouteComponentProps> = (
     <div className="container mx-auto p-6">
       <div className="flex flex-col items-center">
         <div className="flex flex-col mb-2 items-center">
+        <div className="flex flex-col mb-4">
+          <hr />
+          <h1 className="text-blue-900 text-5xl"> 
+              Status Mahasiswa 
+          </h1> 
+          <hr />
+        </div>
           <LazyLoadImage
             isLoading={isLoading}
             path={data.imgPath}
@@ -47,7 +54,7 @@ const StudentPage: React.FC<RouteComponentProps> = (
           />
         </div>
         <div className="flex flex-col mb-4">
-          <div className="font-bold text-xl text-center">LO Anda:</div>
+          <div className="font-bold text-xl text-center bg-blue-900 flex text-white">LO Anda:</div>
           <hr />
           <div className="flex flex-wrap justify-center">
             {isLoading
