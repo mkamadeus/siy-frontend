@@ -16,8 +16,8 @@ import { useAuth } from '~/hooks/useAuth';
 const StudentIndexPage: React.FC<RouteComponentProps> = (
   props: RouteComponentProps
 ) => {
-  const { userData } = useAuth();
-  const student = userData?.userData as Student;
+  const { authState } = useAuth();
+  const student = authState.userData?.userData as Student;
 
   return (
     <>
@@ -99,7 +99,7 @@ const StudentIndexPage: React.FC<RouteComponentProps> = (
             <div className="p-1.5">
               {/* TODO: form list */}
               <QuickTileButton
-                to={'/peer-assessment-form'}
+                to={'/student/peer-assessment'}
                 icon={<ClipboardListOutline />}
                 title="Peer Assessment"
               />

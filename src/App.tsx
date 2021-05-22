@@ -19,7 +19,6 @@ import AdminLectureCreatePage from './pages/admin/lecture/AdminLectureCreatePage
 import AdminLectureEditPage from './pages/admin/lecture/AdminLectureEditPage';
 import AdminLecturePreviewPage from './pages/admin/lecture/AdminLecturePreviewPage';
 import AdminCoursePreviewPage from './pages/admin/course/AdminCoursePreviewPage';
-import LoginPage from './pages/LoginPage';
 import Footer from './components/common/Footer';
 import AdminCoursePage from './pages/admin/course/AdminCoursePage';
 import RegisterPage from './pages/RegisterPage';
@@ -56,10 +55,16 @@ const App: React.FC = () => {
           component={StudentGradePage}
           role={UserRole.STUDENT}
         />
-        {/* <StudentLoPage path="/student/lo" /> */}
-        <StudentGradePage path="/student/transcript" />
-        <StudentPeerAssessmentForm path="/peer-assessment-form" />
-        <StudentJoinClassPage path="/student/join-class" />
+        <PrivateRoute
+          path="/student/peer-assessment"
+          component={StudentPeerAssessmentForm}
+          role={UserRole.STUDENT}
+        />
+        <PrivateRoute
+          path="/student/join-class"
+          component={StudentPeerAssessmentForm}
+          role={UserRole.STUDENT}
+        />
 
           {/* TEACHER */}
           <TeacherIndexPage path="/teacher" />
@@ -83,7 +88,6 @@ const App: React.FC = () => {
         <AdminLectureCreatePage path="/admin/lecture/create" />
 
         {/* AUTH*/}
-        <LoginPage path="/login" />
         <RegisterPage path="/register" />
       </Router>
       <Footer />

@@ -9,11 +9,13 @@ export const authReducer: Reducer<AuthState, AuthAction> = (
   if (action.type === AuthActionConstant.LOGIN) {
     return {
       ...state,
+      isLoading: true,
     };
   } else if (action.type === AuthActionConstant.LOGIN_SUCCESS) {
     const { accessToken, refreshToken, userData } = action.payload;
     return {
       ...state,
+      isLoading: false,
       isAuthenticated: true,
       accessToken,
       refreshToken,
@@ -22,6 +24,7 @@ export const authReducer: Reducer<AuthState, AuthAction> = (
   } else if (action.type === AuthActionConstant.LOGIN_FAIL) {
     return {
       ...state,
+      isLoading: false,
       isAuthenticated: false,
     };
   } else if (action.type === AuthActionConstant.LOGOUT) {

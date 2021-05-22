@@ -97,7 +97,6 @@ export const loginByTokenAction: ActionCreator<
       };
       dispatch(loginAction);
 
-      console.log('asd');
       const userData = await getAuthenticatedUserData(accessToken);
 
       // Set login success
@@ -112,7 +111,6 @@ export const loginByTokenAction: ActionCreator<
       dispatch(loginSuccessAction);
     } catch (err) {
       // Set login success
-      console.log('asd');
       const loginFailAction: ILoginFailAction = {
         type: AuthActionConstant.LOGIN_FAIL,
       };

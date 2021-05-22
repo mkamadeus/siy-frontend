@@ -8,8 +8,8 @@ import { Student } from '~/model/Student';
 const StudentGradePage: React.FC<RouteComponentProps> = (
   _: RouteComponentProps
 ) => {
-  const { userData } = useAuth();
-  const student = userData?.userData as Student;
+  const { authState } = useAuth();
+  const student = authState.userData?.userData as Student;
 
   return (
     <div className="container mx-auto p-6">
