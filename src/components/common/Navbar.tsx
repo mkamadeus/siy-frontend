@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from '@reach/router';
 import { MenuAlt3Solid } from '@graywolfai/react-heroicons';
+import { AuthContext } from '~/context/AuthContext';
+import { useAuth } from '~/hooks/useAuth';
 
 interface MenuProps {
   open: boolean;
@@ -44,6 +46,7 @@ const Menu = ({ open }: MenuProps) => {
 
 const Navbar: React.FC = () => {
   const [open, setOpen] = useState<boolean>(false);
+  const { authState } = useAuth();
 
   return (
     <nav className="bg-gray-900 z-50 fixed w-full top-0">
@@ -51,6 +54,11 @@ const Navbar: React.FC = () => {
         <div className="flex w-full justify-between">
           <div className="flex font-bold text-xl text-gray-100">
             <Link to="/">SIY</Link>
+          </div>
+          <div className="flex text-gray-100">
+            {authState.isAuthenticated
+              ? `Authenticated as ${authState.userData?.userData?.name}`
+              : 'Not authenticated'}
           </div>
           <div
             className="w-8 h-8 lg:hidden"

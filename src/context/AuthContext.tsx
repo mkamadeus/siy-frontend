@@ -1,32 +1,89 @@
 import { navigate } from '@reach/router';
-import React, { useMemo } from 'react';
-import { useQuery } from 'react-query';
-import { useAsync, useLocalStorage } from 'react-use';
-import { refresh } from '~/api/Auth';
-import {
-  getAuthenticatedUserData,
-  getStudentDataBySession,
-  getStudentGradesBySession,
-} from '~/api/Session';
-import { StudentGrade } from '~/model/Grade';
-import { Student } from '~/model/Student';
-import { Teacher } from '~/model/Teacher';
+import React, { useReducer } from 'react';
+import { useAsync } from 'react-use';
+import { login } from '~/api/Auth';
+import { getAuthenticatedUserData } from '~/api/Session';
+import { CredentialsBody } from '~/model/Auth';
+import { SessionData } from '~/model/Session';
 import { UserRole } from '~/model/User';
-import LoadingPage from '~/pages/common/LoadingPage';
 
-export interface IAuthContext {
-  isLoading: boolean;
+export interface AuthContextState {
   isAuthenticated: boolean;
-  authorizedAs: UserRole;
-  userData: Student | Teacher | null;
+  accessToken: string;
+  refreshToken: string;
+  userData: SessionData | null;
 }
 
-export const AuthContext = React.createContext<IAuthContext>({
-  isLoading: false,
-  isAuthenticated: false,
-  authorizedAs: UserRole.STUDENT,
-  userData: null,
+export interface AuthContextValueType {
+  authState: AuthContextState;
+  doLogin: (data: CredentialsBody) => Promise<void>;
+  doLogout: (data: CredentialsBody) => Promise<void>;
+}
+
+export const AuthContext = React.createContext<AuthContextValueType>({
+  authState: {
+    isAuthenticated: false,
+    userData: {
+      role: UserRole.STUDENT,
+      data: null,
+    },
+    accessToken: '',
+    refreshToken: '',
+  },
+  doLogin: async () => {
+    return;
+  },
+  doLogout: async () => {
+    return;
+  },
 });
+
+export enum AuthContextActionType {
+  LOGIN = 'login',
+  LOGIN_BY_TOKEN = 'login_by_token',
+  LOGOUT = 'logout',
+}
+
+export interface AuthContextAction {
+  type: AuthContextActionType;
+  payload?: {
+    accessToken: string;
+    refreshToken: string;
+    userData: SessionData;
+  };
+}
+
+export const AuthContextReducer: React.Reducer<
+  AuthContextState,
+  AuthContextAction
+> = (state, action) => {
+  if (action.type === AuthContextActionType.LOGIN_BY_TOKEN && action.payload) {
+    return {
+      isAuthenticated: true,
+      userData: action.payload.userData,
+      accessToken: action.payload.accessToken,
+      refreshToken: action.payload.refreshToken,
+    };
+  }
+  if (action.type === AuthContextActionType.LOGIN && action.payload) {
+    localStorage.setItem('accessToken', action.payload.accessToken);
+    localStorage.setItem('refreshToken', action.payload.refreshToken);
+    return {
+      isAuthenticated: true,
+      userData: action.payload.userData,
+      accessToken: action.payload.accessToken,
+      refreshToken: action.payload.refreshToken,
+    };
+  } else if (action.type === AuthContextActionType.LOGOUT) {
+    localStorage.clear();
+    return {
+      isAuthenticated: false,
+      userData: null,
+      accessToken: '',
+      refreshToken: '',
+    };
+  } else return { ...state };
+};
 
 export type AuthContextProps = {
   debug?: boolean;
@@ -36,45 +93,55 @@ const AuthContextProvider: React.FunctionComponent<AuthContextProps> = ({
   debug,
   children,
 }) => {
-  const [accessToken, setAccessToken, removeAccessToken] =
-    useLocalStorage<string>('accessToken');
-  const [refreshToken, , removeRefreshToken] =
-    useLocalStorage<string>('refreshToken');
-
-  const {
-    data: userData,
-    isLoading: isUserLoading,
-    error: userError,
-  } = useQuery('student', () => {
-    if (!accessToken) throw new Error('No access token!');
-    return getAuthenticatedUserData(accessToken);
+  const [authState, authDispatch] = useReducer(AuthContextReducer, {
+    isAuthenticated: false,
+    userData: {
+      role: UserRole.STUDENT,
+      data: null,
+    },
+    accessToken: '',
+    refreshToken: '',
   });
 
-  const isLoading = useMemo(() => isUserLoading, [isUserLoading]);
-
   useAsync(async () => {
-    try {
-      if (userError) throw userError;
-      // if (gradesError) throw gradesError;
-      if (!refreshToken) throw new Error('No refresh token!');
-
-      const token = await refresh({ refreshToken: refreshToken as string });
-      setAccessToken(token.accessToken);
-    } catch (err) {
-      removeAccessToken();
-      removeRefreshToken();
-      if (!debug) navigate('/');
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
+    if (accessToken && refreshToken) {
+      const userData = await getAuthenticatedUserData(accessToken);
+      authDispatch({
+        type: AuthContextActionType.LOGIN_BY_TOKEN,
+        payload: {
+          userData: userData,
+          accessToken,
+          refreshToken,
+        },
+      });
     }
-  }, [accessToken, userError]);
+  }, []);
+
+  const doLogin = async (data: CredentialsBody): Promise<void> => {
+    const token = await login(data);
+    const userData = await getAuthenticatedUserData(token.accessToken);
+    authDispatch({
+      type: AuthContextActionType.LOGIN,
+      payload: {
+        accessToken: token.accessToken,
+        refreshToken: token.refreshToken,
+        userData,
+      },
+    });
+    navigate('/student');
+  };
+
+  const doLogout = async (data: CredentialsBody): Promise<void> => {
+    authDispatch({ type: AuthContextActionType.LOGOUT });
+    navigate('/student');
+  };
 
   return (
-    <AuthContext.Provider
-      value={{
-        isLoading,
-        userData,
-      }}
-    >
-      {isLoading ? <LoadingPage /> : children}
+    <AuthContext.Provider value={{ authState, doLogin, doLogout }}>
+      {/* {isLoading && !userError ? <LoadingPage /> : children} */}
+      {children}
     </AuthContext.Provider>
   );
 };

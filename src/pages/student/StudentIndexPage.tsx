@@ -1,40 +1,32 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { RouteComponentProps } from '@reach/router';
 import QuickTileButton from '~/components/common/QuickTileButton';
 import {
+  AcademicCapOutline,
   AcademicCapSolid,
   ClipboardListOutline,
   PresentationChartLineOutline,
   UserGroupOutline,
 } from '@graywolfai/react-heroicons';
-import Identicon from 'react-identicons';
 import StudentGradeTable from '~/components/page/student/StudentGradeTable';
 import ITBBackground from '~/images/itbBackground.png';
-import { AuthContext } from '~/context/AuthContext';
+import { Student } from '~/model/Student';
+import { useAuth } from '~/hooks/useAuth';
 
 const StudentIndexPage: React.FC<RouteComponentProps> = (
   props: RouteComponentProps
 ) => {
-  const { userData: student } = useContext(AuthContext);
-
-  // console.log(student, grades);
-
-  // const gradeThisSemester = grades.filter((grade) => {
-  //   // const today = new Date();
-
-  //   // TODO: fix based on current time
-  //   return grade.year == 2020 && grade.semester == 2;
-  // });
-  const gradeThisSemester = [];
-  console.log(student);
+  const { userData } = useAuth();
+  const student = userData?.userData as Student;
 
   return (
     <>
       <div className="flex flex-col mb-2 items-center relative bg-gradient-to-b from-blue-500 to to-blue-600 p-6">
         <div className="flex flex-col items-center z-10">
-          {/* <div className="w-32 h-32 rounded-full bg-white shadow"> */}
-          <Identicon string={student.nim} size={100} bg="white" />
-          {/* </div> */}
+          <img
+            src={'https://github.com/identicons/mkamadeus.png'}
+            className="w-12 h-12"
+          />
           <div className="text-center text-xl font-bold text-white">
             {student.name}
           </div>
@@ -51,7 +43,7 @@ const StudentIndexPage: React.FC<RouteComponentProps> = (
         <div className="flex flex-col items-center">
           <div className="flex flex-col w-full mb-4">
             <div className="font-bold text-2xl mb-2">Nilai</div>
-            <StudentGradeTable grades={gradeThisSemester} />
+            <StudentGradeTable />
           </div>
           <div className="flex flex-col mb-4 w-full">
             <div className="font-bold text-2xl mb-2">Luaran Pembelajaran</div>
@@ -89,7 +81,7 @@ const StudentIndexPage: React.FC<RouteComponentProps> = (
         </div>
         <div>
           <div className="font-bold text-2xl mb-2">Navigasi</div>
-          <div className="flex flex-wrap justify-center md:jusitfy-start -m-1.5">
+          <div className="flex flex-wrap justify-center md:justify-start -m-1.5 w-full">
             <div className="p-1.5">
               <QuickTileButton
                 to={'/student/transcript'}
@@ -110,6 +102,14 @@ const StudentIndexPage: React.FC<RouteComponentProps> = (
                 to={'/peer-assessment-form'}
                 icon={<ClipboardListOutline />}
                 title="Peer Assessment"
+              />
+            </div>
+            <div className="p-1.5">
+              {/* TODO: form list */}
+              <QuickTileButton
+                to={'/student/join-class'}
+                icon={<AcademicCapOutline />}
+                title="Daftar Kelas"
               />
             </div>
           </div>

@@ -26,47 +26,66 @@ import AdminCoursePage from './pages/admin/course/AdminCoursePage';
 import AuthContextProvider from './context/AuthContext';
 import RegisterPage from './pages/RegisterPage';
 import ErrorPage from './pages/common/ErrorPage';
+import PrivateRoute from './components/routes/PrivateRoute';
+import { UserRole } from './model/User';
+import StudentJoinClassPage from './pages/student/StudentJoinClassPage';
 
 const queryClient = new QueryClient();
 
 const App: React.FC = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthContextProvider>
-        <Navbar />
-        <Router className="min-h-screen mt-16" basepath="/">
-          <NotFoundPage default />
-          <IndexPage path="/" />
-          <StudentIndexPage path="/student" />
-          <StudentLoPage path="/student/lo" />
-          <StudentGradePage path="/student/transcript" />
-          <StudentPeerAssessmentForm path="/peer-assessment-form" />
+      {/* <AuthContextProvider> */}
+      <Navbar />
+      <Router className="min-h-screen mt-16" basepath="/">
+        <NotFoundPage default />
+        <IndexPage path="/" />
+        <PrivateRoute
+          path="/student"
+          component={StudentIndexPage}
+          role={UserRole.STUDENT}
+        />
+        {/* <StudentIndexPage path="/student" /> */}
+        <PrivateRoute
+          path="/student/lo"
+          component={StudentLoPage}
+          role={UserRole.STUDENT}
+        />
+        <PrivateRoute
+          path="/student/transcript"
+          component={StudentGradePage}
+          role={UserRole.STUDENT}
+        />
+        {/* <StudentLoPage path="/student/lo" /> */}
+        <StudentGradePage path="/student/transcript" />
+        <StudentPeerAssessmentForm path="/peer-assessment-form" />
+        <StudentJoinClassPage path="/student/join-class" />
 
-          {/* TEACHER */}
-          <TeacherIndexPage path="/teacher" />
-          <TeacherLecturePage path="/teacher/lecture/:id" />
-          <TeacherPage path="/teacher/class/form" />
+        {/* TEACHER */}
+        <TeacherIndexPage path="/teacher" />
+        <TeacherLecturePage path="/teacher/lecture/:id" />
+        <TeacherPage path="/teacher/class/form" />
 
-          <AdminIndexPage path="/admin" />
+        <AdminIndexPage path="/admin" />
 
-          {/* ADMIN COURSE */}
-          <AdminCoursePage path="/admin/course" />
-          <AdminCoursePreviewPage path="/admin/course/:id" />
-          <AdminCourseCreatePage path="/admin/course/create" />
-          <AdminCourseEditPage path="/admin/course/edit/:id" />
+        {/* ADMIN COURSE */}
+        <AdminCoursePage path="/admin/course" />
+        <AdminCoursePreviewPage path="/admin/course/:id" />
+        <AdminCourseCreatePage path="/admin/course/create" />
+        <AdminCourseEditPage path="/admin/course/edit/:id" />
 
-          {/* ADMIN LECTURE */}
-          <AdminLecturePage path="/admin/lecture" />
-          <AdminLecturePreviewPage path="/admin/lecture/:id" />
-          <AdminLectureEditPage path="/admin/lecture/edit/:id" />
-          <AdminLectureCreatePage path="/admin/lecture/create" />
+        {/* ADMIN LECTURE */}
+        <AdminLecturePage path="/admin/lecture" />
+        <AdminLecturePreviewPage path="/admin/lecture/:id" />
+        <AdminLectureEditPage path="/admin/lecture/edit/:id" />
+        <AdminLectureCreatePage path="/admin/lecture/create" />
 
-          {/* AUTH*/}
-          <LoginPage path="/login" />
-          <RegisterPage path="/register" />
-        </Router>
-        <Footer />
-      </AuthContextProvider>
+        {/* AUTH*/}
+        <LoginPage path="/login" />
+        <RegisterPage path="/register" />
+      </Router>
+      <Footer />
+      {/* </AuthContextProvider> */}
     </QueryClientProvider>
   );
 };
