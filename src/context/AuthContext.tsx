@@ -1,10 +1,14 @@
 import { navigate } from '@reach/router';
 import React, { useReducer } from 'react';
-import { useAsync } from 'react-use';
 import { login } from '~/api/Auth';
-import { getAuthenticatedUserData } from '~/api/Session';
 import { CredentialsBody } from '~/model/Auth';
 import { SessionData } from '~/model/Session';
+import { useAsync } from 'react-use';
+import {
+  getAuthenticatedUserData,
+} from '~/api/Session';
+import { Student } from '~/model/Student';
+import { Teacher } from '~/model/Teacher';
 import { UserRole } from '~/model/User';
 
 export interface AuthContextState {

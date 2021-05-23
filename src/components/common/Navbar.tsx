@@ -1,7 +1,6 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from '@reach/router';
 import { MenuAlt3Solid } from '@graywolfai/react-heroicons';
-import { AuthContext } from '~/context/AuthContext';
 import { useAuth } from '~/hooks/useAuth';
 
 interface MenuProps {

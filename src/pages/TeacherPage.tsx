@@ -1,4 +1,4 @@
-import React from 'react';
+/*import React from 'react';
 import { RouteComponentProps } from '@reach/router';
 import { useForm } from 'react-hook-form';
 import Button from '../components/common/Button';
@@ -459,3 +459,4 @@ const TeacherPage: React.FC<RouteComponentProps> = (
 };
 
 export default TeacherPage;
+*/

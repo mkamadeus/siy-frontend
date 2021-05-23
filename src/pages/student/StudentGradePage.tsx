@@ -1,7 +1,6 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { RouteComponentProps } from '@reach/router';
 
-import { AuthContext } from '~/context/AuthContext';
 import StudentGradeTable from '~/components/page/student/StudentGradeTable';
 import { useAuth } from '~/hooks/useAuth';
 import { Student } from '~/model/Student';

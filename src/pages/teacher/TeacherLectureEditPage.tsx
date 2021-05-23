@@ -1,22 +1,19 @@
-import React from 'react';
 import { RouteComponentProps } from '@reach/router';
+import React from 'react';
 import { useQuery } from 'react-query';
 import { getCourseById } from '~/api/Course';
-import LoadingPage from '~/pages/common/LoadingPage';
 import { getLectureById } from '~/api/Lecture';
-import TeacherStudentTable from '~/components/page/teacherDashboard/TeacherStudentTable';
-import { getAllStudents } from '~/api/Student';
-import TeacherLoTable from '~/components/page/teacherDashboard/TeacherLoTable';
-import TeacherUpload from '~/components/page/teacherDashboard/TeacherUpload';
-import TeacherPortfolio from '~/components/page/teacherDashboard/TeacherPortfolio';
 import { getTeacherById } from '~/api/Teacher';
-// import CourseTable from '~/components/page/CourseTable';
+import TeacherLoTable from '~/components/page/teacherDashboard/TeacherLoTable';
+import TeacherPortfolio from '~/components/page/teacherDashboard/TeacherPortfolio';
+import TeacherUpload from '~/components/page/teacherDashboard/TeacherUpload';
+import LoadingPage from '../common/LoadingPage';
 
 interface RouteProps {
   id: number;
 }
 
-const TeacherLecturePage: React.FC<RouteComponentProps<RouteProps>> = (
+const TeacherLectureEditPage: React.FC<RouteComponentProps<RouteProps>> = (
   props: RouteComponentProps<RouteProps>
 ) => {
   const lectureId = props.id as number;
@@ -24,7 +21,7 @@ const TeacherLecturePage: React.FC<RouteComponentProps<RouteProps>> = (
     ['lecture', lectureId],
     () => getLectureById(lectureId)
   );
-  
+
   const { data: course, isLoading: isCourseLoading } = useQuery(
     ['course-lecture', lectureId],
     async () => {
@@ -33,12 +30,8 @@ const TeacherLecturePage: React.FC<RouteComponentProps<RouteProps>> = (
       );
     }
   );
-  const { data: students, isLoading: isStudentsLoading } = useQuery(
-    'students',
-    getAllStudents
-  );
-  // TODO: Fix with login system duh
-  const teacherId = 1;
+
+  const teacherId = 6;
   const { data: teacher, isLoading: isTeacherLoading } = useQuery(
     ['teacher', teacherId],
     () => getTeacherById(teacherId)
@@ -46,7 +39,6 @@ const TeacherLecturePage: React.FC<RouteComponentProps<RouteProps>> = (
 
   if (!lecture || isLectureloading) return <LoadingPage />;
   if (!course || isCourseLoading) return <LoadingPage />;
-  if (!students || isStudentsLoading) return <LoadingPage />;
   if (!teacher || isTeacherLoading) return <LoadingPage />;
 
   return (
@@ -58,10 +50,6 @@ const TeacherLecturePage: React.FC<RouteComponentProps<RouteProps>> = (
         <div className="text-gray-500 italic">
           Tahun {lecture.year}/{lecture.year + 1} Semester {lecture.semester}
         </div>
-      </div>
-      <div className="text-xl font-bold mb-2">Daftar Peserta Kelas</div>
-      <div className="mb-4">
-        <TeacherStudentTable students={students} lectureId={lectureId} />
       </div>
       <div className="text-xl font-bold mb-2">Bobot LO</div>
       <div className="flex flex-col mb-4">
@@ -85,4 +73,4 @@ const TeacherLecturePage: React.FC<RouteComponentProps<RouteProps>> = (
   );
 };
 
-export default TeacherLecturePage;
+export default TeacherLectureEditPage;
