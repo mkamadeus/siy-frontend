@@ -42,3 +42,12 @@ No eject needed! Snowpack guarantees zero lock-in, and CSA strives for the same.
 <a href="https://github.com/mkamadeus/siy-backend/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=mkamadeus/siy-backend" />
 </a>
+
+## How to use
+
+### First time? Install it first with command:
+`yarn install`
+
+### Then open the directory of the project, and enter command:
+`yarn start`
+
