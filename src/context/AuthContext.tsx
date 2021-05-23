@@ -5,8 +5,6 @@ import { useAsync, useLocalStorage } from 'react-use';
 import { refresh } from '~/api/Auth';
 import {
   getAuthenticatedUserData,
-  getStudentDataBySession,
-  getStudentGradesBySession,
 } from '~/api/Session';
 import { Student } from '~/model/Student';
 import { Teacher } from '~/model/Teacher';

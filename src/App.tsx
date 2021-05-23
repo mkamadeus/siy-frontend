@@ -24,7 +24,6 @@ import Footer from './components/common/Footer';
 import AdminCoursePage from './pages/admin/course/AdminCoursePage';
 import AuthContextProvider from './context/AuthContext';
 import RegisterPage from './pages/RegisterPage';
-import ErrorPage from './pages/common/ErrorPage';
 import TeacherlectureClassPage from './pages/teacher/TeacherLectureClassPage';
 import TeacherLectureEditPage from './pages/teacher/TeacherLectureEditPage';
 import TeacherGradeEditPage from './pages/teacher/TeacherGradePage';
