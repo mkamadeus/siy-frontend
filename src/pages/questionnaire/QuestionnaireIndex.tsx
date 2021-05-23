@@ -21,12 +21,6 @@ const QuestionnaireIndexPage: React.FC<RouteComponentProps> = (
     return <LoadingPage />;
   }
 
-  const grades = data
-    .filter((d) => d.lecture.year === 2020 && d.lecture.semester === 2)
-    .map((d) => {
-      return d.grade;
-    });
-
   return (
     <div className="container mx-auto p-6">
       <div className="flex items-center mb-2">
@@ -37,7 +31,7 @@ const QuestionnaireIndexPage: React.FC<RouteComponentProps> = (
       </div>
       <hr className="mb-4" />
       <div>
-        <QuestionnaireIndexTable grades={grades} />
+        <QuestionnaireIndexTable lectureHistory={data} />
       </div>
     </div>
   );
