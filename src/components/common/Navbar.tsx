@@ -2,14 +2,19 @@ import React, { useState } from 'react';
 
 import { Link, navigate } from '@reach/router';
 import {
+  AcademicCapOutline,
+  ClipboardListOutline,
   HomeSolid,
   MenuAlt3Solid,
+  PresentationChartLineOutline,
   StatusOnlineSolid,
+  UserGroupOutline,
   UserSolid,
 } from '@graywolfai/react-heroicons';
 import { useAuth } from '~/hooks/useAuth';
 import { Student } from '~/model/Student';
 import { Teacher } from '~/model/Teacher';
+import { UserRole } from '~/model/User';
 
 interface MenuProps {
   open: boolean;
@@ -21,29 +26,74 @@ const navigationButtons = [
     icon: <HomeSolid />,
     title: 'Home',
     path: '/',
+    role: null,
   },
   {
     icon: <StatusOnlineSolid />,
-    title: 'Status',
+    title: 'Dashboard',
     path: 'student',
+    role: UserRole.STUDENT,
   },
   {
-    icon: <HomeSolid />,
-    title: 'Teacher',
-    path: 'teacher',
+    icon: <PresentationChartLineOutline />,
+    title: 'Transkrip Nilai',
+    path: '/student/transcript',
+    role: UserRole.STUDENT,
   },
   {
-    icon: <HomeSolid />,
+    icon: <UserGroupOutline />,
+    title: 'Transkrip LO',
+    path: '/student/lo',
+    role: UserRole.STUDENT,
+  },
+  {
+    icon: <ClipboardListOutline />,
     title: 'Peer Assessment',
-    path: 'peer-assessment-form',
+    path: '/student/peer-assessment',
+    role: UserRole.STUDENT,
+  },
+  {
+    icon: <StatusOnlineSolid />,
+    title: 'Daftar Kelas',
+    path: '/student/join-class',
+    role: UserRole.STUDENT,
+  },
+  {
+    icon: <AcademicCapOutline />,
+    title: 'Dashboard',
+    path: 'teacher',
+    role: UserRole.TEACHER,
   },
 ];
 
 const Menu = ({ open, userData }: MenuProps) => {
-  const { logout } = useAuth();
+  const { authState, logout } = useAuth();
 
   return (
-    <div className={`${open ? 'flex' : 'hidden'} lg:flex flex-col lg:flex-row`}>
+    <div
+      className={`${
+        open ? 'flex' : 'hidden'
+      } lg:flex flex-col lg:flex-row w-full lg:justify-end`}
+    >
+      <div>
+        {navigationButtons
+          .filter(
+            (data) =>
+              data.role === null || data.role === authState.userData?.role
+          )
+          .map(({ icon, title, path }) => {
+            return (
+              <Link
+                key={`navbar-${title}`}
+                className="flex items-center py-2 lg:py-0 lg:px-2.5 w-max italic text-white"
+                to={path}
+              >
+                <div className="w-5 h-5 mr-2">{icon}</div>
+                {title}
+              </Link>
+            );
+          })}
+      </div>
       <div className="flex justify-between items-center p-2">
         <div className="flex items-center">
           <div className="w-12 h-12 text-gray-200 bg-white rounded-full p-1">
@@ -66,20 +116,6 @@ const Menu = ({ open, userData }: MenuProps) => {
             Logout
           </button>
         </div>
-      </div>
-      <div>
-        {navigationButtons.map(({ icon, title, path }) => {
-          return (
-            <Link
-              key={`navbar-${title}`}
-              className="flex items-center py-2 lg:py-0 lg:px-2.5 w-max italic text-white"
-              to={path}
-            >
-              <div className="w-5 h-5 mr-2">{icon}</div>
-              {title}
-            </Link>
-          );
-        })}
       </div>
     </div>
   );

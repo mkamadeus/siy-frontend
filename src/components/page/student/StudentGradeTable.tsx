@@ -1,25 +1,22 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import { getCourseById } from '~/api/Course';
-import { getGradesByAuthenticatedUser } from '~/api/Grade';
-import { getLectureById } from '~/api/Lecture';
+import { getAuthenticatedLectureHistory } from '~/api/Session';
 import { useAuth } from '~/hooks/useAuth';
 import { StudentGrade } from '~/model/Grade';
+import { Lecture } from '~/model/Lecture';
 
 interface ItemProps {
   grade: StudentGrade;
+  lecture: Lecture;
   index: number;
 }
 
 const StudentGradeTableItem: React.FunctionComponent<ItemProps> = ({
+  lecture,
   grade,
   index,
 }: ItemProps) => {
-  const lectureId = grade.lectureId;
-  const { data: lecture, isLoading: isLectureLoading } = useQuery(
-    ['lecture', lectureId],
-    () => getLectureById(lectureId)
-  );
   const courseId = lecture?.courseId as number;
   const { data: course, isLoading: isCourseLoading } = useQuery(
     ['course', courseId],
@@ -27,7 +24,6 @@ const StudentGradeTableItem: React.FunctionComponent<ItemProps> = ({
   );
 
   if (!course || isCourseLoading) return null;
-  if (!lecture || isLectureLoading) return null;
 
   return (
     <tr className="border-b border-gray-400" key={`course-${index}`}>
@@ -35,7 +31,7 @@ const StudentGradeTableItem: React.FunctionComponent<ItemProps> = ({
       <td className="p-1 text-center">{course.code}</td>
       <td className="p-1 text-left">{course.name}</td>
       <td className="p-1 text-center">{course.credits}</td>
-      <td className="p-1 text-center">{grade.index}</td>
+      <td className="p-1 text-center">{grade.grade}</td>
     </tr>
   );
 };
@@ -43,18 +39,21 @@ const StudentGradeTableItem: React.FunctionComponent<ItemProps> = ({
 const StudentGradeTable: React.FunctionComponent = () => {
   const { authState } = useAuth();
 
-  const { data: grades, isLoading: isLoading } = useQuery('grades', () =>
-    getGradesByAuthenticatedUser(authState.accessToken)
+  const { data: lectureHistories, isLoading: isLoading } = useQuery(
+    'lectureHistories',
+    () => getAuthenticatedLectureHistory(authState.accessToken)
   );
 
-  if (isLoading || !grades) {
+  console.log(lectureHistories);
+
+  if (isLoading || !lectureHistories) {
     return null;
   }
 
-  if (grades.length === 0) {
+  if (lectureHistories.length === 0) {
     return (
-      <div className="text-center italic w-full text-gray-700">
-        There is no data!
+      <div className="text-center italic w-full text-gray-300 text-sm">
+        Tidak ada data.
       </div>
     );
   }
@@ -71,9 +70,10 @@ const StudentGradeTable: React.FunctionComponent = () => {
         </tr>
       </thead>
       <tbody>
-        {grades.map((grade, index) => (
+        {lectureHistories.map(({ grade, lecture }, index) => (
           <StudentGradeTableItem
             key={`table-item-${index}`}
+            lecture={lecture}
             grade={grade}
             index={index + 1}
           />

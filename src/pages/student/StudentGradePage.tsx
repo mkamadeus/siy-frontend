@@ -13,6 +13,7 @@ const StudentGradePage: React.FC<RouteComponentProps> = (
 
   return (
     <div className="container mx-auto p-6">
+      <div className="font-bold text-2xl mb-2">Transkrip Nilai</div>
       <div className="flex items-center mb-2">
         <div>
           <img
