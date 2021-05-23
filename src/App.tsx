@@ -5,7 +5,6 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import IndexPage from '~/pages/IndexPage';
 import StudentIndexPage from '~/pages/student/StudentIndexPage';
 import NotFoundPage from './pages/common/NotFoundPage';
-import TeacherPage from '~/pages/TeacherPage';
 import TeacherLecturePage from './pages/teacher/TeacherLecturePage';
 import TeacherIndexPage from './pages/teacher/TeacherIndexPage';
 import Navbar from './components/common/Navbar';
@@ -26,6 +25,9 @@ import AdminCoursePage from './pages/admin/course/AdminCoursePage';
 import AuthContextProvider from './context/AuthContext';
 import RegisterPage from './pages/RegisterPage';
 import ErrorPage from './pages/common/ErrorPage';
+import TeacherlectureClassPage from './pages/teacher/TeacherLectureClassPage';
+import TeacherLectureEditPage from './pages/teacher/TeacherLectureEditPage';
+import TeacherGradeEditPage from './pages/teacher/TeacherGradePage';
 
 const queryClient = new QueryClient();
 
@@ -45,7 +47,9 @@ const App: React.FC = () => {
           {/* TEACHER */}
           <TeacherIndexPage path="/teacher" />
           <TeacherLecturePage path="/teacher/lecture/:id" />
-          <TeacherPage path="/teacher/class/form" />
+          <TeacherlectureClassPage path="/teacher/lecture/:id/class" />
+          <TeacherLectureEditPage path="/teacher/lecture/:id/edit" />
+          <TeacherGradeEditPage path="/teacher/lecture/:lId/student/:sId/grade/:gId/edit" />
 
           <AdminIndexPage path="/admin" />
 

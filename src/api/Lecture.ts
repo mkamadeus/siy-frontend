@@ -1,3 +1,4 @@
+import { CourseAssessment } from '~/model/Assessment';
 import { Lecture } from '~/model/Lecture';
 import { BaseInstance } from './Base';
 
@@ -9,9 +10,8 @@ export const getAllLectures = async (): Promise<Lecture[]> => {
 export const getLecturesByTeacherId = async (
   _teacherId: number
 ): Promise<Lecture[]> => {
-  const lectures = (await BaseInstance.get<Lecture[]>('/lectures/year/2020/1'))
-    .data;
-  return lectures;
+  const lectures = (await BaseInstance.get<Lecture[]>('/lectures'));
+  return lectures.data;
 };
 
 export const getLectureById = async (id: number): Promise<Lecture> => {
@@ -28,6 +28,17 @@ export const getLectureByYearSemester = async (
   );
   return lectures.data;
 };
+
+export const getCourseAssessmentByLectureId = async(
+  year: number,
+  semester: number
+): Promise<CourseAssessment[]> => {
+  const ca = await BaseInstance.get<CourseAssessment[]>(
+    `lectures/course-assessment/${year}/${semester}`
+  );
+
+  return ca.data;
+}
 
 export const createLecture = async (lectureData: Lecture): Promise<Lecture> => {
   const lecture = await BaseInstance.post<Lecture>('/lectures', lectureData);

@@ -8,12 +8,11 @@ interface Props {
 }
 
 const LoTypes = [
-  { varName: 'Final', display: 'UAS' },
-  { varName: 'Mid', display: 'UTS' },
+  { varName: 'FinalTest', display: 'UAS' },
+  { varName: 'MidTest', display: 'UTS' },
   { varName: 'Practicum', display: 'Praktikum' },
   { varName: 'Quiz', display: 'Kuis' },
-  { varName: 'Homework', display: 'PR' },
-  { varName: 'KMT', display: 'KMT' },
+  { varName: 'Homework', display: 'PR' }
 ];
 
 const LoCharacters = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
@@ -21,24 +20,37 @@ const LoCharacters = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
 const TeacherLoTable: React.FunctionComponent<Props> = ({ lecture }: Props) => {
   const { register, handleSubmit } = useForm<Partial<Lecture>>();
 
-  const onSubmit = async (data: Partial<Lecture>) => {
+  const onSubmit = async (temp: Partial<Lecture>) => {
     try {
-      for (const loType of LoTypes.slice(0, LoTypes.length-1)) {
-        let value = 0;
-        for (const loCharacter of LoCharacters) {
-          const loKey = `lo${loCharacter}${loType.varName}Weight` as keyof Lecture;
-          value += Number(data[loKey]);
+      const data: Partial<Lecture> = {
+        loFinalTestWeight: [],
+        loMidTestWeight: [],
+        loQuizWeight: [],
+        loHomeworkWeight: [],
+        loPracticumWeight: []
+      }
+
+      for (const loType of LoTypes) {
+        const values = [];
+        const loKey = `lo${loType.varName}Weight` as keyof Lecture;
+        
+        for (let i=0; i < LoCharacters.length; i++) {
+          const tempKey = loKey+LoCharacters[i] as keyof Lecture;
+          values.push(Number(temp[tempKey]));
         }
 
-        if (value != 0 && value != 1) {
+        const total = values.reduce((a, b) => a + b);
+
+        if (total != 0 && total != 1) {
           throw new Error(
             `Pastikan bobot ${loType.display} bertotal satu atau nol di semua bagian.`
           );
         }
+        
+        data[loKey] = values;
       }
-      console.log(lecture.id, data);
+
       await updateLecture(lecture.id, data);
-      // return true;
       alert('Berhasil update lecture!');
       //window.location.reload();
     } catch (err) {
@@ -52,12 +64,12 @@ const TeacherLoTable: React.FunctionComponent<Props> = ({ lecture }: Props) => {
         return (
           <div key={`lo-row-${i}`}>
             <div className="my-2">
-              <div className="text-sm italic mb-2">
-                {display == 'KMT' ? 'Kontribusi Mata Kuliah (KMT) terhadap LO' : ('Bobot LO ' + display)}
-              </div>
+              <div className="text-sm italic mb-2">Bobot LO {display}</div>
               <div className="flex flex-wrap justify-center sm:justify-between p-0.5 -m-0.5 w-full">
                 {LoCharacters.map((no, j) => {
-                  const loKey = `lo${no}${varName}Weight` as keyof Lecture;
+                  const loKey = `lo${varName}Weight` as keyof Lecture;
+                  let val = lecture[loKey][j] as number;
+                  val = isNaN(val) ? 0 : val;
                   return (
                     <div
                       className="flex flex-col w-1/8 min-w-max items-center p-1.5 m-0.5 rounded border border-gray-300 text-xs"
@@ -66,13 +78,11 @@ const TeacherLoTable: React.FunctionComponent<Props> = ({ lecture }: Props) => {
                       <div className="font-semibold mb-1">LO {no}</div>
                       <input
                         type="number"
-                        name={loKey}
-                        defaultValue={lecture[loKey]}
+                        name={loKey + no}
+                        defaultValue={val}
                         className="w-14 text-center p-0 border border-gray-300 rounded focus:ring-gray-400 focus:shadow"
-                        ref={
-                          display == 'KMT' ? 
-                            register({min: 0, max: 3}) : register({min: 0, max: 1})}
-                        step={display == 'KMT' ? '1' : '0.1'}
+                        ref={ register({min: 0, max: 1}) }
+                        step='0.1'
                       />
                     </div>
                   );

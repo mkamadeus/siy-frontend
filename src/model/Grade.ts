@@ -1,10 +1,12 @@
-export interface StudentGrade {
+export interface Grade {
   id: number;
-  studentId: number;
-  lectureId: number;
-  year: number;
-  semester: number;
-  index: CourseGrade;
+  grade: number;
+  lo: number[];
+  quiz: number;
+  midTest: number;
+  finalTest: number;
+  practicum: number;
+  homework: number;
 }
 
 export enum CourseGrade {

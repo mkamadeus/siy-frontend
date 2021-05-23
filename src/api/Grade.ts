@@ -1,17 +1,26 @@
-import { StudentGrade } from '~/model/Grade';
+import { Grade } from '~/model/Grade';
 import { BaseInstance } from './Base';
 
-export const getAllGrades = async (): Promise<StudentGrade[]> => {
-  const grades = await BaseInstance.get<StudentGrade[]>('/grades');
+export const getAllGrades = async (): Promise<Grade[]> => {
+  const grades = await BaseInstance.get<Grade[]>('/grades');
   return grades.data;
 };
 
-export const getGradesByNim = async (nim: string): Promise<StudentGrade[]> => {
-  const grades = await BaseInstance.get<StudentGrade[]>(
-    `student/nim/${nim}/grades`
+export const getGradeById = async (id: number): Promise<Grade> => {
+  const grade = await BaseInstance.get<Grade>(`/grades/${id}`);
+  return grade.data;
+}
+
+export const updateGradeById = async (
+  id: number,
+  data: Partial<Grade>
+): Promise<Grade> => {
+  const grade = await BaseInstance.put<Grade>(
+    `/grades/${id}`,
+    data
   );
-  return grades.data;
-};
+  return grade.data;
+}
 
 export const uploadFile = async (
   lectureId: number,
