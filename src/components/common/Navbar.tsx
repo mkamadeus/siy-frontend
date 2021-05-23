@@ -4,7 +4,6 @@ import { Link, navigate } from '@reach/router';
 import {
   AcademicCapOutline,
   ClipboardListOutline,
-  HomeSolid,
   MenuAlt3Solid,
   PresentationChartLineOutline,
   StatusOnlineSolid,
@@ -22,12 +21,6 @@ interface MenuProps {
 }
 
 const navigationButtons = [
-  {
-    icon: <HomeSolid />,
-    title: 'Home',
-    path: '/',
-    role: null,
-  },
   {
     icon: <StatusOnlineSolid />,
     title: 'Dashboard',
@@ -125,12 +118,18 @@ const Navbar: React.FC = () => {
   const [open, setOpen] = useState<boolean>(false);
   const { authState } = useAuth();
 
+  let homePath = '/';
+
+  if (authState.userData?.role === UserRole.STUDENT) homePath = 'student';
+  else if (authState.userData?.role === UserRole.TEACHER) homePath = 'teacher';
+
+
   return (
     <nav className="bg-gray-900 z-50 fixed w-full top-0">
       <div className="flex w-full p-4 flex-col lg:flex-row">
         <div className="flex w-full justify-between items-center">
           <div className="flex font-bold text-xl text-gray-100">
-            <Link to="/">SIY</Link>
+            <Link to={homePath}>SIY</Link>
           </div>
           <div
             className="w-8 h-8 lg:hidden"
