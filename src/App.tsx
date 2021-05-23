@@ -27,6 +27,8 @@ import StudentJoinClassPage from './pages/student/StudentJoinClassPage';
 import TeacherLectureEditPage from './pages/teacher/TeacherLectureEditPage';
 import TeacherLectureClassPage from './pages/teacher/TeacherLectureClassPage';
 import TeacherGradePage from './pages/teacher/TeacherGradePage';
+import QuestionnaireIndexPage from './pages/questionnaire/QuestionnaireIndex';
+import QuestionnairePage from './pages/questionnaire/QuestionnairePage';
 
 const queryClient = new QueryClient();
 
@@ -57,6 +59,17 @@ const pages = [
     component: StudentJoinClassPage,
     role: UserRole.STUDENT,
   },
+  {
+    path: '/student/questionnaire',
+    component: QuestionnaireIndexPage,
+    role: UserRole.STUDENT,
+  },
+  {
+    path: '/student/questionnaire/lecture/:lId/grade/:gId',
+    component: QuestionnairePage,
+    role: UserRole.STUDENT,
+  },
+  
   // TEACHER PAGES
   {
     path: '/teacher',
