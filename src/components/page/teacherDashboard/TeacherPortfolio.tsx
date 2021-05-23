@@ -1,7 +1,10 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useQuery } from 'react-query';
+import { getTeachingHistoriesByTeacherId, updatePorto } from '~/api/TeachingHistory';
 import { Lecture } from '~/model/Lecture';
 import { Teacher } from '~/model/Teacher';
+import { TeachingHistory } from '~/model/TeachingHistory';
 
 interface Props {
   teacher: Teacher;
@@ -11,9 +14,23 @@ interface Props {
 const TeacherPortfolio : React.FunctionComponent<Props> = ({ teacher, lecture }: Props) => {
   const { register, handleSubmit } = useForm();
 
-  const onSubmit = async (data: { teacherPresence: number }) => {
+  const { data, isLoading } = useQuery(
+    ['teaching-history', teacher.id],
+    () => getTeachingHistoriesByTeacherId(teacher.id).then(
+      (tHistories) => {
+        return tHistories.find((tHistory) => {
+          return tHistory.lectureId == lecture.id;
+        });
+      }
+    )
+  );
+
+  if (!data || isLoading) return null;
+  const onSubmit = async (data: Partial<TeachingHistory>) => {
+    data.portfolio = Number(data.portfolio);
+    
     try {
-      // TODO: get teacher id for kehadiran
+      await updatePorto(lecture.id, teacher.id, data);
       alert('Berhasil!');
     } catch (err) {
       alert(err.message);
@@ -26,8 +43,9 @@ const TeacherPortfolio : React.FunctionComponent<Props> = ({ teacher, lecture }:
         <label htmlFor=""></label>
         <input
           type="number"
-          ref={register({ min: 0, max: 100 })}
-          name="teacherPresence"
+          ref={ register({ min: 0, max: 100 }) }
+          name="portfolio"
+          defaultValue={data.portfolio as number}
           className="border-gray-300 rounded-md shadow-sm w-full"
         />
       </div>

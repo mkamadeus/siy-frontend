@@ -1,6 +1,6 @@
 import { Link } from '@reach/router';
 import React from 'react';
-import { EyeOutline } from '@graywolfai/react-heroicons';
+import { EyeOutline, PencilOutline } from '@graywolfai/react-heroicons';
 import { useQuery } from 'react-query';
 import { Lecture } from '~/model/Lecture';
 import { getCourseById } from '~/api/Course';
@@ -29,11 +29,14 @@ const TeacherLectureTableItem: React.FunctionComponent<ItemProps> = ({
     <tr className="border-b border-gray-400" key={`course-${index}`}>
       <td className="p-1 text-center">{lecture.id}</td>
       <td className="p-1 text-left">{course?.name}</td>
-      <td className="p-1 text-center">{lecture.year}</td>
+      <td className="p-1 text-center">{lecture.year+'/'+(lecture.year+1)}</td>
       <td className="p-1 text-center">{lecture.semester}</td>
       <td className="p-1 text-center flex justify-center space-x-3">
-        <Link to={`/teacher/lecture/${lecture.id}`}>
+        <Link to={`/teacher/lecture/${lecture.id}/class`}>
           <EyeOutline className="h-5 w-5 text-gray-500" />
+        </Link>
+        <Link to={`/teacher/lecture/${lecture.id}/edit`}>
+          <PencilOutline className="h-5 w-5 text-gray-500" />
         </Link>
       </td>
     </tr>

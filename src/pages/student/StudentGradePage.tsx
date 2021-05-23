@@ -1,22 +1,24 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { RouteComponentProps } from '@reach/router';
 
-import { AuthContext } from '~/context/AuthContext';
 import StudentGradeTable from '~/components/page/student/StudentGradeTable';
+import { useAuth } from '~/hooks/useAuth';
+import { Student } from '~/model/Student';
 
 const StudentGradePage: React.FC<RouteComponentProps> = (
   _: RouteComponentProps
 ) => {
-  const { student, grades } = useContext(AuthContext);
+  const { authState } = useAuth();
+  const student = authState.userData?.userData as Student;
 
   return (
     <div className="container mx-auto p-6">
+      <div className="font-bold text-2xl mb-2">Transkrip Nilai</div>
       <div className="flex items-center mb-2">
         <div>
           <img
-            src={student.imgPath}
-            alt={`mahasiswa-${student.nim}`}
-            className="h-16 w-16 object-cover shadow rounded-full"
+            src={'https://github.com/identicons/mkamadeus.png'}
+            className="w-12 h-12"
           />
         </div>
         <div className="p-2">
@@ -26,7 +28,7 @@ const StudentGradePage: React.FC<RouteComponentProps> = (
       </div>
       <hr className="mb-4" />
       <div>
-        <StudentGradeTable grades={grades} />
+        <StudentGradeTable />
       </div>
     </div>
   );

@@ -1,33 +1,25 @@
 import React from 'react';
 import { RouteComponentProps } from '@reach/router';
 import { useQuery } from 'react-query';
-import { getAllCourses } from '~/api/Course';
+import { useAuth } from '~/hooks/useAuth';
+import { getLoAssessment } from '~/api/LOAssessment';
 import LoadingPage from '../common/LoadingPage';
-import withReactContent from 'sweetalert2-react-content';
-import Swal from 'sweetalert2';
 
 const AdminIndexPage: React.FC<RouteComponentProps> = (
   _props: RouteComponentProps
 ) => {
-  const { isLoading } = useQuery('courses', getAllCourses);
+  const { authState } = useAuth();
+  const { data, isLoading } = useQuery('loAssessment', () =>
+    getLoAssessment(authState.accessToken, 2020, 2)
+  );
 
-  if (isLoading) {
+  if (!data || isLoading) {
     return <LoadingPage />;
   }
-
-  const hehe = () => {
-    const swal = withReactContent(Swal);
-    swal.fire('asdasd');
-  };
-
   return (
     <div className="container mx-auto p-6">
-      <div>Welcome to SIY homepage</div>
-      <div>
-        <div>
-          <button onClick={hehe}>sadasd</button>
-        </div>
-      </div>
+      <div className="text-4xl font-bold">Preview LO Assessment</div>
+      <div className="font-bold text-center">{data}</div>
     </div>
   );
 };

@@ -1,27 +1,19 @@
 import React from 'react';
 import ITBBackground from '~/images/itbBackground.png';
-import { Link, navigate, RouteComponentProps } from '@reach/router';
+import { Link, RouteComponentProps } from '@reach/router';
 import { useForm } from 'react-hook-form';
 import { CredentialsBody } from '~/model/Auth';
-import { login } from '~/api/Auth';
-import { useLocalStorage } from 'react-use';
+import { useAuth } from '~/hooks/useAuth';
 
 const IndexPage: React.FC<RouteComponentProps> = (
   _props: RouteComponentProps
 ) => {
+  const { login } = useAuth();
   const { register, handleSubmit } = useForm();
-  const [, setAccessToken] = useLocalStorage('accessToken');
-  const [, setRefreshToken] = useLocalStorage('refreshToken');
 
   const onSubmit = async (data: CredentialsBody) => {
-    try {
-      const token = await login(data);
-      setAccessToken(token.accessToken);
-      setRefreshToken(token.refreshToken);
-      navigate('/student');
-    } catch (err) {
-      alert('Login gagal!');
-    }
+    const { username, password } = data;
+    await login(username, password);
   };
 
   return (
