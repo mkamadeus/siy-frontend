@@ -13,7 +13,7 @@ export const getGradesByStudentId = async (
     `students/${studentId}/grades`
   );
   return grades.data;
-};
+}
 
 export const getGradesByAuthenticatedUser = async (
   token: string

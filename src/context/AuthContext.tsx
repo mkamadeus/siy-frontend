@@ -7,6 +7,8 @@ import { useAsync } from 'react-use';
 import {
   getAuthenticatedUserData,
 } from '~/api/Session';
+import { Student } from '~/model/Student';
+import { Teacher } from '~/model/Teacher';
 import { UserRole } from '~/model/User';
 
 export interface AuthContextState {
