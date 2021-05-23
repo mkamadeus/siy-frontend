@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { Teaches } from '~/model/Teaches';
 import { BaseInstance } from './Base';
 
