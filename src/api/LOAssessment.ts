@@ -2,11 +2,11 @@ import { AuthInstance } from './Base';
 
 export const getLoAssessment = async (
   token: string,
-  year: string,
-  semester: string
-) => {
-  const outcomes = await AuthInstance(token).get(
+  year: number,
+  semester: number
+): Promise<number> => {
+  const outcomes = await AuthInstance(token).get<number>(
     `/learning-outcomes/${year}/${semester}`
   );
-  return outcomes;
+  return outcomes.data;
 };

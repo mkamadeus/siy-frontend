@@ -127,6 +127,10 @@ const StudentIndexPage: React.FC<RouteComponentProps> = (
             </div>
           </div>
         </div>
+        <div className="flex flex-col w-full mb-4">
+          <div className="font-bold text-2xl mb-2">QR Code</div>
+          <StudentGradeTable />
+        </div>
       </div>
     </>
   );
