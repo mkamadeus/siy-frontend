@@ -85,7 +85,7 @@ const Menu = ({ open, userData }: MenuProps) => {
             return (
               <Link
                 key={`navbar-${title}`}
-                className="flex items-center py-2 lg:py-0 lg:px-2.5 w-max italic text-white"
+                className="flex items-center py-2 lg:py-0 lg:px-2.5 italic text-white text-sm transition duration-150 hover:bg-gray-700"
                 to={path}
               >
                 <div className="w-5 h-5 mr-2">{icon}</div>
@@ -95,7 +95,7 @@ const Menu = ({ open, userData }: MenuProps) => {
           })}
       </div>
       <div className="flex justify-between items-center px-2">
-        <div className="flex items-center">
+        <div className="flex items-center w-64">
           <div className="w-8 h-8 text-gray-200 bg-white rounded-full p-1">
             <UserSolid />
           </div>

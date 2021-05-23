@@ -60,7 +60,7 @@ const pages = [
     role: UserRole.STUDENT,
   },
   {
-    path: '/student/quesionnaire',
+    path: '/student/questionnaire',
     component: QuestionnaireIndexPage,
     role: UserRole.STUDENT,
   },
