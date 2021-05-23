@@ -24,7 +24,7 @@ export const getLectureByYearSemester = async (
   semester: number
 ): Promise<Lecture[]> => {
   const lectures = await BaseInstance.get<Lecture[]>(
-    `/lectures/year/${year}/${semester}`
+    `/lectures/query?year=${year}&semester=${semester}`
   );
   return lectures.data;
 };

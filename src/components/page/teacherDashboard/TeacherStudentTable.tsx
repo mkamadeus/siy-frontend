@@ -20,7 +20,7 @@ const TeacherStudentTableItem: React.FunctionComponent<ItemProps> = ({
   student,
   grade,
   index,
-  lectureId
+  lectureId,
 }: ItemProps) => {
   return (
     <tr className="border-b border-gray-400" key={`course-${index}`}>
@@ -34,7 +34,9 @@ const TeacherStudentTableItem: React.FunctionComponent<ItemProps> = ({
       <td className="p-1 text-center">{grade.homework}</td>
       <td className="p-1 text-center">{grade.grade}</td>
       <td className="p-1 text-center flex justify-center space-x-3">
-        <Link to={`/teacher/lecture/${lectureId}/student/${student.id}/grade/${grade.id}/edit`}>
+        <Link
+          to={`/teacher/lecture/${lectureId}/student/${student.id}/grade/${grade.id}/edit`}
+        >
           <PencilOutline className="h-5 w-5 text-gray-500" />
         </Link>
       </td>
@@ -43,7 +45,7 @@ const TeacherStudentTableItem: React.FunctionComponent<ItemProps> = ({
 };
 
 const TeacherStudentTable: React.FunctionComponent<Props> = ({
-  lectureHistories
+  lectureHistories,
 }: Props) => {
   if (lectureHistories.length === 0) {
     return (
@@ -69,14 +71,14 @@ const TeacherStudentTable: React.FunctionComponent<Props> = ({
       </thead>
       <tbody>
         {lectureHistories.map((lectureHistory, index) => (
-            <TeacherStudentTableItem
-              key={`table-item-${index}`}
-              student={lectureHistory.student}
-              grade={lectureHistory.grade}
-              index={index}
-              lectureId={lectureHistory.lectureId}
-            />
-          ))}
+          <TeacherStudentTableItem
+            key={`table-item-${index}`}
+            student={lectureHistory.student}
+            grade={lectureHistory.grade}
+            index={index}
+            lectureId={lectureHistory.lectureId}
+          />
+        ))}
       </tbody>
     </table>
   );

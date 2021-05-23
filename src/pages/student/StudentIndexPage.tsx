@@ -16,8 +16,8 @@ import { useAuth } from '~/hooks/useAuth';
 const StudentIndexPage: React.FC<RouteComponentProps> = (
   props: RouteComponentProps
 ) => {
-  const { userData } = useAuth();
-  const student = userData?.userData as Student;
+  const { authState } = useAuth();
+  const student = authState.userData?.userData as Student;
 
   return (
     <>
@@ -48,33 +48,47 @@ const StudentIndexPage: React.FC<RouteComponentProps> = (
           <div className="flex flex-col mb-4 w-full">
             <div className="font-bold text-2xl mb-2">Luaran Pembelajaran</div>
             <div className="flex flex-wrap justify-center">
-              <div className="flex flex-col justify-center items-center w-20 h-20 p-2 rounded border border-gray-300 shadow m-1">
-                <div className="font-semibold text-sm">LO A</div>
-                <div className="font-bold">{student.lok[0].toPrecision(3)}</div>
+              <div className="flex flex-col justify-center items-center w-16 h-16 p-2 rounded-lg bg-gray-100 shadow m-1">
+                <div className="font-semibold text-xs">LO A</div>
+                <div className="font-bold text-sm">
+                  {student.lok[0].toPrecision(3)}
+                </div>
               </div>
-              <div className="flex flex-col justify-center items-center w-20 h-20 p-2 rounded border border-gray-300 shadow m-1">
-                <div className="font-semibold text-sm">LO B</div>
-                <div className="font-bold">{student.lok[0].toPrecision(3)}</div>
+              <div className="flex flex-col justify-center items-center w-16 h-16 p-2 rounded-lg bg-gray-100 shadow m-1">
+                <div className="font-semibold text-xs">LO B</div>
+                <div className="font-bold text-sm">
+                  {student.lok[0].toPrecision(3)}
+                </div>
               </div>
-              <div className="flex flex-col justify-center items-center w-20 h-20 p-2 rounded border border-gray-300 shadow m-1">
-                <div className="font-semibold text-sm">LO C</div>
-                <div className="font-bold">{student.lok[0].toPrecision(3)}</div>
+              <div className="flex flex-col justify-center items-center w-16 h-16 p-2 rounded-lg bg-gray-100 shadow m-1">
+                <div className="font-semibold text-xs">LO C</div>
+                <div className="font-bold text-sm">
+                  {student.lok[0].toPrecision(3)}
+                </div>
               </div>
-              <div className="flex flex-col justify-center items-center w-20 h-20 p-2 rounded border border-gray-300 shadow m-1">
-                <div className="font-semibold text-sm">LO D</div>
-                <div className="font-bold">{student.lok[0].toPrecision(3)}</div>
+              <div className="flex flex-col justify-center items-center w-16 h-16 p-2 rounded-lg bg-gray-100 shadow m-1">
+                <div className="font-semibold text-xs">LO D</div>
+                <div className="font-bold text-sm">
+                  {student.lok[0].toPrecision(3)}
+                </div>
               </div>
-              <div className="flex flex-col justify-center items-center w-20 h-20 p-2 rounded border border-gray-300 shadow m-1">
-                <div className="font-semibold text-sm">LO E</div>
-                <div className="font-bold">{student.lok[0].toPrecision(3)}</div>
+              <div className="flex flex-col justify-center items-center w-16 h-16 p-2 rounded-lg bg-gray-100 shadow m-1">
+                <div className="font-semibold text-xs">LO E</div>
+                <div className="font-bold text-sm">
+                  {student.lok[0].toPrecision(3)}
+                </div>
               </div>
-              <div className="flex flex-col justify-center items-center w-20 h-20 p-2 rounded border border-gray-300 shadow m-1">
-                <div className="font-semibold text-sm">LO F</div>
-                <div className="font-bold">{student.lok[0].toPrecision(3)}</div>
+              <div className="flex flex-col justify-center items-center w-16 h-16 p-2 rounded-lg bg-gray-100 shadow m-1">
+                <div className="font-semibold text-xs">LO F</div>
+                <div className="font-bold text-sm">
+                  {student.lok[0].toPrecision(3)}
+                </div>
               </div>
-              <div className="flex flex-col justify-center items-center w-20 h-20 p-2 rounded border border-gray-300 shadow m-1">
-                <div className="font-semibold text-sm">LO G</div>
-                <div className="font-bold">{student.lok[0].toPrecision(3)}</div>
+              <div className="flex flex-col justify-center items-center w-16 h-16 p-2 rounded-lg bg-gray-100 shadow m-1">
+                <div className="font-semibold text-xs">LO G</div>
+                <div className="font-bold text-sm">
+                  {student.lok[0].toPrecision(3)}
+                </div>
               </div>
             </div>
           </div>
@@ -97,9 +111,8 @@ const StudentIndexPage: React.FC<RouteComponentProps> = (
               />
             </div>
             <div className="p-1.5">
-              {/* TODO: form list */}
               <QuickTileButton
-                to={'/peer-assessment-form'}
+                to={'/student/peer-assessment'}
                 icon={<ClipboardListOutline />}
                 title="Peer Assessment"
               />
@@ -113,6 +126,10 @@ const StudentIndexPage: React.FC<RouteComponentProps> = (
               />
             </div>
           </div>
+        </div>
+        <div className="flex flex-col w-full mb-4">
+          <div className="font-bold text-2xl mb-2">QR Code</div>
+          <StudentGradeTable />
         </div>
       </div>
     </>

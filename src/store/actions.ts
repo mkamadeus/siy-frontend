@@ -5,6 +5,7 @@ import { AuthState } from './states';
 import { ActionCreator, Action } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 import { navigate } from '@reach/router';
+import { UserRole } from '~/model/User';
 
 export enum AuthActionConstant {
   LOGIN = 'auth/login',
@@ -69,7 +70,10 @@ export const loginAction: ActionCreator<
       dispatch(loginSuccessAction);
 
       if (getState().isAuthenticated) {
-        navigate('/student');
+        if (getState().userData?.role === UserRole.STUDENT)
+          navigate('/student');
+        else if (getState().userData?.role === UserRole.TEACHER)
+          navigate('/teacher');
       }
     } catch (err) {
       // Set login success
@@ -97,7 +101,6 @@ export const loginByTokenAction: ActionCreator<
       };
       dispatch(loginAction);
 
-      console.log('asd');
       const userData = await getAuthenticatedUserData(accessToken);
 
       // Set login success
@@ -112,7 +115,6 @@ export const loginByTokenAction: ActionCreator<
       dispatch(loginSuccessAction);
     } catch (err) {
       // Set login success
-      console.log('asd');
       const loginFailAction: ILoginFailAction = {
         type: AuthActionConstant.LOGIN_FAIL,
       };

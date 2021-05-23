@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import ITBBackground from '~/images/itbBackground.png';
 import { Link, RouteComponentProps } from '@reach/router';
 import { useForm } from 'react-hook-form';
@@ -8,12 +8,8 @@ import { useAuth } from '~/hooks/useAuth';
 const IndexPage: React.FC<RouteComponentProps> = (
   _props: RouteComponentProps
 ) => {
-  const { login, loginByToken } = useAuth();
+  const { login } = useAuth();
   const { register, handleSubmit } = useForm();
-
-  useEffect(() => {
-    loginByToken();
-  }, []);
 
   const onSubmit = async (data: CredentialsBody) => {
     const { username, password } = data;

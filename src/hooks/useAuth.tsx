@@ -1,24 +1,37 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
-import { SessionData } from '~/model/Session';
-import { AuthAction, loginAction, loginByTokenAction } from '~/store/actions';
+import { AuthAction, loginAction, logoutAction } from '~/store/actions';
 import { AuthState } from '~/store/states';
 
-export const useAuth = (): Promise<void> => {
+type UseAuthType = {
+  authState: AuthState;
+  login: (username: string, password: string) => Promise<void>;
+  logout: () => void;
+};
+
+export const useAuth = (): UseAuthType => {
   const dispatch = useDispatch<ThunkDispatch<AuthState, null, AuthAction>>();
   const authState = useSelector<AuthState, AuthState>((state) => state);
-  const userData = useSelector<AuthState, SessionData | null>(
-    (state) => state.userData
-  );
+  // const location = useLocation();
 
-  // console.log(authState);
   const login = async (username: string, password: string) => {
     await dispatch(loginAction(username, password));
   };
 
-  const loginByToken = async () => {
-    await dispatch(loginByTokenAction());
+  const logout = () => {
+    dispatch(logoutAction());
   };
 
-  return { authState, userData, login, loginByToken };
+  // useEffect(() => {
+  //   console.log(authState);
+  //   if (
+  //     !authState.isLoading &&
+  //     authState.accessToken === '' &&
+  //     !authState.isAuthenticated
+  //   ) {
+  //     navigate('/');
+  //   }
+  // }, [authState]);
+
+  return { authState, login, logout };
 };
