@@ -4,7 +4,7 @@ import { SessionData } from '~/model/Session';
 import { AuthAction, loginAction, loginByTokenAction } from '~/store/actions';
 import { AuthState } from '~/store/states';
 
-export const useAuth = () => {
+export const useAuth = (): Promise<void> => {
   const dispatch = useDispatch<ThunkDispatch<AuthState, null, AuthAction>>();
   const authState = useSelector<AuthState, AuthState>((state) => state);
   const userData = useSelector<AuthState, SessionData | null>(

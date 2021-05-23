@@ -44,7 +44,7 @@ const StudentJoinClassPage: React.FC<RouteComponentProps> = (
       <div className="font-bold text-xl mb-4">Daftar Kelas</div>
       <div className="">
         {lectures.map((lecture) => {
-          return <JoinClassButton courseId={lecture.courseId} />;
+          return <JoinClassButton key={lecture.id} courseId={lecture.courseId} />;
         })}
       </div>
     </div>

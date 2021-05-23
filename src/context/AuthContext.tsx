@@ -1,18 +1,12 @@
 import { navigate } from '@reach/router';
-import React, { useReducer, useMemo } from 'react';
+import React, { useReducer } from 'react';
 import { login } from '~/api/Auth';
 import { CredentialsBody } from '~/model/Auth';
 import { SessionData } from '~/model/Session';
-import { useQuery } from 'react-query';
-import { useAsync, useLocalStorage } from 'react-use';
-import { refresh } from '~/api/Auth';
+import { useAsync } from 'react-use';
 import {
   getAuthenticatedUserData,
-  getStudentDataBySession,
-  getStudentGradesBySession,
 } from '~/api/Session';
-import { Student } from '~/model/Student';
-import { Teacher } from '~/model/Teacher';
 import { UserRole } from '~/model/User';
 
 export interface AuthContextState {
