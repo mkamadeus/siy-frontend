@@ -1,7 +1,8 @@
-import { StudentGrade } from '~/model/Grade';
+import { Grade } from '~/model/Grade';
 import { LectureHistory } from '~/model/LectureHistory';
 import { SessionData } from '~/model/Session';
 import { Student } from '~/model/Student';
+import { TeachingHistory } from '~/model/TeachingHistory';
 import { AuthInstance } from './Base';
 
 export const getStudentDataBySession = async (
@@ -13,8 +14,8 @@ export const getStudentDataBySession = async (
 
 export const getStudentGradesBySession = async (
   token: string
-): Promise<StudentGrade[]> => {
-  const grades = await AuthInstance(token).get<StudentGrade[]>(
+): Promise<Grade[]> => {
+  const grades = await AuthInstance(token).get<Grade[]>(
     '/session/student/grades'
   );
   return grades.data;
@@ -32,6 +33,15 @@ export const getAuthenticatedLectureHistory = async (
 ): Promise<LectureHistory[]> => {
   const user = await AuthInstance(token).get<LectureHistory[]>(
     '/me/lecture-histories'
+  );
+  return user.data;
+};
+
+export const getAuthenticatedTeachingHistory = async (
+  token: string
+): Promise<TeachingHistory[]> => {
+  const user = await AuthInstance(token).get<TeachingHistory[]>(
+    '/me/teaching-histories'
   );
   return user.data;
 };

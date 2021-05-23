@@ -15,7 +15,7 @@ interface RouteProps {
   gId: number;
 }
 
-const TeacherGradeEditPage: React.FC<RouteComponentProps<RouteProps>> = (
+const TeacherGradePage: React.FC<RouteComponentProps<RouteProps>> = (
   props: RouteComponentProps<RouteProps>
 ) => {
   const lectureId = props.lId as number;
@@ -47,7 +47,7 @@ const TeacherGradeEditPage: React.FC<RouteComponentProps<RouteProps>> = (
   if (!student || isStudentLoading) return <LoadingPage />;
   if (!course || isCourseLoading) return <LoadingPage />;
   if (!grade || isGradeLoading) return <LoadingPage />;
-  
+
   // const courseId = lecture.courseId;
   // const { data: course, isLoading: isCourseLoading } = useQuery(
   //   ['course', courseId],
@@ -73,6 +73,6 @@ const TeacherGradeEditPage: React.FC<RouteComponentProps<RouteProps>> = (
       <GradeForm grade={grade} />
     </div>
   );
-}
+};
 
-export default TeacherGradeEditPage;
+export default TeacherGradePage;

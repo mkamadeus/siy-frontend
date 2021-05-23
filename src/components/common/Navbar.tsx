@@ -75,7 +75,7 @@ const Menu = ({ open, userData }: MenuProps) => {
         open ? 'flex' : 'hidden'
       } lg:flex flex-col lg:flex-row w-full lg:justify-end`}
     >
-      <div>
+      <div className="flex flex-col lg:flex-row space-x-1">
         {navigationButtons
           .filter(
             (data) =>
@@ -94,9 +94,9 @@ const Menu = ({ open, userData }: MenuProps) => {
             );
           })}
       </div>
-      <div className="flex justify-between items-center p-2">
+      <div className="flex justify-between items-center px-2">
         <div className="flex items-center">
-          <div className="w-12 h-12 text-gray-200 bg-white rounded-full p-1">
+          <div className="w-8 h-8 text-gray-200 bg-white rounded-full p-1">
             <UserSolid />
           </div>
           <div className="text-white text-xs p-2">
@@ -111,7 +111,7 @@ const Menu = ({ open, userData }: MenuProps) => {
               logout();
               navigate('/');
             }}
-            className="flex w-full items-center justify-center rounded-md bg-blue-500 text-white py-2 px-4 shadow-none hover:shadow-lg focus:ring focus:outline-none focus:bg-blue-600 transition duration-300"
+            className="flex w-full text-sm items-center justify-center rounded-md bg-blue-500 text-white py-2 px-4 shadow-none hover:shadow-lg focus:ring focus:outline-none focus:bg-blue-600 transition duration-300"
           >
             Logout
           </button>

@@ -2,16 +2,18 @@ import { RouteComponentProps } from '@reach/router';
 import React from 'react';
 import { useQuery } from 'react-query';
 import { getCourseById } from '~/api/Course';
-import { getCourseAssessmentByLectureId, getLectureById } from '~/api/Lecture';
+import { getLectureById } from '~/api/Lecture';
 import { getStudentByLectureId } from '~/api/LectureHistory';
 import TeacherStudentTable from '~/components/page/teacherDashboard/TeacherStudentTable';
 import LoadingPage from '../common/LoadingPage';
+import ITBBackground from '~/images/itbBackground.png';
+import { getCourseAssessment } from '~/api/CourseAssment';
 
 interface RouteProps {
   id: number;
 }
 
-const TeacherlectureClassPage: React.FC<RouteComponentProps<RouteProps>> = (
+const TeacherLectureClassPage: React.FC<RouteComponentProps<RouteProps>> = (
   props: RouteComponentProps<RouteProps>
 ) => {
   const lectureId = props.id as number;
@@ -36,51 +38,53 @@ const TeacherlectureClassPage: React.FC<RouteComponentProps<RouteProps>> = (
     }
   );
 
-  const year = lecture? lecture.year : 0;
-  const semester = lecture? lecture.semester : 0;
-  const { data: cas, isLoading: isCALoading } = useQuery(
-    ['course-assessment', year, semester],
-    () => getCourseAssessmentByLectureId(year, semester)
+  const { data: ca, isLoading: isCALoading } = useQuery(
+    'course-assessment',
+    () => getCourseAssessment(lectureId)
   );
 
   if (!lecture || isLectureloading) return <LoadingPage />;
   if (!course || isCourseLoading) return <LoadingPage />;
   if (!lectureHistory || isLectureHistoryLoading) return <LoadingPage />;
-  if (!cas || isCALoading) return <LoadingPage />;
-
-  const ca = cas.find((ca) => {
-    return ca.id == lectureId;
-  });
+  if (!ca || isCALoading) return <LoadingPage />;
 
   return (
-    <div className="container mx-auto p-6" >
-      <div className="flex flex-col w-full mb-4">
-        <div className="flex flex-row justify-between">
-          <div>
-            <div className="text-2xl font-bold">
-              {course.code} {course.name}
-            </div>
-
-            <div className="text-gray-500 italic">
-              Tahun {lecture.year}/{lecture.year + 1} Semester {lecture.semester}
-            </div>
+    <>
+      <div className="flex flex-row justify-between mb-4 items-center relative bg-gradient-to-b from-blue-500 to to-blue-600 p-6">
+        <div className="z-10">
+          <div className="text-2xl font-bold text-white">
+            {course.code} {course.name}
           </div>
-          
-          <div className="text-center">
-            <div className="text-gray-500">
-              Course Assessment
+          <div className="text-gray-200 italic">
+            Tahun {lecture.year}/{lecture.year + 1} Semester {lecture.semester}
+          </div>
+        </div>
+        <div className="text-center z-10">
+          <div className="text-gray-200">Course Assessment</div>
+          <div className="flex flex-row justify-between space-x-2">
+            <div className="font-bold text-white">
+              {ca}
+              {' / 4.00'}
             </div>
-            <div className="flex flex-row font-bold justify-between">
-              <div>{ca?.courseAssessment}</div> / <div>{ca?.mark}</div>
+            <div
+              className={`flex items-center px-1 rounded ${
+                ca < 3.0 ? 'bg-red-500' : 'bg-green-500'
+              } text-xs text-white`}
+            >
+              {ca < 3.0 ? 'Improve' : 'Maintain'}
             </div>
           </div>
         </div>
+        <img className="absolute bottom-0 z-0" src={ITBBackground} />
       </div>
-      <div className="mb-4">
-        <TeacherStudentTable lectureHistories={lectureHistory} />
+      <div className="container mx-auto p-6">
+        <div className="font-bold text-2xl mb-2">Daftar Peserta Kelas</div>
+        <div className="mb-4  overflow-x-auto">
+          <TeacherStudentTable lectureHistories={lectureHistory} />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
-export default TeacherlectureClassPage;
+export default TeacherLectureClassPage;

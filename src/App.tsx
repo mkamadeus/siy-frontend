@@ -5,7 +5,6 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import IndexPage from '~/pages/IndexPage';
 import StudentIndexPage from '~/pages/student/StudentIndexPage';
 import NotFoundPage from './pages/common/NotFoundPage';
-import TeacherLecturePage from './pages/teacher/TeacherLecturePage';
 import TeacherIndexPage from './pages/teacher/TeacherIndexPage';
 import Navbar from './components/common/Navbar';
 import StudentGradePage from './pages/student/StudentGradePage';
@@ -25,9 +24,9 @@ import RegisterPage from './pages/RegisterPage';
 import PrivateRoute from './components/routes/PrivateRoute';
 import { UserRole } from './model/User';
 import StudentJoinClassPage from './pages/student/StudentJoinClassPage';
-import TeacherlectureClassPage from './pages/teacher/TeacherLectureClassPage';
 import TeacherLectureEditPage from './pages/teacher/TeacherLectureEditPage';
-import TeacherGradeEditPage from './pages/teacher/TeacherGradePage';
+import TeacherLectureClassPage from './pages/teacher/TeacherLectureClassPage';
+import TeacherGradePage from './pages/teacher/TeacherGradePage';
 
 const queryClient = new QueryClient();
 
@@ -65,13 +64,18 @@ const pages = [
     role: UserRole.TEACHER,
   },
   {
-    path: '/teacher/lecture/:id',
-    component: TeacherLecturePage,
+    path: '/teacher/lecture/:id/class',
+    component: TeacherLectureClassPage,
     role: UserRole.TEACHER,
   },
   {
-    path: '/teacher/class/form',
-    component: TeacherLecturePage,
+    path: '/teacher/lecture/:id/edit',
+    component: TeacherLectureEditPage,
+    role: UserRole.TEACHER,
+  },
+  {
+    path: '/teacher/lecture/:lId/student/:sId/grade/:gId/edit',
+    component: TeacherGradePage,
     role: UserRole.TEACHER,
   },
   // ADMIN PAGES
@@ -126,7 +130,7 @@ const App: React.FC = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <Navbar />
-      <Router className="min-h-screen mt-16" basepath="/">
+      <Router className="min-h-screen mt-20" basepath="/">
         <NotFoundPage default />
         <IndexPage path="/" />
         <RegisterPage path="/register" />
