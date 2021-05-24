@@ -62,20 +62,20 @@ const navigationButtons = [
     icon: <StatusOnlineSolid />,
     title: 'Dashboard',
     path: 'admin',
-    role: UserRole.ADMIN
+    role: UserRole.ADMIN,
   },
   {
     icon: <AcademicCapOutline />,
     title: 'Course',
     path: '/admin/course',
-    role: UserRole.ADMIN
+    role: UserRole.ADMIN,
   },
   {
     icon: <PresentationChartLineOutline />,
     title: 'Lecture',
     path: '/admin/lecture',
-    role: UserRole.ADMIN
-  }
+    role: UserRole.ADMIN,
+  },
 ];
 
 const Menu = ({ open, userData }: MenuProps) => {
@@ -113,11 +113,13 @@ const Menu = ({ open, userData }: MenuProps) => {
           <div className="w-8 h-8 text-gray-200 bg-white rounded-full p-1">
             <UserSolid />
           </div>
-          <div className="text-white text-xs p-2">
-            <div className="text-xs font-semibold">Logged in as:</div>
-            <div>{userData?.name}</div>
-            <div>{(userData as Student).nim}</div>
-          </div>
+          {authState.userData?.role !== UserRole.ADMIN && (
+            <div className="text-white text-xs p-2">
+              <div className="text-xs font-semibold">Logged in as:</div>
+              <div>{userData?.name}</div>
+              <div>{(userData as Student).nim}</div>
+            </div>
+          )}
         </div>
         <div>
           <button
@@ -143,7 +145,6 @@ const Navbar: React.FC = () => {
 
   if (authState.userData?.role === UserRole.STUDENT) homePath = 'student';
   else if (authState.userData?.role === UserRole.TEACHER) homePath = 'teacher';
-
 
   return (
     <nav className="bg-gray-900 z-50 fixed w-full top-0">

@@ -19,7 +19,15 @@ const AdminIndexPage: React.FC<RouteComponentProps> = (
   return (
     <div className="container mx-auto p-6">
       <div className="text-4xl font-bold">Preview LO Assessment</div>
-      <div className="font-bold text-center">{data}</div>
+      <div className="flex space-x-2 font-bold text-center">
+        {data.map((lo, index) => {
+          return (
+            <div key={`lo-${index}`} className="text-lg">
+              {lo}
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };
