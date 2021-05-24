@@ -57,37 +57,37 @@ const StudentIndexPage: React.FC<RouteComponentProps> = (
               <div className="flex flex-col justify-center items-center w-16 h-16 p-2 rounded-lg bg-gray-100 shadow m-1">
                 <div className="font-semibold text-xs">LO B</div>
                 <div className="font-bold text-sm">
-                  {student.lok[0].toPrecision(3)}
+                  {student.lok[1].toPrecision(3)}
                 </div>
               </div>
               <div className="flex flex-col justify-center items-center w-16 h-16 p-2 rounded-lg bg-gray-100 shadow m-1">
                 <div className="font-semibold text-xs">LO C</div>
                 <div className="font-bold text-sm">
-                  {student.lok[0].toPrecision(3)}
+                  {student.lok[2].toPrecision(3)}
                 </div>
               </div>
               <div className="flex flex-col justify-center items-center w-16 h-16 p-2 rounded-lg bg-gray-100 shadow m-1">
                 <div className="font-semibold text-xs">LO D</div>
                 <div className="font-bold text-sm">
-                  {student.lok[0].toPrecision(3)}
+                  {student.lok[3].toPrecision(3)}
                 </div>
               </div>
               <div className="flex flex-col justify-center items-center w-16 h-16 p-2 rounded-lg bg-gray-100 shadow m-1">
                 <div className="font-semibold text-xs">LO E</div>
                 <div className="font-bold text-sm">
-                  {student.lok[0].toPrecision(3)}
+                  {student.lok[4].toPrecision(3)}
                 </div>
               </div>
               <div className="flex flex-col justify-center items-center w-16 h-16 p-2 rounded-lg bg-gray-100 shadow m-1">
                 <div className="font-semibold text-xs">LO F</div>
                 <div className="font-bold text-sm">
-                  {student.lok[0].toPrecision(3)}
+                  {student.lok[5].toPrecision(3)}
                 </div>
               </div>
               <div className="flex flex-col justify-center items-center w-16 h-16 p-2 rounded-lg bg-gray-100 shadow m-1">
                 <div className="font-semibold text-xs">LO G</div>
                 <div className="font-bold text-sm">
-                  {student.lok[0].toPrecision(3)}
+                  {student.lok[6].toPrecision(3)}
                 </div>
               </div>
             </div>

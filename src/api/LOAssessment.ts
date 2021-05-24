@@ -6,7 +6,7 @@ export const getLoAssessment = async (
   semester: number
 ): Promise<number> => {
   const outcomes = await AuthInstance(token).get<number>(
-    `/learning-outcomes/${year}/${semester}`
+    `lectures/learning-outcomes/${year}/${semester}`
   );
   return outcomes.data;
 };

@@ -74,6 +74,8 @@ export const loginAction: ActionCreator<
           navigate('/student');
         else if (getState().userData?.role === UserRole.TEACHER)
           navigate('/teacher');
+        else if (getState().userData?.role === UserRole.ADMIN)
+          navigate('/admin');
       }
     } catch (err) {
       // Set login success

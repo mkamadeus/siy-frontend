@@ -13,11 +13,12 @@ import {
 import { useAuth } from '~/hooks/useAuth';
 import { Student } from '~/model/Student';
 import { Teacher } from '~/model/Teacher';
+import { Admin } from '~/model/Admin';
 import { UserRole } from '~/model/User';
 
 interface MenuProps {
   open: boolean;
-  userData: Student | Teacher | null;
+  userData: Student | Teacher | Admin | null;
 }
 
 const navigationButtons = [
@@ -57,10 +58,30 @@ const navigationButtons = [
     path: 'teacher',
     role: UserRole.TEACHER,
   },
+  {
+    icon: <StatusOnlineSolid />,
+    title: 'Dashboard',
+    path: 'admin',
+    role: UserRole.ADMIN
+  },
+  {
+    icon: <AcademicCapOutline />,
+    title: 'Course',
+    path: '/admin/course',
+    role: UserRole.ADMIN
+  },
+  {
+    icon: <PresentationChartLineOutline />,
+    title: 'Lecture',
+    path: '/admin/lecture',
+    role: UserRole.ADMIN
+  }
 ];
 
 const Menu = ({ open, userData }: MenuProps) => {
   const { authState, logout } = useAuth();
+
+  console.log(authState);
 
   return (
     <div
